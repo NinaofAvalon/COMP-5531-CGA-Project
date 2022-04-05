@@ -1,0 +1,15 @@
+CREATE TABLE `emails` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `recipient` int(11) NOT NULL,
+  `sender` int(11) NOT NULL,
+  `email_subject` varchar(100) DEFAULT NULL,
+  `email_body` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+  -- accept null value but no duplicate
+) ENGINE=InnoDB AUTO_INCREMENT=1006 DEFAULT CHARSET=latin1;
+
+insert into new_project.users value(1, 'user1', '12345', 'user1@gmail.com', '1234567', 'abab', '1');
+
+insert into new_project.users value(2, 'user2', '12345', 'user2@gmail.com', '1234567', 'abab', '1');
+
+insert into new_project.emails(recipient, sent, email_subject, email_body) value( 1,2, 'hello world', 'this is my first email.');
