@@ -5,7 +5,7 @@
    define('DB_DATABASE', 'test');
    $conn = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
 
-   if($conn){
-     echo "Database connected".mysqli_connect_error();
-   }
+   // if($conn){
+   //   echo "Database connected".mysqli_connect_error();
+   // }
 ?>

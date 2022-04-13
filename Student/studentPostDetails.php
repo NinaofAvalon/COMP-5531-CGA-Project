@@ -1,6 +1,41 @@
 <?php
    include('../session.php');
+
+   $post_id = $_GET["id"];
+
+   if(isset($_POST['submit'])){
+
+     if($conn === false){
+    die("ERROR: Could not connect. "
+          . mysqli_connect_error());
+        }
+
+     //get user Message
+     $reply = mysqli_real_escape_string(
+        $conn, $_REQUEST['comment']);
+
+        // Attempt insert query execution
+        date_default_timezone_set('America/Montreal');
+        $date=date('y-m-d h:ia');
+        $username = $_SESSION["username"];
+        $sql = "INSERT INTO replies (creator,content,creation_date,post_id)
+                    VALUES ('$username', '$reply', '$date','$post_id')";
+        if(mysqli_query($conn, $sql)){
+          //prevent form to be resubmitted multiple times
+          header("Location:studentPostDetails.php?id=$post_id");
+          die();
+        } else{
+            echo "ERROR: Message not sent!!!";
+        }
+
+        // Close connection
+        mysqli_close($conn);
+   }
+
+
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -53,9 +88,9 @@
       <b >
         <font size="4">
           <i>
-            COMP 5531/Winter 2022
+            <?php echo htmlspecialchars($_SESSION["course_name"]); ?>/Winter 2022
             <br>
-            Section NN
+            SECTION <?php echo htmlspecialchars($_SESSION["course_section"]); ?>
           </i>
         </font>
       </b>
@@ -190,103 +225,89 @@
 
     <!--Topic Section-->
       <div class="main_home">
+        <form class="" action="studentPostDetails.php?id=<?php echo $post_id ?>"  method="post">
+
 
         <div class="topic-container">
+          <?php
+
+          $query = "SELECT * FROM discussion_board where id='$post_id'";
+          $run = $conn->query($query);
+          $row = $run->fetch_array();
+           ?>
             <!--Original thread-->
             <div class="head">
                 <div class="authors">Author</div>
-                <div class="content">Topic: random topic (Read 1325 Times)</div>
+                <div class="content" name="original_post_title"><?php echo $row['title'];?></div>
             </div>
 
             <div class="body">
                 <div class="authors">
-                    <div class="username"><a href="">Username</a></div>
-                    <div>Role</div>
+                    <div class="username" name=author><?php echo $row['creator']; ?></div>
                     <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt="">
-                    <div>Posts: <u>45</u></div>
-                    <div>Points: <u>4586</u></div>
+
                 </div>
-                <div class="content">
-                    Just a random content of a random topic.
-                    <br>To see how it looks like.
-                    <br><br>
-                    Nothing more and nothing less.
+                <div class="content" name="orignal_post">
+                    <?php echo $row['content']; ?>
                     <br>
-                    <hr>
-                    Regards username
-                    <br>
-                    <div class="comment">
-                        <button onclick="showComment()">Comment</button>
-                    </div>
+
                 </div>
             </div>
-        </div>
+
+
+
+
+
+            <?php
+
+             $query = "SELECT * FROM replies where post_id='$post_id'";
+             $run = $conn->query($query);
+             $i=0;
+             while($row= $run->fetch_array()) {
+
+             if($i==0){
+
+
+              ?>
+               <!--replies-->
+
+
+               <div class="body-replies">
+                   <div class="authors">
+                       <div class="username"><?php echo $row['creator']; ?></div>
+                       <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt="">
+
+                   </div>
+                   <div class="content">
+                       <?php echo $row['content']; ?>
+                       <br>
+
+                   </div>
+               </div>
+
+               <?php
+             }
+           }
+                ?>
+
+
+  </div>
+
 
         <!--Comment Area-->
-        <div class="comment-area hide" id="comment-area">
-            <textarea name="comment" id="" placeholder="reply here ... "></textarea>
-            <input type="submit" value="submit">
-        </div>
+          <div class="comment-area hide" id="comment-area">
+              <input type="text" class="reply" name="comment" id="comment" placeholder="reply here ... ">
+              <div class="reply-submit">
+                <input type="submit" value="send" name="submit" id="submit">
+              </div>
 
-        <!--Comments Section-->
-        <div class="comments-container">
-            <div class="body">
-                <div class="authors">
-                    <div class="username"><a href="">AnotherUser</a></div>
-                    <div>Role</div>
-                    <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt="">
-                    <div>Posts: <u>455</u></div>
-                    <div>Points: <u>4586</u></div>
-                </div>
-                <div class="content">
-                    Just a comment of the above random topic.
-                    <br>To see how it looks like.
-                    <br><br>
-                    Nothing more and nothing less.
-                    <br>
-                    <br>
-                    <div class="comment">
-                        <button onclick="showReply()">Reply</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--Reply Area-->
-        <div class="comment-area hide" id="reply-area">
-            <textarea name="reply" id="" placeholder="reply here ... "></textarea>
-            <input type="submit" value="submit">
-        </div>
+          </div>
+
+        </form>
 
 
-        <!--Another Comment With replies-->
-        <div class="comments-container">
-            <div class="body">
-                <div class="authors">
-                    <div class="username"><a href="">AnotherUser</a></div>
-                    <div>Role</div>
-                    <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt="">
-                    <div>Posts: <u>455</u></div>
-                    <div>Points: <u>4586</u></div>
-                </div>
-                <div class="content">
-                    Just a comment of the above random topic.
-                    <br>To see how it looks like.
-                    <br><br>
-                    Nothing more and nothing less.
-                    <br>
-                    <br>
-                    <div class="comment">
-                        <button onclick="showReply()">Reply</button>
-                    </div>
-                </div>
-            </div>
         </div>
-        <!--Reply Area-->
-        <div class="comment-area hide" id="reply-area">
-            <textarea name="reply" id="" placeholder="reply here ... "></textarea>
-            <input type="submit" value="submit">
-        </div>
-        </div>
+
 
   </body>
 </html>

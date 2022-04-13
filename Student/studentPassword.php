@@ -1,5 +1,41 @@
 <?php
    include('../session.php');
+
+
+
+   if(isset($_POST['submit'])){
+
+     if($conn === false){
+    die("ERROR: Could not connect. "
+          . mysqli_connect_error());
+        }
+
+     //get user Message
+     $newPassword = mysqli_real_escape_string(
+        $conn, $_REQUEST['studentNewPassword']);
+
+    $confirmNewPassword =  mysqli_real_escape_string(
+       $conn, $_REQUEST['studentNewPasswordConfirmation']);
+
+        // Attempt insert query execution
+        if($newPassword == $confirmNewPassword){
+        $username = $_SESSION["username"];
+        $sql = "UPDATE users SET password='$newPassword' WHERE username='$username'";
+        if(mysqli_query($conn, $sql)){
+          //prevent form to be resubmitted multiple times
+          header("Location:studentPassword.php");
+          die();
+        } else{
+            echo "ERROR: Message not sent!!!";
+        }
+
+        // Close connection
+        mysqli_close($conn);
+      } else{
+        echo "passwords don't match";
+      }
+   }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -52,9 +88,9 @@
     <b >
       <font size="4">
         <i>
-          COMP 5531/Winter 2022
+          <?php echo htmlspecialchars($_SESSION["course_name"]); ?>/Winter 2022
           <br>
-          Section NN
+          SECTION <?php echo htmlspecialchars($_SESSION["course_section"]); ?>
         </i>
       </font>
     </b>
@@ -188,15 +224,13 @@
 
     <!-- main page -->
       <div class="main_home">
-    <form action="studentProcessChangePassword.php" method="POST">
+    <form action="studentPassword.php" method="POST">
         <div>
-            <label>Enter New Password</label>
-            <input type="text" name="studentNewPassword">
+            <input type="text" class="feedback-input" name="studentNewPassword" placeholder="New Password">
         </div>
         <br>
         <div>
-            <label>Confirm New Password</label>
-            <input type="text" name="studentNewPasswordConfirmation">
+            <input type="text" class="feedback-input" name="studentNewPasswordConfirmation" placeholder="Confirm New Password">
         </div>
         <br>
         <input type="submit" name="submit" value="Submit">

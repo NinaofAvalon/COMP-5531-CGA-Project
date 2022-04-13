@@ -1,5 +1,41 @@
 <?php
-   include('../session.php');
+   include_once ('../session.php');
+
+   $username = $_SESSION["username"];
+
+
+   $group_id = $_SESSION["group_id"];
+
+
+
+   if(isset($_POST['submit'])){
+
+     if($conn === false){
+    die("ERROR: Could not connect. "
+          . mysqli_connect_error());
+        }
+
+     //get user Message
+     $message = mysqli_real_escape_string(
+        $conn, $_REQUEST['message']);
+
+        // Attempt insert query execution
+        date_default_timezone_set('America/Montreal');
+        $date=date('y-m-d h:ia');
+        $username = $_SESSION["username"];
+        $sql = "INSERT INTO chat (message,username,date,group_id)
+                    VALUES ('$message', '$username', '$date','$group_id')";
+        if(mysqli_query($conn, $sql)){
+          //prevent form to be resubmitted multiple times
+          header("Location:studentGroupChat.php");
+          die();
+        } else{
+            echo "ERROR: Message not sent!!!";
+        }
+
+        // Close connection
+        mysqli_close($conn);
+   }
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -9,7 +45,16 @@
     <style><?php include '../style.css'; ?></style>
 
   </head>
-  <body>
+  <body onload="show_func()">
+
+    <script>
+    function show_func(){
+     var element = document.getElementById("chathist");
+        element.scrollTop = element.scrollHeight;
+     }
+     </script>
+
+
 
     <!-- header -->
     <div class="header" height="20%" scrolling="no">
@@ -54,9 +99,9 @@
       <b >
         <font size="4">
           <i>
-            COMP 5531/Winter 2022
+            <?php echo htmlspecialchars($_SESSION["course_name"]); ?>/Winter 2022
             <br>
-            Section NN
+            SECTION <?php echo htmlspecialchars($_SESSION["course_section"]); ?>
           </i>
         </font>
       </b>
@@ -190,33 +235,87 @@
 
     <!-- main part -->
     <div class="main_home">
+    <form  name="myform" action="studentGroupChat.php" method="post">
       <section class="chat_area">
         <header>
-          <div class="chat_details">
-            <span>Student Name</span>
+          <div class="chat_details" id="chat_details">
+
+            <span><?php echo htmlspecialchars($_SESSION["username"]); ?> </span>
             <p>Active Now</p>
+
           </div>
-        </header>
-        <div class="chat_box">
+
+          </header>
+
+        <div class="chat_box" id="chathist">
+          <?php
+          $query = "SELECT * FROM chat where group_id='$group_id'";
+          $run = $conn->query($query);
+          $i=0;
+
+           while($row = $run->fetch_array()) {
+           if($_SESSION['username']==$row['username']){
+
+           ?>
+
           <div class="chat_outgoing">
             <div class="chat_details">
-              <p>Hello This is a group chat</p>
-            </div>
-          </div>
-            <div class="chat_incoming">
-              <div class="chat_details">
-                <p>we have a group chat</p>
+              <?php echo $row['message']; ?>
+              <div class="info">
+                  <?php echo $row['username']; ?>, <?php echo $row['date']; ?>
               </div>
             </div>
           </div>
-          <form class="typing_area" action="#">
-            <input type="text" placeholder="Type a message">
-              <button type="button" name="button">
-                <img src="../telegram.png" alt="">
-              </button>
-          </form>
-      </section>
-    </div>
 
-  </body>
+          <?php
+          }
+
+          else
+          {
+
+            if($_SESSION['username']!=$row['username'])
+            {
+            ?>
+            <div class="chat_incoming">
+              <div class="chat_details">
+                <?php echo $row['message']; ?>
+                <div class="info">
+                    <?php echo $row['username']; ?>, <?php echo $row['date']; ?>
+                </div>
+              </div>
+          </div>
+            <br>
+          <?php
+        }
+          else 
+          {
+            ?>
+
+            <div class="chat_outgoing">
+              <div class="chat_details">
+                <?php echo $row['message']; ?>
+                <div class="info">
+                    <?php echo $row['username']; ?>, <?php echo $row['date']; ?>
+                </div>
+
+              </div>
+
+            </div>
+            <br>
+            <?php
+          }
+        }
+      }
+          ?>
+          </div>
+          <div class="typing_area">
+            <input type="text" placeholder="Type a message" id="message" name="message">
+                <button type="submit" name="submit" id="submit" value="send">
+                  <img src="../telegram.png" alt="">
+                </button>
+          </div>
+      </section>
+      </form>
+    </div>
+   </body>
 </html>

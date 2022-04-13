@@ -16,6 +16,28 @@ body{
   padding-bottom:15px;
 }
 
+button.login {
+  background-color: #B7CADB;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 15px;
+  border-radius: 5px;
+  border: 2px solid #B7CADB ;
+}
+
+.course-name{
+  padding-top: 10px;
+}
+
+
+.submit_button{
+  padding-top: 10px;
+}
+
+
 
 .menu{
   background-color: #B7CADB;
@@ -27,7 +49,7 @@ body{
   left: 0;
   padding-left: 10px;
   padding-right: 10px;
-  top:1px;
+  top:3%;
 
 
 }
@@ -58,16 +80,224 @@ display: block;
 display: none;
 min-width: 120px;
 z-index: 1;
+
 }
-.dropdownlist-content a {
+.dropdownlist-content input {
 color: darkblue;
-padding: 14px 18px;
+padding-top: 100px;
 display: block;
 }
 
 .dropdownlist-content a:hover {background-color: #D7E9F7;}
 .dropdowndemo:hover .dropdownlist-content {display: contents;}
 .dropdowndemo: hover .dropdownbtn {background-color: blue;}
+
+
+/* agenda */
+
+
+
+table.calendar {
+  border:1px solid black;
+  height:500px;
+  margin:auto;
+  margin-top: 10px;
+}
+
+
+table.month{
+  align:center;
+}
+td.calendar-day	{
+  min-height:80px;
+  font-size:11px;
+  position:relative;
+  }
+* html div.calendar-day {
+  height:80px;
+}
+td.calendar-day:hover	{
+  background:#B7CADB;
+}
+td.calendar-day-np	{
+  background:#eee; min-height:80px;
+  }
+ * html div.calendar-day-np {
+   height:80px;
+ }
+td.calendar-day-head {
+  background:#5684ab;
+  font-weight:bold;
+  text-align:center;
+  width:120px;
+  padding:5px;
+  border-bottom:1px solid black;
+  border-top:1px solid black;
+  border-right:1px solid black;
+}
+div.day-number {
+  background:#999;
+  padding:5px;
+  color:#fff;
+  font-weight:bold;
+  float:right;
+  margin:-5px -5px 0 0;
+  width:20px;
+  text-align:center;
+}
+/* shared */
+td.calendar-day, td.calendar-day-np {
+  width:120px;
+  padding:5px;
+  border-bottom:1px solid #999;
+  border-right:1px solid #999;
+}
+
+select {
+    background-color: #f3f4f6;
+    padding: 15px 20px;
+    border-radius: 10px;
+  }
+
+  .opts {
+   background-color: #fff;
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   column-gap: 15px;
+ }
+
+
+ /* adding event */
+
+
+
+.center{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+
+.modal-box{
+  top: 40%;
+  opacity: 0;
+  width: 480px;
+  padding: 18px 10px;
+  border-radius: 5px;
+  visibility: hidden;
+  background: white;
+  height: auto;
+  box-shadow: 5px 5px 30px rgba(0,0,0,.2);
+}
+
+.start-btn.show-modal{
+  opacity: 0;
+  visibility: hidden;
+}
+
+.modal-box.show-modal{
+  top: 50%;
+  opacity: 1;
+  visibility: visible;
+  transition: .4s;
+}
+
+/* popup box */
+.modal-box{
+  top: 40%;
+  opacity: 0;
+  width: 480px;
+  padding: 18px 10px;
+  border-radius: 5px;
+  visibility: hidden;
+  background: white;
+  height: auto;
+  box-shadow: 5px 5px 30px rgba(0,0,0,.2);
+}
+
+.start-btn.show-modal{
+  opacity: 0;
+  visibility: hidden;
+}
+.modal-box.show-modal{
+  top: 50%;
+  opacity: 1;
+  visibility: visible;
+  transition: .4s;
+}
+
+/* cancle button */
+.modal-box .fa-times{
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #0569d4;
+  font-size: 18px;
+  border-radius: 100%;
+  text-align: center;
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+  line-height: 40px;
+  margin: 10px;
+  color: white;
+}
+
+.fa-times:hover{
+  font-size: 22px;
+}
+
+/* design the form */
+.form_container{
+  background: #fff;
+  padding: 30px;
+  margin-top: 20px;
+  border-radius: 3px;
+}
+
+.form_container .form_item{
+  margin-bottom: 25px;
+}
+
+.form_container .form_wrap.form_grp{
+  display: flex;
+}
+
+.form_container .form_wrap.form_grp .form_item{
+  width: 50%;
+}
+
+.form_container .form_wrap.form_grp .form_item:first-child{
+  margin-right: 4%;
+}
+
+.form_container .form_item label{
+  display: block;
+  margin-bottom: 5px;
+}
+/* input box and select box */
+.form_container .form_item input,
+.form_container .form_item select{
+  width: 100%;
+  border: 1px solid #dadce0;
+  border-radius: 3px;
+  padding: 10px;
+  font-size: 16px;
+}
+/* submit button */
+.form_container .btn input[type="submit"]{
+
+  background: #6271f0;
+  cursor: pointer;
+  color: #fff;
+  border: 1px solid #6271f0;
+  padding: 10px;
+  width: 100%;
+  border-radius: 3px;
+}
+
 
 
 
@@ -84,7 +314,7 @@ display: block;
 .table-head div{
     padding: 5px;
     margin: 2px;
-    background-color: #B0CAC7;
+    background-color: #5684ab;
     font-weight: bold;
     border: 2px solid;
 
@@ -115,7 +345,7 @@ display: block;
 .table-row .status, .table-row .subjects, .table-row .replies, .table-row .last-reply{
     padding: 5px;
     margin: 2px;
-    background-color: #A8D3DA;
+    background-color:#5684ab;
     border: 1px solid;
 }
 
@@ -139,12 +369,72 @@ display: block;
 
 
 /* ########################################### */
+/*           create post                    */
+/* ########################################### */
+
+button.post-button{
+  border-radius:5px;
+  font-size:20px;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+a{
+  color:inherit;
+  text-decoration: none;
+}
+
+.feedback-input {
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight:500;
+  font-size: 18px;
+  border-radius: 5px;
+  line-height: 22px;
+  background-color: transparent;
+  border:2px solid #B7CADB;
+  transition: all 0.3s;
+  padding: 13px;
+  margin-bottom: 15px;
+  width:100%;
+  box-sizing: border-box;
+  outline:0;
+}
+
+
+textarea {
+  height: 150px;
+  line-height: 150%;
+  resize:vertical;
+}
+
+input[type="submit"] {
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+  width: 100%;
+  background-color:#B7CADB;
+  border-radius:5px;
+  border:0;
+  cursor:pointer;
+  color:white;
+  font-size:24px;
+  padding-top:10px;
+  padding-bottom:10px;
+  transition: all 0.3s;
+  margin-top:-4px;
+  font-weight:700;
+}
+
+[type="submit"]:hover { background:#81a3c0; }
+
+
+/* ########################################### */
 /*            detail.html                      */
 /* ########################################### */
 
 .head{
     display: flex;
-    background-color: #B0CAC7;
+    background-color: #5684ab;
     padding: 5px;
     font-weight: bold;
     font-size: 15px;
@@ -162,7 +452,16 @@ display: block;
 
 .body{
     display: flex;
-    background-color: #B0CAC7;
+    background-color:#5684ab;
+    padding: 5px;
+    margin-top: 5px;
+    margin-right: 100px;
+
+}
+
+.body-replies{
+    display: flex;
+    background-color:#c4d7e8;
     padding: 5px;
     margin-top: 5px;
     margin-right: 100px;
@@ -173,7 +472,23 @@ display: block;
     font-size: 20px;
 }
 
+.author-div{
+  padding: 10px;
+}
+
+.reply-submit{
+  padding-top: 10px;
+  margin-right: 100px;
+
+}
+
 .body .authors img{
+    max-width: 50px;
+    max-height: 80px;
+
+}
+
+.body-replies .authors img{
     max-width: 50px;
     max-height: 80px;
 
@@ -188,32 +503,21 @@ display: block;
     float: right;
 }
 
-/* comment section */
-.comment-area{
-    margin-bottom:50px;
-    margin-right: 100px;
-}
-
-.comment-area textarea{
-    width: 100%;
-    min-height: 100px;
-    padding-top: 10px;
-    padding-bottom: 10px;
 
 
-    margin-block: 10px;
-    margin-right: 1%;
-}
 
-.comment-area input{
-    float: right;
-    padding: 10px;
-    border-radius: 10px;
-    cursor: pointer;
+.comment-area .reply{
+
+  display: flex;
+  padding: 5px;
+  margin-top: 5px;
+  margin-right: 100px;
+  width: 90.4%;
 }
 
 .comment-area input:hover{
     border: solid 1px #000000;
+    align-self: center;
 }
 
 /* ########################################### */
@@ -247,31 +551,35 @@ display: block;
 .chat_outgoing .chat_details{
   margin-left: auto;
   max-width: calc(100% - 130px);
+  background: #333;
+  color: #fff;
+  border-radius: 18px 18px 0 18px;
+  padding: 10px;
+
+
 }
 
 .chat_incoming .chat_details{
   max-width: calc(100% - 130px);
   margin-right: auto;
-}
-
-.chat_outgoing .chat_details p{
-  background: #333;
-  color: #fff;
-  border-radius: 18px 18px 0 18px;
-  padding: 10px;
-}
-
-.chat_box .chat_incoming{
-  display: flex;
-}
-
-.chat_incoming .chat_details p{
   color: #333;
   background: #fff;
   border-radius: 18px 18px 18px 0;
   padding: 10px;
   box-shadow: 5px 10px;
 }
+
+
+
+.chat_box .chat_incoming{
+  display: flex;
+}
+
+.info {
+  font-size: 10px;
+}
+
+
 
 .chat_area .typing_area{
   padding: 18px 25px;
@@ -282,14 +590,16 @@ display: block;
 .typing_area{
   background-color:white;
   border-radius: 0 0 18px 18px;
+  padding-top: 10px;
 }
 
 .typing_area input{
   height: 45px;
-  width: calc(100% - 70px);
+  width: calc(100%);
   font-size: 17px;
   border: 1px solid #ccc;
   padding: 0 13px;
+  padding-top: 10px;
   border-radius: 5px;
   outline: none;
 }
