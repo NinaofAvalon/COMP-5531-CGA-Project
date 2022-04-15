@@ -13,7 +13,7 @@ session_start();
 
 $user_check = $_SESSION['id'];
 
-$ses_sql = mysqli_query($conn,"select users.username as username, emails.email_subject, emails.email_body, r.username as sender from emails join users on emails.recipient = users.id join users r on r.id = emails.sender where recipient = '$user_check' ");
+$ses_sql = mysqli_query($conn,"select emails.id as email_id, users.username as username, emails.email_subject, emails.email_body, r.username as sender, emails.email_date  from emails join users on emails.recipient = users.id join users r on r.id = emails.sender where recipient = '$user_check' ");
 
 // $email_records = mysqli_fetch_array($ses_sql,MYSQLI_ASSOC);
 
@@ -32,7 +32,7 @@ $ses_sql = mysqli_query($conn,"select users.username as username, emails.email_s
   <body>
   
     <!-- header -->
-    <div class="header" height="20%" scrolling="no">
+    <div class="header1" height="20%" scrolling="no">
       <table border="0" width="100%">
         <tbody>
           <tr width="100%">
@@ -136,10 +136,10 @@ $ses_sql = mysqli_query($conn,"select users.username as username, emails.email_s
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Username</th>
-                            <th>Recive from</th>
-                            <th>Subject</th>
-                            <th>Summary</th>
+                            <th class="col-6">Mail Title</th>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Date</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -149,11 +149,17 @@ $ses_sql = mysqli_query($conn,"select users.username as username, emails.email_s
                         ?>
 
                             <tr>
-                                <td><?= $row_count ?></td>
-                                <td><?= $row['username'] ?></td>
+                                <td>
+                                  <?= $row_count ?>
+                                </td>
+                                <td>
+                                  <a href="emailDetails.php?email_id=<?= $row['email_id'] ?>">
+                                    <?= $row['email_subject'] ?>
+                                  </a>
+                                </td>
                                 <td><?= $row['sender'] ?></td>
-                                <td><?= $row['email_subject'] ?></td>
-                                <td><?= $row['email_body'] ?></td>
+                                <td><?= $row['username'] ?></td>
+                                <td><?= $row['email_date'] ?></td>
                             </tr>
                         <?php
                             $row_count++;
