@@ -1,11 +1,7 @@
 <?php
    include('../session.php');
 
-   $instructor_fname = "SELECT * FROM instructor WHERE username = '$username'";
-   $instructor_lname;
-   $instructor_phone;
-   $instructor_office;
-   $instructor_email;
+
 
 ?>
 ﻿<!DOCTYPE html>
@@ -59,9 +55,9 @@
     <b >
       <font size="4">
         <i>
-          COMP 5531/Winter 2022
+          <?php echo htmlspecialchars($_SESSION["course_name"]); ?>/Winter 2022
           <br>
-          Section NN
+          SECTION <?php echo htmlspecialchars($_SESSION["course_section"]); ?>
         </i>
       </font>
     </b>
@@ -201,21 +197,25 @@
       <br>
       <br>
 
+    <?php
+    $coursename = $_SESSION['course_name'];
+    $query = "SELECT * FROM instructor where instructor_course='$coursename'";
+    $run = $conn -> query($query);
+    $row = $run -> fetch_array();
+     ?>
     <table border="1" width="100%">
       <tbody>
             <tr bgcolor="F6E5F5">
-                <th>First name</th>
-                <th>Last name</th>
+                <th>First Name</th>
+                <th>Last Name</th>
                 <th>Phone</th>
-                <th>Office</th>
                 <th>Email</th>
             </tr>
             <tr>
-              <td>First name</td>
-              <td>Last name</td>
-              <td>Phone</td>
-              <td>Office</td>
-              <td>email</td>
+              <td><?php echo $row['first_name']; ?></td>
+              <td><?php echo $row['last_name']; ?></td>
+              <td><?php echo $row['phone']; ?></td>
+              <td><?php echo $row['email']; ?></td>
             </tr>
         </tbody>
     </table>
@@ -227,22 +227,24 @@
     <b>Course TA</b>
     <br>
     <br>
-
+    <?php
+    $query = "SELECT * FROM TA where id = (SELECT TA_id from course where course_name='$coursename')";
+    $run = $conn -> query($query);
+    $row = $run -> fetch_array();
+     ?>
   <table border="1" width="100%">
     <tbody>
           <tr bgcolor="F6E5F5">
               <th>First name</th>
               <th>Last name</th>
               <th>Phone</th>
-              <th>Office</th>
               <th>Email</th>
           </tr>
           <tr>
-            <td>First name</td>
-            <td>Last name</td>
-            <td>Phone</td>
-            <td>Office</td>
-            <td>email</td>
+            <td><?php echo $row['first_name']; ?></td>
+            <td><?php echo $row['last_name']; ?></td>
+            <td><?php echo $row['phone']; ?></td>
+            <td><?php echo $row['email']; ?></td>
           </tr>
       </tbody>
   </table>

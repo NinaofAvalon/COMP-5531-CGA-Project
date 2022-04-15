@@ -1,6 +1,41 @@
 <?php
    include('../session.php');
+
+   $username = $_SESSION['username'];
+
+   if(isset($_POST['submit'])){
+
+     if($conn === false){
+    die("ERROR: Could not connect. "
+          . mysqli_connect_error());
+        }
+
+        //get user title
+      $post_title = mysqli_real_escape_string(
+           $conn, $_REQUEST['post-title']);
+     //get user Message
+     $post_content = mysqli_real_escape_string(
+        $conn, $_REQUEST['post-content']);
+
+        // Attempt insert query execution
+        date_default_timezone_set('America/Montreal');
+        $date=date('y-m-d h:ia');
+        $username = $_SESSION["username"];
+        $sql = "INSERT INTO discussion_board (title,creator,content,creation_date)
+                    VALUES ('$post_title', '$username', '$post_content','$date')";
+        if(mysqli_query($conn, $sql)){
+          //prevent form to be resubmitted multiple times
+          header("Location:studentGroupDiscussion.php");
+          die();
+        } else{
+            echo "ERROR: Message not sent!!!";
+        }
+
+        // Close connection
+        mysqli_close($conn);
+   }
 ?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -17,14 +52,15 @@
         <tbody>
           <tr width="100%">
             <td width="5%" align="left"><h2>CGA</h2></td>
-            <td align="center"><font size="5"><b>Feed</b></font></td>
+            <td align="center"><font size="5"><b>Create Post</b></font></td>
           </tr>
         </tbody>
       </table>
       <table border="0" width="100%">
         <tbody>
           <tr width="100%">
-            <td align="left"><font class="font-header" size="3">Welcome, <?php echo htmlspecialchars($_SESSION["username"]); ?> ! <?php echo "Today is " . date("Y-m-d") . "<br>"; ?></font></td>
+            <td align="left"><font class="font-header" size="3">Welcome, <?php
+            echo htmlspecialchars($_SESSION["username"]); ?> ! <?php echo "Today is " . date("Y-m-d") . "<br>"; ?></font></td>
             <td align="right">
               <i>
                 <b>
@@ -186,6 +222,19 @@
           </ul>
         </font>
       </b>
+    </div>
+
+    <div class="main_home">
+
+      <form class="" action="studentCreatePost.php" method="post" id="create-post">
+
+        <input name="post-title" type="text" class="feedback-input" placeholder="Title" />
+    <textarea name="post-content" class="feedback-input" placeholder="Post"></textarea>
+    <input type="submit" name="submit" class="post_submit" value="SUBMIT"><a href="studentGroupDiscussion.php"></a></input>
+
+
+      </form>
+
     </div>
 
   </body>

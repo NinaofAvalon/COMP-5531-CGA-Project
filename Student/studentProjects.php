@@ -52,9 +52,9 @@
     <b >
       <font size="4">
         <i>
-          COMP 5531/Winter 2022
+          <?php echo htmlspecialchars($_SESSION["course_name"]); ?>/Winter 2022
           <br>
-          Section NN
+          SECTION <?php echo htmlspecialchars($_SESSION["course_section"]); ?>
         </i>
       </font>
     </b>
