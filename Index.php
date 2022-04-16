@@ -23,7 +23,7 @@ if(isset($_POST['submit'])){
          session_start();
          $_SESSION["username"] = $username;
          $_SESSION['id'] = $row['id'];
-         header("location: Student/studentCourses.php");
+         header("location: welcome.php");
       }else {
          $error = "Your Login Name or Password is invalid";
          echo $error;

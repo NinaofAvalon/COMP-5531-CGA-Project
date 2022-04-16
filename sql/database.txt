@@ -56,13 +56,22 @@ CREATE TABLE  course  (
    id  int(11) NOT NULL AUTO_INCREMENT,
    course_name  varchar(100) NOT NULL,
    instructor_id  int(11) NOT NULL,
-   TA_id  int(11) NOT NULL,
    course_section  varchar(100) NOT NULL,
    course_term  varchar(100) NOT NULL,
   PRIMARY KEY ( id ),
   KEY  course_fk  (instructor_id ),
   FOREIGN KEY ( instructor_id ) REFERENCES  instructor  ( id )
 ) ENGINE=InnoDB AUTO_INCREMENT=1036 DEFAULT CHARSET=latin1;
+
+-- course_ta
+CREATE TABLE  course_ta  (
+   id  int(11) NOT NULL AUTO_INCREMENT,
+   course_id  int(11) NOT NULL,
+   ta_id int(11) NOT NULL,
+  PRIMARY KEY ( id )
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+
 
 -- group
 CREATE TABLE class_group (

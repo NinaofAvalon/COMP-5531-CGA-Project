@@ -4,13 +4,14 @@
 
 
 ?>
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Contact Information</title>
+    <title>Group Discussion</title>
     <style><?php include '../style.css'; ?></style>
 
 </head>
+
 <body>
   <!-- header -->
   <div class="header" height="20%" scrolling="no">
@@ -18,7 +19,7 @@
       <tbody>
         <tr width="100%">
           <td width="5%" align="left"><h2>CGA</h2></td>
-          <td align="center"><font size="5"><b>Contact Information</b></font></td>
+          <td align="center"><font size="5"><b>Discussion Board</b></font></td>
         </tr>
       </tbody>
     </table>
@@ -188,71 +189,61 @@
       </font>
     </b>
   </div>
+  <!-- main section -->
 
 
-    <!-- Table -->
-    <div class="main_home">
+  <div class="main_home">
 
-      <b>Course Instructor</b>
-      <br>
-      <br>
 
-    <?php
-    $coursename = $_SESSION['course_name'];
-    $query = "SELECT * FROM instructor where instructor_course='$coursename'";
-    $run = $conn -> query($query);
-    $row = $run -> fetch_array();
-     ?>
-    <table border="1" width="100%">
-      <tbody>
-            <tr bgcolor="F6E5F5">
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Phone</th>
-                <th>Email</th>
-            </tr>
-            <tr>
-              <td><?php echo $row['first_name']; ?></td>
-              <td><?php echo $row['last_name']; ?></td>
-              <td><?php echo $row['phone']; ?></td>
-              <td><?php echo $row['email']; ?></td>
-            </tr>
-        </tbody>
-    </table>
 
-    <br>
+            <div class="table-head">
+                <div class="subjects">Subjects</div>
 
-    <hr>
+            </div>
 
-    <b>Course TA</b>
-    <br>
-    <br>
-    <?php
-    $query = "SELECT * FROM TA 
-    join course_ta ct on ta.id = ct.ta_id
-    join course on course.id = ct.course_id
-    where course.course_name='$coursename'";
-    $run = $conn -> query($query);
-    $row = $run -> fetch_array();
-     ?>
-  <table border="1" width="100%">
-    <tbody>
-          <tr bgcolor="F6E5F5">
-              <th>First name</th>
-              <th>Last name</th>
-              <th>Phone</th>
-              <th>Email</th>
-          </tr>
-          <tr>
-            <td><?php echo $row['first_name']; ?></td>
-            <td><?php echo $row['last_name']; ?></td>
-            <td><?php echo $row['phone']; ?></td>
-            <td><?php echo $row['email']; ?></td>
-          </tr>
-      </tbody>
-  </table>
 
-    <div class="main_home">
+            <div class="table-row">
 
-</body>
+                <div class="subjects">
+                  <?php
+                  $query = "SELECT * FROM discussion_board";
+
+                  $run = $conn->query($query);
+                  $i=0;
+
+
+                  while($row = $run->fetch_array()) {
+                  if($i==0){
+
+
+                ?>
+
+                  <form class="" action="studentPostDetails.php" method="get">
+
+                    <input type="hidden" name="id" id="id" value="<?php echo $row['id']; ?>">
+                    <div class="author-div">
+                      <span>Author:  <?php echo $row['creator']; ?></span>
+                    </div>
+
+                  <input type="submit" id="title" value="<?php echo $row['title']; ?>">
+                  <br>
+
+
+                   </form>
+                   <?php
+                     }
+                   }
+                 ?>
+
+
+                </div>
+
+            </div>
+
+
+        <button class="post-button"><a href="studentCreatePost.php">Submit New Post</a></button>
+        </div>
+
+  </body>
+
 </html>

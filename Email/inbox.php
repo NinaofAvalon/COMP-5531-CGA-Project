@@ -48,7 +48,7 @@ $ses_sql = mysqli_query($conn,"select emails.id as email_id, users.username as u
             <td align="right">
               <i>
                 <b>
-                  <a href="welcome.php">
+                  <a href="../welcome.php">
                     <font class="home_link" color="black">Home</font>
                   </a>
                 </b>

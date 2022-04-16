@@ -1,11 +1,6 @@
 <?php
    include('session.php');
 
-   //keeping track of the student's course and section
-   $course_name = $_SESSION['course_name'];
-   $section = $_SESSION['course_section'];
-   $group_id =$_SESSION['group_id'];
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -56,142 +51,33 @@
     <!-- menu -->
     <div class="menu" height="100%" width="150px">
       <hr>
-      <b >
-        <font size="4">
-          <i>
-            <?php echo htmlspecialchars($_SESSION["course_name"]); ?>/Winter 2022
-            <br>
-            SECTION <?php echo htmlspecialchars($_SESSION["course_section"]); ?>
-          </i>
-        </font>
-      </b>
-      <hr>
+      
       <b>
         <font size="4">
           <ul>
             <li>
-              <a href="Student/studentContact.php">
+              <a href="Student/studentCourses.php">
                 <b>
-                  <font color="black">Contact Information</font>
+                  <font color="black">Student Section</font>
                 </b>
               </a>
             </li>
           </ul>
         </font>
       </b>
-
       <b>
         <font size="4">
           <ul>
             <li>
-              <a href="Student/studentGroup.php">
+              <a href="TA/taCourses.php">
                 <b>
-                  <font color="black">Course Group</font>
+                  <font color="black">TA Section</font>
                 </b>
               </a>
             </li>
           </ul>
         </font>
       </b>
-
-      <b>
-        <font size="4">
-          <ul>
-            <li>
-              <a href="Student/studentGroupChat.php">
-                <b>
-                  <font color="black">Group Chat</font>
-                </b>
-              </a>
-            </li>
-          </ul>
-        </font>
-      </b>
-
-      <b>
-        <font size="4">
-          <ul>
-            <li>
-              <a href="Student/studentGroupDiscussion.php">
-                <b>
-                  <font color="black">Discussion Board</font>
-                </b>
-              </a>
-            </li>
-          </ul>
-        </font>
-      </b>
-
-      <b>
-        <font size="4">
-          <ul>
-            <li>
-              <a href="Student/studentAgenda.php">
-                <b>
-                  <font color="black">Agenda</font>
-                </b>
-              </a>
-            </li>
-          </ul>
-        </font>
-      </b>
-
-      <b>
-        <font size="4">
-          <ul>
-            <li>
-              <a href="Student/studentProjects.php">
-                <b>
-                  <font color="black">Upload Files</font>
-                </b>
-              </a>
-            </li>
-          </ul>
-        </font>
-      </b>
-
-      <b>
-        <font size="4">
-          <ul>
-            <li>
-              <a href="Student/studentFeed.php">
-                <b>
-                  <font color="black">Feed</font>
-                </b>
-              </a>
-            </li>
-          </ul>
-        </font>
-      </b>
-
-      <b>
-        <font size="4">
-          <ul>
-            <li>
-              <a href="Student/studentPassword.php">
-                <b>
-                  <font color="black">Change Password</font>
-                </b>
-              </a>
-            </li>
-          </ul>
-        </font>
-      </b>
-
-      <b>
-        <font size="4">
-          <ul>
-            <li>
-              <a href="Student/studentEmail.php">
-                <b>
-                  <font color="black">Change Email</font>
-                </b>
-              </a>
-            </li>
-          </ul>
-        </font>
-      </b>
-
       <b>
         <font size="4">
           <ul>
