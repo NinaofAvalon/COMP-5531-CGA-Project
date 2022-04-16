@@ -191,6 +191,20 @@
           </ul>
         </font>
       </b>
+
+      <b>
+        <font size="4">
+          <ul>
+            <li>
+              <a href="Email/inbox.php">
+                <b>
+                  <font color="black">Email System</font>
+                </b>
+              </a>
+            </li>
+          </ul>
+        </font>
+      </b>
     </div>
 
     <!-- Main section -->
