@@ -1,6 +1,13 @@
 <?php
    include('../session.php');
    $username = $_SESSION["username"];
+   if (isset($_POST['course_name'])) {
+    echo "course_id" . $_REQUEST['course_id'];
+    $_SESSION['course_id'] = $_REQUEST['course_id'];
+    $_SESSION['course_name']= $_REQUEST['course_name'];
+    $_SESSION['course_section']= $_REQUEST['course_section'];
+    header("Location: taDiscussionBoard.php");
+  }
 
 ?>
 <!DOCTYPE html>
@@ -33,7 +40,7 @@
           <td align="center">
             <b>
               <font size="5">
-                Your Courses
+                Your Courses <?php echo "what is ".isset($_POST['submit']); ?>
               </font>
             </b>
           </td>
@@ -46,26 +53,24 @@
 
       <div align=center class="dropdowndemo">
 
+        <button align=center class="dropdownbtn">Winter 2022</button>
 <?php
 $user_id = $_SESSION['id'];
 $query = "SELECT course.id as course_id, course.course_name,course.course_section from ta inner join course_ta ct on ta.id = ct.ta_id inner join course on course.id = ct.course_id where ta.user_id = '$user_id'";
 $run = $conn->query($query);
 $i=0;
 while($row= $run->fetch_array()) {
-  if($i==0){
+  // if($i==0){
 ?>
-<button align=center class="dropdownbtn">Winter 2022</button>
 <div class="dropdownlist-content">
-<form class="" action="taDiscussionBoard.php" method="post">
-  <?php $_SESSION['course_name']= $row['course_name'];
-        $_SESSION['course_section']= $row['course_section'];
-        $_SESSION['course_id']= $row['course_id'];
-  ?>
-  <input type="submit" class="course-name" name="course_name" value="<?php echo $row['course_name']; ?>" ></input>
+<form class="" action="taCourses.php" method="post">
+  <input  type="hidden" name="course_id" id="course_id" value="<?php echo $row['course_id']; ?>" ></input>
+  <input type="submit" class="course-name" name="course_name" id="course_name" value="<?php echo $row['course_name']; ?>" ></input>
+  <input  type="hidden" name="course_section" id="course_section" value="<?php echo $row['course_section']; ?>" ></input>
 </form>
 
 <?php
-}
+// }
 }
  ?>
 

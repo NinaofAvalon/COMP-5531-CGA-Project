@@ -12,7 +12,6 @@ require_once "../php/config.php";
 session_start();
 
 // $user_check = $_SESSION['id'];
-echo "aaa";
 if (isset($_GET['email_id'])) {
   $user_check = $_GET['email_id'];
 }
