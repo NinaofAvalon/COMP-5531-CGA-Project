@@ -117,7 +117,7 @@ CREATE TABLE  `course_ta`  (
 --
 
 LOCK TABLES `course_ta` WRITE;
-insert into `course_ta`  (course_id, ta_id) values (1036,133456),(1037,133457),(1038,133458),(1039,133459),(1040,133462),(1041,133463),(1042,133456),(1043,133457),(1044,133458),(1045,133459),(1046,133462);
+insert into `course_ta`  (course_id, ta_id) values (1036,133456),(1037,133457),(1038,133458),(1039,133459),(1040,133462),(1041,133463),(1043,133463),(1042,133456),(1043,133457),(1044,133458),(1045,133459),(1046,133462);
 UNLOCK TABLES;
 --
 -- Table structure for table `discussion_board`
@@ -132,6 +132,7 @@ CREATE TABLE `discussion_board` (
   `creator` varchar(100) NOT NULL,
   `content` text NOT NULL,
   `creation_date` varchar(100) DEFAULT NULL,
+  `course_id` int(11) NOT NULL, 
   PRIMARY KEY (`id`),
   KEY `creator` (`creator`),
   CONSTRAINT `discussion_board_ibfk_1` FOREIGN KEY (`creator`) REFERENCES `users` (`username`)
@@ -144,7 +145,7 @@ CREATE TABLE `discussion_board` (
 
 LOCK TABLES `discussion_board` WRITE;
 /*!40000 ALTER TABLE `discussion_board` DISABLE KEYS */;
-INSERT INTO `discussion_board` VALUES (1001,'test post','m_adels','this is a test post','2022-04-04'),(1002,'This is another post','m_adels','this is another test post','22-04-06 05:13pm'),(1003,'This is another post','m_adels','this is another test post','22-04-06 05:13pm'),(1004,'let\'s talk about this','m_adels','this is interesting','22-04-06 05:18pm'),(1005,'another one','m_adels','hello','22-04-06 05:19pm'),(1006,'this is my post','m_adels','whaddup','22-04-06 05:20pm'),(1007,'Post','a_ulyss','This is my first post','22-04-07 01:36am'),(1008,'another','a_ulyss','and another one','22-04-07 01:38am');
+INSERT INTO `discussion_board` VALUES (1001,'test post','m_adels','this is a test post','2022-04-04', 1043),(1002,'This is another post','m_adels','this is another test post','22-04-06 05:13pm', 1036),(1003,'This is another post','m_adels','this is another test post','22-04-06 05:13pm', 1043),(1004,'let\'s talk about this','m_adels','this is interesting','22-04-06 05:18pm', 1043),(1005,'another one','m_adels','hello','22-04-06 05:19pm', 1036),(1006,'this is my post','m_adels','whaddup','22-04-06 05:20pm', 1036),(1007,'Post','a_ulyss','This is my first post','22-04-07 01:36am', 1038),(1008,'another','a_ulyss','and another one','22-04-07 01:38am', 1040);
 /*!40000 ALTER TABLE `discussion_board` ENABLE KEYS */;
 UNLOCK TABLES;
 

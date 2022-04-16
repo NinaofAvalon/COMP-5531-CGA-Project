@@ -63,125 +63,14 @@
       </font>
     </b>
     <hr>
-    <b>
-      <font size="4">
-        <ul>
-          <li>
-            <a href="studentContact.php">
-              <b>
-                <font color="black">Contact Information</font>
-              </b>
-            </a>
-          </li>
-        </ul>
-      </font>
-    </b>
 
     <b>
       <font size="4">
         <ul>
           <li>
-            <a href="studentGroup.php">
-              <b>
-                <font color="black">Course Group</font>
-              </b>
-            </a>
-          </li>
-        </ul>
-      </font>
-    </b>
-
-    <b>
-      <font size="4">
-        <ul>
-          <li>
-            <a href="studentGroupChat.php">
-              <b>
-                <font color="black">Group Chat</font>
-              </b>
-            </a>
-          </li>
-        </ul>
-      </font>
-    </b>
-
-    <b>
-      <font size="4">
-        <ul>
-          <li>
-            <a href="studentGroupDiscussion.php">
+            <a href="taDiscussionBoard.php">
               <b>
                 <font color="black">Discussion Board</font>
-              </b>
-            </a>
-          </li>
-        </ul>
-      </font>
-    </b>
-
-    <b>
-      <font size="4">
-        <ul>
-          <li>
-            <a href="studentAgenda.php">
-              <b>
-                <font color="black">Agenda</font>
-              </b>
-            </a>
-          </li>
-        </ul>
-      </font>
-    </b>
-
-    <b>
-      <font size="4">
-        <ul>
-          <li>
-            <a href="studentProjects.php">
-              <b>
-                <font color="black">Upload Files</font>
-              </b>
-            </a>
-          </li>
-        </ul>
-      </font>
-    </b>
-
-    <b>
-      <font size="4">
-        <ul>
-          <li>
-            <a href="studentFeed.php">
-              <b>
-                <font color="black">Feed</font>
-              </b>
-            </a>
-          </li>
-        </ul>
-      </font>
-    </b>
-
-    <b>
-      <font size="4">
-        <ul>
-          <li>
-            <a href="studentPassword.php">
-              <b>
-                <font color="black">Change Password</font>
-              </b>
-            </a>
-          </li>
-        </ul>
-      </font>
-    </b>
-
-    <b>
-      <font size="4">
-        <ul>
-          <li>
-            <a href="studentEmail.php">
-              <b>
-                <font color="black">Change Email</font>
               </b>
             </a>
           </li>
@@ -206,7 +95,8 @@
 
                 <div class="subjects">
                   <?php
-                  $query = "SELECT * FROM discussion_board";
+                  $course_id = $_SESSION["course_id"];
+                  $query = "SELECT * FROM discussion_board where course_id = '$course_id'";
 
                   $run = $conn->query($query);
                   $i=0;
@@ -218,7 +108,7 @@
 
                 ?>
 
-                  <form class="" action="studentPostDetails.php" method="get">
+                  <form class="" action="taPostDetails.php" method="get">
 
                     <input type="hidden" name="id" id="id" value="<?php echo $row['id']; ?>">
                     <div class="author-div">
@@ -241,7 +131,7 @@
             </div>
 
 
-        <button class="post-button"><a href="studentCreatePost.php">Submit New Post</a></button>
+        <button class="post-button"><a href="taCreatePost.php">Submit New Post</a></button>
         </div>
 
   </body>
