@@ -341,4 +341,21 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+DROP TABLE IF EXISTS `emails`;
+CREATE TABLE `emails` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `recipient` int(11) NOT NULL,
+  `sender` int(11) NOT NULL,
+  `email_subject` varchar(100) DEFAULT NULL,
+  `email_body` varchar(100) DEFAULT NULL,
+  `email_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`) 
+  -- accept null value but no duplicate
+) ENGINE=InnoDB AUTO_INCREMENT=1006 DEFAULT CHARSET=latin1;
+
+
+LOCK TABLES `emails` WRITE;
+insert into emails(recipient, sender, email_subject, email_body, email_date) value( 1006,1024, 'hello world', 'this is my first email.', '2022-04-12 22:19:06');
+UNLOCK TABLES;
+
 -- Dump completed on 2022-04-15 15:26:39
