@@ -84,16 +84,10 @@
     console.log(day_value);
       });
 
-    var x = 1;
-
-    document.querySelector('.test').innerHTML = 'Hello World!';
-
+      <?php
+        echo "<script>document.writeln(day_value);</script>";
+       ?>
     </script>
-
-    <?php
-       $content =  "<script>document.querySelector('.test').innerHTML = day_value;</script>";
-
-    ?>
 
 
   </head>
@@ -354,7 +348,15 @@ echo draw_calendar($numericalMonth,$year);
               <input type="text" name="description">
           </div>
       </div>
-      <!--city name input-->
+
+      <!-- day -->
+      <div class="form_wrap form_grp">
+          <div class="form_item">
+              <label name="day">Description</label>
+              <input type="hidden" name="day">
+          </div>
+      </div>
+      <!--start time-->
       <div class="form_wrap">
           <div class="form_item">
               <label>Start</label>
