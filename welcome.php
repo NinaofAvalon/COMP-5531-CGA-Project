@@ -1,6 +1,10 @@
 <?php
+   require('php/utils.php');
    include('session.php');
-
+   if (!isset($_SESSION['id'])) {
+    header('Location: Index.php');
+   }
+   $userRoles = getRoleByUserId($conn, $_SESSION['id']);
 ?>
 <!DOCTYPE html>
 <html>
@@ -55,7 +59,7 @@
       <b>
         <font size="4">
           <ul>
-            <li>
+            <li <?php echo (in_array("student", $userRoles))? "" : "style='display:none;'" ?>>
               <a href="Student/studentCourses.php">
                 <b>
                   <font color="black">Student Section</font>
@@ -68,10 +72,23 @@
       <b>
         <font size="4">
           <ul>
-            <li>
+            <li <?php echo (in_array("ta", $userRoles))? "" : "style='display:none;'" ?>>
               <a href="TA/taCourses.php">
                 <b>
                   <font color="black">TA Section</font>
+                </b>
+              </a>
+            </li>
+          </ul>
+        </font>
+      </b>
+      <b>
+        <font size="4">
+          <ul>
+            <li <?php echo (in_array("instructor", $userRoles))? "" : "style='display:none;'" ?>>
+              <a href="Instrucotr/">
+                <b>
+                  <font color="black">Instructor Section</font>
                 </b>
               </a>
             </li>
@@ -97,109 +114,11 @@
     <div class="main_home">
 
       <p>
-       This webpage allows you to share information and ideas with your teammates via pages and shared files.
-       The features offered as menus are explained below.
+       This webpage allows you to navigate to Student, TA, Insturctor, Administrator section based on your roles.
 
    </p>
 
-   <p>
-       <strong>Features</strong>
-   </p>
-
-   <ul>
-       <li><strong>Contact Information</strong></li>
-   </ul>
-
-   <p>
-       List the contact information for the instructor and tutor for the course.
-   </p>
-
-   <ul>
-       <li><strong>Course Group</strong></li>
-   </ul>
-
-   <p>
-       List detail information of your current group.
-   </p>
-
-   <ul>
-       <li><strong>Group Discussion</strong></li>
-   </ul>
-
-   <p>
-       Share and discuss ideas with your teammates on a message board.
-   </p>
-
-   <ul>
-       <li><strong>Assignment/Project Upload</strong></li>
-       <ul>
-           <li>Upload/Update your submission files before preset deadline</li>
-       </ul>
-       <ul>
-           <li>Upload your late submission files with preset penalty</li>
-       </ul>
-       <ul>
-           <li>View your current upload info for your individual/group works</li>
-       </ul>
-       <ul>
-           <li>View your current upload info for your individual/group works</li>
-       </ul>
-       <ul>
-           <li><strong>Note: For group work, only the group leader can upload files. Make sure the group members agree on the contents of the files being uploaded.</strong></li>
-       </ul>
-   </ul>
-
-   <ul>
-       <li><strong>Change Password</strong></li>
-   </ul>
-
-   <p>
-       Change your password for access to the system.
-   </p>
-
-   <ul>
-       <li><strong>Change Username</strong></li>
-   </ul>
-
-   <p>
-       Update your username which is recorded in the system. Make sure to change your username to the ones as required by the instructor.
-   </p>
-
-   <!-- Links -->
-   <br>
-   <hr>
-
-   <a href="studentContact.html">
-       <ul>
-           <li><strong>Contact Information</strong></li>
-       </ul>
-   </a>
-   <a href="studentGroup.html">
-       <ul>
-           <li><strong>Course Group</strong></li>
-       </ul>
-   </a>
-   <a href="studentGroupDiscussion.html">
-       <ul>
-           <li><strong>Group Discussion</strong></li>
-       </ul>
-   </a>
-   <a href="studentProjects.html">
-       <ul>
-           <li><strong>Assignment/Project Upload</strong></li>
-       </ul>
-   </a>
-   <a href="studentPassword.html">
-       <ul>
-           <li><strong>Change Password</strong></li>
-       </ul>
-   </a>
-   <a href="studentUsername.html">
-       <ul>
-           <li><strong>Change Username</strong></li>
-       </ul>
-   </a>
-
+   
     </div>
 
 </body>
