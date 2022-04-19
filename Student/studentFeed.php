@@ -1,7 +1,10 @@
 <?php
    include('../session.php');
-   $username = $_SESSION["username"];
-   $course_name = $_SESSION["course_name"];
+   //get student id
+   $student_id = $_SESSION['student_id'];
+   $username = $_SESSION['username'];
+   $id = $_SESSION['id'];
+
 
    if(isset($_POST['submit'])){
 
@@ -27,8 +30,6 @@
      $post_content = mysqli_real_escape_string(
         $conn, $_REQUEST['post-content']);
 
-        //likes
-        $likes = 0;
 
         // Attempt insert query execution
 

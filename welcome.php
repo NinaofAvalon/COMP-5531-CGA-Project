@@ -1,15 +1,37 @@
 <?php
    include('session.php');
 
-   $course_name = $_POST['course_name'];
 
-   $sql = "SELECT course_section, course_term from course where course_name='$course_name'";
-   $run = $conn->query($sql);
-   $row = $run->fetch_array();
-   $course_section = $row['course_section'];
-   $course_term = $row['course_term'];
+   //get student id
+   $student_id = $_SESSION['student_id'];
 
-   GLOBAL $course_name;
+
+   // $_SESSION["course_name"] = $course_name;
+   $course_name = $_POST["course_name"];
+   $_SESSION['course_name'] = $course_name;
+
+
+      $sql = "SELECT course_section, course_term, id from course where course_name='$course_name'";
+      $run = $conn->query($sql);
+      $row = $run->fetch_array();
+      $_SESSION["course_section"] = $row['course_section'];
+      $_SESSION["course_term"] = $row['course_term'];
+     $_SESSION["id"] = $row['id'];
+     $id =$_SESSION["id"];
+
+
+
+
+      //establish the group_id for the student
+      $query = "SELECT class_group.group_id,class_group.group_name,class_group.leader_id,class_group.course_id, stud_in_group.student_id
+                FROM class_group
+                left join stud_in_group ON class_group.group_id=stud_in_group.group_id
+                having student_id='$student_id' and course_id='$id'";
+      $run2 = $conn->query($query);
+      $row2 = $run2->fetch_array();
+      $_SESSION["group_name"] = $row2['group_name'];
+      $_SESSION["leader_id"] = $row2['leader_id'];
+      $_SESSION["group_id"] = $row2['group_id'];
 
 
 ?>
@@ -65,9 +87,9 @@
       <b >
         <font size="4">
           <i>
-            <?php echo $_SESSION['course_name']; ?>/<?php echo $course_term; ?>
+            <?php echo $_SESSION["course_name"]; ?>/ <?php echo $_SESSION["course_term"]; ?>
             <br>
-            SECTION <?php echo $course_section; ?>
+            SECTION <?php echo $_SESSION["course_section"];?>
           </i>
         </font>
       </b>
@@ -155,12 +177,11 @@
           </ul>
         </font>
       </b>
-
       <b>
         <font size="4">
           <ul>
             <li>
-              <a href="Student/studentFeed.php">
+              <a href="studentFeed.php">
                 <b>
                   <font color="black">Feed</font>
                 </b>

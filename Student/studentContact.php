@@ -1,6 +1,8 @@
 <?php
    include('../session.php');
 
+  $course_section=  $_SESSION["course_section"];
+
 
 
 ?>
@@ -213,7 +215,8 @@
 
     <?php
     $coursename = $_SESSION['course_name'];
-    $query = "SELECT * FROM instructor where instructor_course='$coursename'";
+    $course_id = $_SESSION['id'];
+    $query = "SELECT * from instructor where id=(select instructor_id from course_taught where course_id='$course_id')";
     $run = $conn -> query($query);
     $row = $run -> fetch_array();
      ?>
@@ -242,7 +245,7 @@
     <br>
     <br>
     <?php
-    $query = "SELECT * FROM TA where id = (SELECT TA_id from course where course_name='$coursename')";
+    $query = "SELECT * FROM TA where id = (SELECT TA_id from course where course_name='$coursename' and course_section='$course_section')";
     $run = $conn -> query($query);
     $row = $run -> fetch_array();
      ?>

@@ -1,6 +1,9 @@
 <?php
    include('../session.php');
 
+   $course_id =$_SESSION['id'];
+   $username = $_SESSION['username'];
+
    if(isset($_POST['submit'])){
       $fileName = $_FILES['file']['name'];
       $fileTmpName = $_FILES['file']['tmp_name'];
@@ -9,7 +12,7 @@
 
      //sql query
      $username = $_SESSION['username'];
-     $sql = "INSERT INTO uploads(username,file) values ('$username','$fileName')";
+     $sql = "INSERT INTO uploads(username,file,course_id) values ('$username','$fileName','$course_id')";
 
        if(mysqli_query($conn, $sql)){
          move_uploaded_file($fileTmpName, $path);
@@ -229,7 +232,7 @@
 
 
         <?php
-        $query = "SELECT * FROM uploads";
+        $query = "SELECT * FROM uploads where username='$username' and course_id='$course_id'";
         $run = $conn->query($query);
         while($row=$run->fetch_array()){
         ?>

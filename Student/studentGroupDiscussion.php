@@ -1,5 +1,7 @@
 <?php
    include('../session.php');
+   $course_id = $_SESSION["id"];
+   $group_id = $_SESSION['group_id'];
 
 
 
@@ -219,7 +221,7 @@
 
                 <div class="subjects">
                   <?php
-                  $query = "SELECT * FROM discussion_board";
+                  $query = "SELECT * FROM discussion_board where course_id='$course_id' and group_id='$group_id'";
 
                   $run = $conn->query($query);
                   $i=0;

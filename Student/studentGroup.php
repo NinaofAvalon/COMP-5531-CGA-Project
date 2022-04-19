@@ -1,7 +1,9 @@
 <?php
    include('../session.php');
    $username = $_SESSION['username'];
-   $group_id = $_SESSION['group_id'];
+   $group_name = $_SESSION['group_name'];
+   $group_leader =$_SESSION["leader_id"];
+   $group_id = $_SESSION["group_id"];
 ?>
 <!DOCTYPE html>
 <html>
@@ -210,24 +212,26 @@
 
     <?php
     //all group members
-    $query ="SELECT student.student_id,student.first_name, student.last_name, student.group_id, class_group.group_name, class_group.leader_id, users.email
-            from ((student
-            inner join class_group on student.group_id = class_group.group_id
-            inner join users on student.user_id = users.id))
-            having group_id = (select group_id from student where user_id = ( select id from users where username='$username'))";
+    $query ="SELECT class_group.group_id,class_group.group_name,class_group.leader_id,class_group.course_id, stud_in_group.student_id,student.first_name, student.last_name, users.email
+            FROM class_group
+            inner join stud_in_group ON class_group.group_id=stud_in_group.group_id
+            inner join student on stud_in_group.student_id=student.student_id
+            inner join users on student.user_id = users.id
+            having group_id = '$group_id'";
 
     //leader information
-    $query1 ="SELECT student.student_id,student.first_name, student.last_name, student.group_id, class_group.group_name, class_group.leader_id, users.email
-              from ((student
-              inner join class_group on student.student_id = class_group.leader_id
-              inner join users on student.user_id = users.id))
-              having group_id = (select group_id from student where user_id = ( select id from users where username='$username'))";
+    $query1 ="SELECT class_group.group_id,class_group.group_name,class_group.leader_id,class_group.course_id, stud_in_group.student_id,student.first_name, student.last_name, users.email
+              FROM class_group
+              inner join stud_in_group ON class_group.group_id=stud_in_group.group_id
+              inner join student on stud_in_group.student_id=student.student_id
+              inner join users on student.user_id = users.id
+              having group_id = '$group_id' AND student_id=leader_id";
     $run1 = $conn -> query($query1);
     $row1= $run1 ->fetch_array();
 
     //group count Members
     $query2 = "SELECT COUNT(group_id)
-                FROM student
+                FROM stud_in_group
                 WHERE group_id='$group_id'";
 
 
