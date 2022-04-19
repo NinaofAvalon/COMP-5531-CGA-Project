@@ -1,0 +1,267 @@
+﻿<?php
+include('session.php');
+    session_start();
+ ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css" />
+    <title>Home</title>
+</head>
+<body>
+
+    <body>
+        <!-- header -->
+        <div class="header" height="20%" scrolling="no">
+            <table border="0" width="100%">
+                <tbody>
+                    <tr width="100%">
+                        <td width="5%" align="left"><h2>CGA</h2></td>
+                        <td align="center"><font size="5"><b>Home</b></font></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table border="0" width="100%">
+                <tbody>
+                    <tr width="100%">
+                        <td align="left"><font class="font-header" size="3">Welcome, <?php echo htmlspecialchars($_SESSION["username"]); ?> ! <?php echo "Today is " . date("Y-m-d") . "<br>"; ?></font></td>
+                        <td align="right">
+                            <i>
+                                <b>
+                                    <a href="welcome.php">
+                                        <font class="home_link" color="black">Home</font>
+                                    </a>
+                                </b>
+                            </i>
+                            <i>
+                                <b>
+                                    <a href="logout.php">
+                                        <font color="black">Logout</font>
+                                    </a>
+                                </b>
+                            </i>
+                            <br>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- menu -->
+        <div class="menu" height="100%" width="150px">
+            <hr>
+            <b>
+                <font size="4">
+                    <i>
+                        <?php echo htmlspecialchars($_SESSION["course_name"]); ?><br>
+                        Section <?php echo htmlspecialchars($_SESSION["course_section"]); ?>
+                    </i>
+                </font>
+            </b>
+            <hr>
+            <b>
+                <font size="4">
+                    <ul>
+                        <li>
+                            <a href="Instructor/instructorTutorInfo.php">
+                                <b>
+                                    <font color="black">Tutor Information</font>
+                                </b>
+                            </a>
+                        </li>
+                    </ul>
+                </font>
+            </b>
+
+            <b>
+                <font size="4">
+                    <ul>
+                        <li>
+                            <a href="Instructor/instructorStudents.php">
+                                <b>
+                                    <font color="black">Students</font>
+                                </b>
+                            </a>
+                        </li>
+                    </ul>
+                </font>
+            </b>
+
+            <b>
+                <font size="4">
+                    <ul>
+                        <li>
+                            <a href="Instructor/instructorGroups.php">
+                                <b>
+                                    <font color="black">Course Groups</font>
+                                </b>
+                            </a>
+                        </li>
+                    </ul>
+                </font>
+            </b>
+
+            <b>
+                <font size="4">
+                    <ul>
+                        <li>
+                            <a href="Instructor/instructorDiscussion.php">
+                                <b>
+                                    <font color="black">Discussion Board</font>
+                                </b>
+                            </a>
+                        </li>
+                    </ul>
+                </font>
+            </b>
+
+            <b>
+                <font size="4">
+                    <ul>
+                        <li>
+                            <a href="Instructor/instructorMarkedEntities.php">
+                                <b>
+                                    <font color="black">Marked Entities</font>
+                                </b>
+                            </a>
+                        </li>
+                    </ul>
+                </font>
+            </b>
+              <b>
+                <font size="4">
+                    <ul>
+                        <li>
+                            <a href="Email/email_welcome.php">
+                                <b>
+                                    <font color="black">Email</font>
+                                </b>
+                            </a>
+                        </li>
+                    </ul>
+                </font>
+            </b>
+
+            <b>
+                <font size="4">
+                    <ul>
+                        <li>
+                            <a href="Instructor/instructorPassword.php">
+                                <b>
+                                    <font color="black">Change Password</font>
+                                </b>
+                            </a>
+                        </li>
+                    </ul>
+                </font>
+            </b>
+
+            <b>
+                <font size="4">
+                    <ul>
+                        <li>
+                            <a href="Instructor/instructorEmail.php">
+                                <b>
+                                    <font color="black">Change Email</font>
+                                </b>
+                            </a>
+                        </li>
+                    </ul>
+                </font>
+            </b>
+        </div>
+
+        <!-- Home -->
+    <div class="main_home">
+    <!-- Headings -->
+    <h2>Welcome to CrsMgr Group-work Assistant(CGA)</h2>
+
+    <!-- Paragraph -->
+    <p>
+        This webpage allows you to set up and update students, TAs, groups, members of each group, and the group marked entities.
+        The features offered as menus are explained below.
+
+    </p>
+
+    <p>
+        <strong>Features</strong>
+    </p>
+
+    <ul>
+        <li><strong>Tutor Information</strong></li>
+        <ul>
+            <li>List the contact information for the tutors for the course.</li>
+        </ul>
+        <ul>
+            <li>Insert tutors for the course.</li>
+        </ul>
+        <ul>
+            <li>Update tutors for the course.</li>
+        </ul>
+    </ul>
+
+    <ul>
+        <li><strong>Students</strong></li>
+        <ul>
+            <li>View detailed information of all students in the section.</li>
+        </ul>
+        <ul>
+            <li>Insert set of students.</li>
+        </ul>
+    </ul>
+
+
+
+    <ul>
+        <li><strong>Course Groups</strong></li>
+        <ul>
+            <li>View detailed information of all section groups.</li>
+        </ul>
+        <ul>
+            <li>Insert groups in the section.</li>
+        </ul>
+        <ul>
+            <li>Make changes to teammates in groups over the term.</li>
+        </ul>
+    </ul>
+
+
+    <ul>
+        <li><strong>Discussion Board</strong></li>
+    </ul>
+
+    <p>
+        Read the ideas discussed by students on a message board and add suggestions and comments.
+    </p>
+
+    <ul>
+        <li><strong>Marked Entities</strong></li>
+        <ul>
+            <li>Download assignments and projects uploaded by student groups</li>
+        </ul>
+        <ul>
+            <li>Insert marked entities for group assignments and projects</li>
+        </ul>
+
+    </ul>
+
+    <ul>
+        <li><strong>Change Password</strong></li>
+    </ul>
+
+    <p>
+        Change your password for access to the system.
+    </p>
+
+    <ul>
+        <li><strong>Change Username</strong></li>
+    </ul>
+
+    <p>
+        Update your username which is recorded in the system.
+    </p>
+
+</div>
+</body>
+</html>
