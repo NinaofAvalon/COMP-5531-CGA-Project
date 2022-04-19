@@ -16,6 +16,17 @@ body{
   padding-bottom:15px;
 }
 
+.header1{
+  background-color: #B7CADB;
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-left: 10px;
+  width: 100%;
+  padding-right: 10px;
+  padding-bottom:15px;
+}
 
 .menu{
   background-color: #B7CADB;

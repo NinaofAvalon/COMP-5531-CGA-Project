@@ -3,7 +3,7 @@
 require_once "../php/config.php";
 
 session_start();
-
+echo 'php version' . phpversion();
 $user_check = $_SESSION['id'];
 
 $ses_sql = mysqli_query($conn,"select * from emails join users on emails.recipient = users.id where recipient = '$user_check' ");
@@ -31,7 +31,9 @@ if (!empty($_POST['sent'])
       $sentToId = $sentToRow['id'];
       $subjectStr = $_POST['subject'];
       $bodyStr = $_POST['body'];
-      $insertEmail = "INSERT INTO emails(recipient, sender, email_subject, email_body) VALUES ('$sentToId', '$user_id', '$subjectStr', '$bodyStr')";
+      date_default_timezone_set('America/New_York');
+      $emailDate = date('Y-m-d H:i:s');
+      $insertEmail = "INSERT INTO emails(recipient, sender, email_subject, email_body, email_date) VALUES ('$sentToId', '$user_id', '$subjectStr', '$bodyStr', '$emailDate')";
       $resultInsertEmail = mysqli_query($conn, $insertEmail);
       echo $resultInsertEmail;
       header("Location: ./sent.php");

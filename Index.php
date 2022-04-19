@@ -20,7 +20,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   if($count == 1) {
          session_start();
          $_SESSION["username"] = $username;
-
+         $_SESSION['id'] = $row['id'];
          header("location: Student/studentCourses.php");
       }else {
          $error = "Your Login Name or Password is invalid";
