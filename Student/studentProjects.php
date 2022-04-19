@@ -1,5 +1,24 @@
 <?php
    include('../session.php');
+
+   if(isset($_POST['submit'])){
+      $fileName = $_FILES['file']['name'];
+      $fileTmpName = $_FILES['file']['tmp_name'];
+      $path = "../files/".$fileName;
+
+
+     //sql query
+     $username = $_SESSION['username'];
+     $sql = "INSERT INTO uploads(username,file) values ('$username','$fileName')";
+
+       if(mysqli_query($conn, $sql)){
+         move_uploaded_file($fileTmpName, $path);
+         header("Location:studentProjects.php");
+         die();
+       } else{
+         echo "error".mysqli_error($conn);
+       }
+   }
 ?>
 <!DOCTYPE html>
 <html>
@@ -184,6 +203,51 @@
         </ul>
       </font>
     </b>
+    <b>
+      <font size="4">
+        <ul>
+          <li>
+            <a href="studentProfilePicture.php">
+              <b>
+                <font color="black">Change Profile Picture</font>
+              </b>
+            </a>
+          </li>
+        </ul>
+      </font>
+    </b>
+  </div>
+  <div class="main_home">
+    <table border="1" width="100%">
+      <tbody>
+        <tr bgcolor="F6E5F5">
+          <form class="" action="studentProjects.php" method="post" enctype="multipart/form-data">
+            <th><input type="file" name="file">
+          <button type="submit" name="submit">UPLOAD</button></th>
+          </form>
+        </tr>
+
+
+        <?php
+        $query = "SELECT * FROM uploads";
+        $run = $conn->query($query);
+        while($row=$run->fetch_array()){
+        ?>
+        <tr>
+          <div class="">
+            <td><a href="download.php?file=<?php echo $row['file']?>"><?php echo $row['file']?></a></td>
+          </div>
+        </tr>
+
+        <?php
+      }
+
+         ?>
+      </tbody>
+
+    </table>
+
+
   </div>
 </body>
 </html>

@@ -1,10 +1,16 @@
 <?php
    include('session.php');
 
-   //keeping track of the student's course and section
-   $course_name = $_SESSION['course_name'];
-   $section = $_SESSION['course_section'];
-   $group_id =$_SESSION['group_id'];
+   $course_name = $_POST['course_name'];
+
+   $sql = "SELECT course_section, course_term from course where course_name='$course_name'";
+   $run = $conn->query($sql);
+   $row = $run->fetch_array();
+   $course_section = $row['course_section'];
+   $course_term = $row['course_term'];
+
+   GLOBAL $course_name;
+
 
 ?>
 <!DOCTYPE html>
@@ -59,9 +65,9 @@
       <b >
         <font size="4">
           <i>
-            <?php echo htmlspecialchars($_SESSION["course_name"]); ?>/Winter 2022
+            <?php echo $_SESSION['course_name']; ?>/<?php echo $course_term; ?>
             <br>
-            SECTION <?php echo htmlspecialchars($_SESSION["course_section"]); ?>
+            SECTION <?php echo $course_section; ?>
           </i>
         </font>
       </b>
