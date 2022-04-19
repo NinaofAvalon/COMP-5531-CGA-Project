@@ -1,5 +1,5 @@
 <?php
-   include('../session.php');
+   include('session.php');
 
    $instructor_fname = "SELECT * FROM instructor WHERE username = '$username'";
    $instructor_lname;
@@ -12,7 +12,7 @@
 <html>
 <head>
     <title>Contact Information</title>
-    <style><?php include '../style.css'; ?></style>
+    <style><?php include 'style.css'; ?></style>
 
 </head>
 <body>

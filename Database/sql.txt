@@ -41,7 +41,7 @@ CREATE TABLE `group` (
 -- CGA.instructor definition
 
 CREATE TABLE `instructor` (
-  `instructor_id` int(11) NOT NULL,
+  `instructor_username` varchar(100) NOT NULL,
   `instructor_name` varchar(100) DEFAULT NULL,
   `instructor_course` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`instructor_id`),
@@ -52,7 +52,10 @@ CREATE TABLE `instructor` (
 
 CREATE TABLE `TA` (
   `TA_id` int(11) NOT NULL,
-  `TA_name` varchar(100) DEFAULT NULL,
+  `TA_section` int(3) DEFAULT NULL,
+  `TA_firstName` varchar(100) DEFAULT NULL,
+  `TA_lastName` varchar(100) DEFAULT NULL,
+  `TA_email` varchar(100) DEFAULT NULL,
   `TA_group` varchar(100) DEFAULT NULL,
   -- assign TA to the group 
   PRIMARY KEY (`TA_id`),
@@ -60,8 +63,15 @@ CREATE TABLE `TA` (
   CONSTRAINT `TA_id_fk` FOREIGN KEY (`TA_id`) REFERENCES `users` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-
-
+CREATE TABLE `TA` (
+  `TA_id` int(11) NOT NULL,
+  `TA_section` int(3) DEFAULT NULL,
+  `TA_firstName` varchar(100) DEFAULT NULL,
+  `TA_lastName` varchar(100) DEFAULT NULL,
+  `TA_email` varchar(100) DEFAULT NULL,
+  `TA_group` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`TA_id`)
+);
 
 
 -- CGA.job definition
@@ -111,8 +121,9 @@ CREATE TABLE `course` (
 
 CREATE TABLE `student` (
   `student_id` int(11) NOT NULL AUTO_INCREMENT,
-  `studnet_name` varchar(100) NOT NULL,
+  `student_name` varchar(100) NOT NULL,
   `enroll_course_id` int(11) NOT NULL,
+  `student_grade` int(3) NOT NULL,
   `group_id` int(11) NOT NULL, -- which group this student belong to 
   PRIMARY KEY (`student_id`),
   KEY `enroll_course_id_fk,` (`enroll_course_id`),
