@@ -29,7 +29,7 @@ endfor;
 for($list_day = 1; $list_day <= $days_in_month; $list_day++):
 $calendar.= '<td class="calendar-day ">';
 /* add in the day number */
-$calendar.= '<div class="day-number start-btn" >'.$list_day.'</div>';
+$calendar.= '<div class="day-number start-btn" id="day-number" >'.$list_day.'</div>';
 
 /** QUERY THE DATABASE FOR AN ENTRY FOR THIS DAY !!  IF MATCHES FOUND, PRINT THEM !! **/
 $calendar.= str_repeat('<p> </p>',2);

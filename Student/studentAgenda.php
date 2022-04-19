@@ -5,6 +5,7 @@
    $month = date('M');
    $numericalMonth = numericalMonth($month);
    $year = date('Y');
+   $group_id = $_SESSION['group_id'];
 
 
 
@@ -14,13 +15,10 @@
     die("ERROR: Could not connect. "
           . mysqli_connect_error());
         }
-
      //get user Message
      $month = mysqli_real_escape_string(
         $conn, $_REQUEST['calendar__month']);
-
         $numericalMonth = numericalMonth($month);
-
 
       $year = mysqli_real_escape_string(
            $conn, $_REQUEST['calendar__year']);
@@ -47,12 +45,17 @@
       $end_time = mysqli_real_escape_string(
             $conn, $_REQUEST['end-time']);
 
+      $month  = mysqli_real_escape_string(
+            $conn, $_REQUEST['month-number']);
+
+      $day = mysqli_real_escape_string(
+            $conn, $_REQUEST['day-number']);
+
+
         // Attempt insert query execution
         $username = $_SESSION["username"];
-        $row= ($conn ->query("SELECT student_id from student where user_id = (Select id from users where username='$username')"))->fetch_array();
-        $student_id = $row['student_id'];
-        $sql = "INSERT INTO events (event_title,start_time,end_time,description,student_id)
-                    VALUES ('$event_title', '$start_time', '$end_time','$event_description', '$student_id')";
+        $sql = "INSERT INTO events (event_title,start_time,end_time,description,group_id,monthNumber,dayNumber)
+                    VALUES ('$event_title', '$start_time', '$end_time','$event_description', '$group_id','$month','$day')";
         if(mysqli_query($conn, $sql)){
           //prevent form to be resubmitted multiple times
           header("Location:studentAgenda.php");
@@ -77,29 +80,9 @@
 
     <script src="function.js"></script>
 
-    <script >
-    var day_value ="";
-    $(document).on("click", ".day-number", function(e){
-    day_value = $(this).text();
-    console.log(day_value);
-      });
-
-    var x = 1;
-
-    document.querySelector('.test').innerHTML = 'Hello World!';
-
-    </script>
-
-    <?php
-       $content =  "<script>document.querySelector('.test').innerHTML = day_value;</script>";
-
-    ?>
-
-
   </head>
   <body>
 
-    <h2 class="test"></h2>
 
 
 
@@ -280,6 +263,20 @@
           </ul>
         </font>
       </b>
+
+      <b>
+        <font size="4">
+          <ul>
+            <li>
+              <a href="studentProfilePicture.php">
+                <b>
+                  <font color="black">Change Profile Picture</font>
+                </b>
+              </a>
+            </li>
+          </ul>
+        </font>
+      </b>
     </div>
 
     <div class="main_home">
@@ -324,6 +321,8 @@
 <?php
 /* sample usages */
 echo draw_calendar($numericalMonth,$year);
+
+
  ?>
 
 <!-- pop-up form -->
@@ -352,6 +351,24 @@ echo draw_calendar($numericalMonth,$year);
           <div class="form_item">
               <label>Description</label>
               <input type="text" name="description">
+          </div>
+      </div>
+      <!-- day -->
+      <div class="form_wrap form_grp">
+          <div class="form_item">
+
+            <script >
+            var day_value ="hello";
+            $(document).on("click", ".day-number", function(e){
+
+            day_value = $(this).text();
+            console.log(day_value);
+            document.getElementById("day_value").value = day_value;
+          });
+
+            </script>
+              <input id="month_value" type="hidden" name="month-number" value=<?php echo $numericalMonth ?>>
+              <input id="day_value" type="hidden" name="day-number">
           </div>
       </div>
       <!--city name input-->
@@ -466,6 +483,47 @@ echo draw_calendar($numericalMonth,$year);
      </form>
    </div>
   </div>
+
+  <h3>Meetings: </h3>
+
+  <?php
+  $query = "SELECT * FROM events WHERE group_id = $group_id and monthNumber=$numericalMonth";
+  $run = $conn->query($query);
+  while($row= $run->fetch_array()) {
+  $slash = "/";
+
+  ?>
+  <h4><?php echo $row['monthNumber']; echo $slash; echo $row['dayNumber']; ?></h4>
+    <div>
+      <span>Title: </span>
+      <span><?php echo $row['event_title']; ?></span>
+    </div>
+
+    <div>
+      <label>Time: </label>
+      <span><?php echo $row['start_time']; ?></span>
+      <span>-</span>
+      <span><?php echo $row['end_time']; ?></span>
+    </div>
+    <div class="">
+      <label>Description: </label>
+      <span><?php echo $row['description']; ?></span>
+    </div>
+
+    <br>
+
+
+<?php
+}
+
+ ?>
+
+
+
+
+
+
+
 
 
 

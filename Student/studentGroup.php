@@ -187,6 +187,19 @@
         </ul>
       </font>
     </b>
+    <b>
+      <font size="4">
+        <ul>
+          <li>
+            <a href="studentProfilePicture.php">
+              <b>
+                <font color="black">Change Profile Picture</font>
+              </b>
+            </a>
+          </li>
+        </ul>
+      </font>
+    </b>
   </div>
 
   <!-- Table -->
