@@ -2,7 +2,7 @@
 
 include('../session.php');
 
-require_once "php/config.php";
+require_once "../php/config.php";
 
 session_start();
 

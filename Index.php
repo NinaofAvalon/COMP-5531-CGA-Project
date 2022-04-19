@@ -23,6 +23,7 @@ if(isset($_POST['submit'])){
   if($count == 1) {
          session_start();
          $_SESSION["username"] = $username;
+         $_SESSION['id'] = $row['id'];
 
          header("location: Instructor/instructorCourses.php");
       }else {
