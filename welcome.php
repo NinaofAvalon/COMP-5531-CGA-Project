@@ -6,17 +6,6 @@
    }
    $userRoles = getRoleByUserId($conn, $_SESSION['id']);
 
-   $course_name = $_POST['course_name'];
-
-   $sql = "SELECT course_section, course_term from course where course_name='$course_name'";
-   $run = $conn->query($sql);
-   $row = $run->fetch_array();
-   $course_section = $row['course_section'];
-   $course_term = $row['course_term'];
-
-   GLOBAL $course_name;
-
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -66,17 +55,6 @@
 
     <!-- menu -->
     <div class="menu" height="100%" width="150px">
-      <hr>
-      
-      <b >
-        <font size="4">
-          <i>
-            <?php echo $_SESSION['course_name']; ?>/<?php echo $course_term; ?>
-            <br>
-            SECTION <?php echo $course_section; ?>
-          </i>
-        </font>
-      </b>
       <hr>
       <b>
         <font size="4">

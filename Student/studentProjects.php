@@ -9,7 +9,10 @@
 
      //sql query
      $username = $_SESSION['username'];
-     $sql = "INSERT INTO uploads(username,file) values ('$username','$fileName')";
+     $course_name = $_SESSION['course_name'];
+     date_default_timezone_set('America/New_York');
+     $file_date = date('Y-m-d H:i:s');
+     $sql = "INSERT INTO uploads(username,file, course_id, file_date) select '$username','$fileName', id, '$file_date' from course c where c.course_name = '$course_name' limit 1";
 
        if(mysqli_query($conn, $sql)){
          move_uploaded_file($fileTmpName, $path);
