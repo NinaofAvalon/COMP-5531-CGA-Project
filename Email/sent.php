@@ -40,7 +40,7 @@ $ses_sql = mysqli_query($conn,"select users.username as username, emails.email_s
             <td align="right">
               <i>
                 <b>
-                  <a href="welcome.php">
+                  <a href="../welcome.php">
                     <font class="home_link" color="black">Home</font>
                   </a>
                 </b>

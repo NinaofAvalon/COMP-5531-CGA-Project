@@ -1,5 +1,5 @@
 <?php
-include('../session.php'); 
+include('../session.php');
 require_once("connection.php");
 ?>
 
@@ -130,7 +130,19 @@ require_once("connection.php");
                     </ul>
                 </font>
             </b>
-
+  <b>
+                <font size="4">
+                    <ul>
+                        <li>
+                            <a href="../Email/email_welcome.php">
+                                <b>
+                                    <font color="black">Email</font>
+                                </b>
+                            </a>
+                        </li>
+                    </ul>
+                </font>
+            </b>
             <b>
                 <font size="4">
                     <ul>

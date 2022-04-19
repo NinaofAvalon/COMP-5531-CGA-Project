@@ -135,7 +135,19 @@ include('../session.php');
                     </ul>
                 </font>
             </b>
-
+ <b>
+                <font size="4">
+                    <ul>
+                        <li>
+                            <a href="../Email/email_welcome.php">
+                                <b>
+                                    <font color="black">Email</font>
+                                </b>
+                            </a>
+                        </li>
+                    </ul>
+                </font>
+            </b>
             <b>
                 <font size="4">
                     <ul>
@@ -178,7 +190,6 @@ include('../session.php');
                         <th>File</th>
                         <th>Uploaded by</th>
                         <th>Date</th>
-                        <th>Edit</th>
                         <th>Delete</th>
                     </tr>
                     </thead>
@@ -196,8 +207,7 @@ include('../session.php');
                         <td><a href="download.php?file=<?php echo $row['file']?>"><?php echo $row['file']?></a></td>
                         <td><?php echo $student_name ?></td>
                         <td><?php echo $date ?></td>
-                        <td><a href="instructorProjectEdit.php?GetId=<?php echo $id ?>"> Edit </a></td>
-                        <td><a href="instructorProjectDelete.php?del=<?php echo $id ?>"> Delete </a></td>
+                        <td><a href="instructorProjectDelete.php?del=<?php echo $file ?>"> Delete </a></td>
 
                     </tr>
                     <?php

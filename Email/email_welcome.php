@@ -27,7 +27,7 @@
             <td align="right">
               <i>
                 <b>
-                  <a href="welcome.php">
+                  <a href="../welcome.php">
                     <font class="home_link" color="black">Home</font>
                   </a>
                 </b>

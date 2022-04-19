@@ -7,10 +7,5 @@ if(!$con)
 {
     die("Connection Error");
 }
-else
-{
-
-    echo 'Connection Successfull';
-}
 
  ?>

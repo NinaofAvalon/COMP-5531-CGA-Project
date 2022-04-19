@@ -135,7 +135,19 @@ inner join project.course_enrolled on project.student.student_id = project.cours
                     </ul>
                 </font>
             </b>
-
+ <b>
+                <font size="4">
+                    <ul>
+                        <li>
+                            <a href="../Email/email_welcome.php">
+                                <b>
+                                    <font color="black">Email</font>
+                                </b>
+                            </a>
+                        </li>
+                    </ul>
+                </font>
+            </b>
             <b>
                 <font size="4">
                     <ul>

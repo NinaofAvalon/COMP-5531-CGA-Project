@@ -19,7 +19,8 @@ if (isset($_POST['submit'])) // isset() function - checks whether a variable is 
         $leaderID = $_POST['leader_id'];
 
         $query = " insert into project.class_group(group_id, group_name, leader_id, course_id) VALUES('$id','$groupName','$leaderID', '$course');";
-        $query .= " update project.stud_in_group set group_id = '$id' where student_id = '$leaderID'";
+        $query .= " update project.stud_in_group set group_id = '$id' where student_id = '$leaderID';";
+        $query .= " insert into project.stud_in_group(group_id, student_id) VALUES('$id','$leaderID')";
 
         $result = mysqli_multi_query($mysqli, $query);
 

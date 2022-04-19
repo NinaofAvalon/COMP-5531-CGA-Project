@@ -3,8 +3,9 @@ include('session.php');
 require_once("connection.php");
 $id = $_GET['GetId'];
 $query = "select id,user_id,first_name,last_name,birth_date, phone,email from project.TA where id ='".$id."' ";
-$result = mysqli_query($con,$query); 
+$result = mysqli_query($con,$query);
 ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -132,7 +133,19 @@ $result = mysqli_query($con,$query);
                     </ul>
                 </font>
             </b>
-
+  <b>
+                <font size="4">
+                    <ul>
+                        <li>
+                            <a href="../Email/email_welcome.php">
+                                <b>
+                                    <font color="black">Email</font>
+                                </b>
+                            </a>
+                        </li>
+                    </ul>
+                </font>
+            </b>
             <b>
                 <font size="4">
                     <ul>
