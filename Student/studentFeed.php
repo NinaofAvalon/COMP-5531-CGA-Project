@@ -1,5 +1,51 @@
 <?php
    include('../session.php');
+   $username = $_SESSION["username"];
+   $course_name = $_SESSION["course_name"];
+
+   if(isset($_POST['submit'])){
+
+     if($conn === false){
+    die("ERROR: Could not connect. "
+          . mysqli_connect_error());
+        }
+
+        // full name
+        $query="SELECT first_name,last_name from student where user_id=(select id from users where username='$username')";
+        $run = $conn->query($query);
+        $row = $run->fetch_array();
+        $space = " ";
+        $full_name = $row['first_name'].$space.$row['last_name'];
+
+
+
+        //feed content
+        $feed_content = mysqli_real_escape_string(
+             $conn, $_REQUEST['feed-content']);
+
+     //get user Message
+     $post_content = mysqli_real_escape_string(
+        $conn, $_REQUEST['post-content']);
+
+        //likes
+        $likes = 0;
+
+        // Attempt insert query execution
+
+        $sql = "INSERT INTO feed (fullName,username,feedContent,course_name)
+                    VALUES ('$full_name', '$username', '$feed_content','$course_name')";
+        if(mysqli_query($conn, $sql)){
+          //prevent form to be resubmitted multiple times
+          header("Location:studentFeed.php");
+          die();
+        } else{
+            echo "ERROR: Message not sent!!!";
+        }
+
+        // Close connection
+        mysqli_close($conn);
+   }
+
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -7,6 +53,8 @@
     <meta charset="utf-8">
     <title></title>
     <style><?php include '../style.css'; ?></style>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
 
   </head>
   <body>
@@ -54,9 +102,9 @@
       <b >
         <font size="4">
           <i>
-            COMP 5531/Winter 2022
+            <?php echo htmlspecialchars($_SESSION["course_name"]); ?>/Winter 2022
             <br>
-            Section NN
+            SECTION <?php echo htmlspecialchars($_SESSION["course_section"]); ?>
           </i>
         </font>
       </b>
@@ -186,7 +234,92 @@
           </ul>
         </font>
       </b>
+
+      <b>
+        <font size="4">
+          <ul>
+            <li>
+              <a href="studentProfilePicture.php">
+                <b>
+                  <font color="black">Change Profile Picture</font>
+                </b>
+              </a>
+            </li>
+          </ul>
+        </font>
+      </b>
     </div>
+
+    <div class="main_home">
+
+      <div class="feed">
+        <div class="feed-header">
+          <h2>Home</h2>
+        </div>
+        <?php
+
+        $query = "SELECT profilePicture from users where username='$username'";
+        $run = $conn -> query($query);
+        $row = $run ->fetch_array();
+
+         ?>
+          <div class="feed-box">
+            <form class="" action="studentFeed.php" method="post">
+              <div class="feed-box-input">
+                <img src="../files/<?php echo $row['profilePicture']; ?>" alt="">
+                <input type="text" name="feed-content"  placeholder="What's on your mind?">
+              </div>
+              <button type="submit" name="submit" class="feed-box__feed-button">Post</button>
+            </form>
+          </div>
+          <!-- feed starts -->
+          <?php
+          $query2 = "SELECT feed.fullName,feed.id, feed.feedContent, feed.username, users.profilePicture, users.username FROM feed LEFT JOIN users ON feed.username=users.username";
+          $run2 = $conn->query($query2);
+
+           while($row2 = $run2->fetch_array()) {
+           ?>
+          <div class="post">
+            <div class="post-avatar">
+              <img src="../files/<?php echo $row2['profilePicture']; ?>" alt="">
+            </div>
+
+            <div class="post-body">
+              <div class="post-header">
+                <div class="post-header-text">
+                  <h3><?php echo $row2['fullName']; ?>
+                  <span class="post-header-special"> <?php echo $row2['username']; ?></span>
+                  </h3>
+                </div>
+                <div class="post-header-description">
+                  <p><?php echo $row2['feedContent']; ?></p>
+                </div>
+              </div>
+
+
+
+              <div class="post-feeder">
+
+                  <!-- implement like/unlike functionality -->
+                  <!-- user has liked the post -->
+                  <!-- <span><a href="" class="unlike" id="<?php echo $row2['id']; ?>"><img src="../heart.png"></a></span> -->
+
+                  <!-- user has not liked the post -->
+                  <!-- <span><a href="" class="like" id="<?php echo $row2['id']; ?>"><img src="../love.png"></a></span> -->
+
+              </div>
+
+              <?php
+            }
+
+               ?>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
 
   </body>
 </html>

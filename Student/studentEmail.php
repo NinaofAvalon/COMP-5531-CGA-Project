@@ -1,5 +1,38 @@
 <?php
    include('../session.php');
+
+   if(isset($_POST['submit'])){
+
+     if($conn === false){
+    die("ERROR: Could not connect. "
+          . mysqli_connect_error());
+        }
+
+     //get user Message
+     $newEmail = mysqli_real_escape_string(
+        $conn, $_REQUEST['studentNewEmail']);
+
+    $confirmNewEmail =  mysqli_real_escape_string(
+       $conn, $_REQUEST['studentNewEmailConfirmation']);
+
+        // Attempt insert query execution
+        if($newEmail == $confirmNewEmail){
+        $username = $_SESSION["username"];
+        $sql = "UPDATE users SET email='$newEmail' WHERE username='$username'";
+        if(mysqli_query($conn, $sql)){
+          //prevent form to be resubmitted multiple times
+          header("Location:studentEmail.php");
+          die();
+        } else{
+            echo "ERROR: Message not sent!!!";
+        }
+
+        // Close connection
+        mysqli_close($conn);
+      } else{
+        echo "emails don't match";
+      }
+   }
 ?>
 <!DOCTYPE html>
 <html>
@@ -52,9 +85,9 @@
     <b >
       <font size="4">
         <i>
-          COMP 5531/Winter 2022
+          <?php echo htmlspecialchars($_SESSION["course_name"]); ?>/Winter 2022
           <br>
-          Section NN
+          SECTION <?php echo htmlspecialchars($_SESSION["course_section"]); ?>
         </i>
       </font>
     </b>
@@ -184,19 +217,31 @@
         </ul>
       </font>
     </b>
+
+    <b>
+      <font size="4">
+        <ul>
+          <li>
+            <a href="studentProfilePicture.php">
+              <b>
+                <font color="black">Change Profile Picture</font>
+              </b>
+            </a>
+          </li>
+        </ul>
+      </font>
+    </b>
   </div>
     <!-- main page -->
     <div class="main_home">
 
-    <form action="studentProcessChangeUsername.php" method="POST">
+    <form action="studentEmail.php" method="POST">
         <div>
-            <label>Enter New Email</label>
-            <input type="text" name="studentNewUsername">
+            <input type="text" class="feedback-input" name="studentNewEmail" placeholder="New email">
         </div>
         <br>
         <div>
-            <label>Confirm New Email</label>
-            <input type="text" name="studentNewUsernameConfirmation">
+            <input type="text" class="feedback-input" name="studentNewEmailConfirmation" placeholder="Confirm New email">
         </div>
         <br>
         <input type="submit" name="submit" value="Submit">

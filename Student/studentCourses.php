@@ -1,7 +1,10 @@
 <?php
    include('../session.php');
+   $username = $_SESSION["username"];
 
-  
+
+
+
 
 ?>
 <!DOCTYPE html>
@@ -47,18 +50,36 @@
 
       <div align=center class="dropdowndemo">
 
+<?php
 
+$query = "SELECT course.course_name,course.course_section, sig.group_id,student.student_id
+from student
+inner join course_enrolled ce on student.student_id = ce.student_id
+inner join course on ce.course_id = course.id
+inner join stud_in_group sig on sig.student_id = student.student_id
+having student_id = (select student_id from student where user_id = (select id from users where username='$username'))";
+$run = $conn->query($query);
+?>
 <button align=center class="dropdownbtn">Winter 2022</button>
+
+<?php
+while($row= $run->fetch_array()) {
+ ?>
+
 <div class="dropdownlist-content">
-<form class="" action="" method="post">
-  <input type="submit" name="Comp5531" value="Comp5531"></input>
-</form>
-<form class="" action="" method="post">
-  <input type="submit" name="Comp5531" value="Comp5531"></input>
-</form>
-<form class="" action="" method="post">
-  <input type="submit" name="Comp5531" value="Comp5531"></input>
-</form>
+
+<form class="" action="studentFeed.php" method="post">
+  <?php $_SESSION['course_name']= $row['course_name'];
+        $_SESSION['course_section']= $row['course_section'];
+        $_SESSION['group_id']= $row['group_id'];
+  ?>
+  <input type="submit" class="course-name" name="course_name" value="<?php echo $row['course_name']; ?>" ></input>
+ </form>
+
+<?php
+}
+
+ ?>
 
 
 </div>

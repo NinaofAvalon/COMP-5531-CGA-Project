@@ -1,5 +1,8 @@
 <?php
    include('../session.php');
+
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -53,9 +56,9 @@
     <b >
       <font size="4">
         <i>
-          COMP 5531/Winter 2022
+          <?php echo htmlspecialchars($_SESSION["course_name"]); ?>/Winter 2022
           <br>
-          Section NN
+          SECTION <?php echo htmlspecialchars($_SESSION["course_section"]); ?>
         </i>
       </font>
     </b>
@@ -185,180 +188,75 @@
         </ul>
       </font>
     </b>
+    <b>
+      <font size="4">
+        <ul>
+          <li>
+            <a href="studentProfilePicture.php">
+              <b>
+                <font color="black">Change Profile Picture</font>
+              </b>
+            </a>
+          </li>
+        </ul>
+      </font>
+    </b>
   </div>
   <!-- main section -->
 
 
   <div class="main_home">
+
+
+
             <div class="table-head">
                 <div class="subjects">Subjects</div>
-                <div class="replies">Replies/Views</div>
-                <div class="last-reply">Last Reply</div>
-            </div>
-            <div class="table-row">
-                <div class="subjects">
-                    <a href="">Is learning Python on 2021 worth it?</a>
-                    <br>
-                    <span>Started by <b><a href="">User</a></b> .</span>
-                </div>
-                <div class="replies">
-                    2 replies <br> 125 views
-                </div>
 
-                <div class="last-reply">
-                    Oct 12 2021
-                    <br>By <b><a href="">User</a></b>
-                </div>
-            </div>
-            <!--starts here-->
-            <div class="table-row">
-                <div class="subjects">
-                    <a href="">Is learning Python on 2021 worth it?</a>
-                    <br>
-                    <span>Started by <b><a href="">User</a></b> .</span>
-                </div>
-                <div class="replies">
-                    2 replies <br> 125 views
-                </div>
-
-                <div class="last-reply">
-                    Oct 12 2021
-                    <br>By <b><a href="">User</a></b>
-                </div>
-            </div>
-
-            <div class="table-row">
-                <div class="subjects">
-                    <a href="">Is learning Python on 2021 worth it?</a>
-                    <br>
-                    <span>Started by <b><a href="">User</a></b> .</span>
-                </div>
-                <div class="replies">
-                    2 replies <br> 125 views
-                </div>
-
-                <div class="last-reply">
-                    Oct 12 2021
-                    <br>By <b><a href="">User</a></b>
-                </div>
-            </div>
-
-            <div class="table-row">
-                <div class="subjects">
-                    <a href="">Is learning Python on 2021 worth it?</a>
-                    <br>
-                    <span>Started by <b><a href="">User</a></b> .</span>
-                </div>
-                <div class="replies">
-                    2 replies <br> 125 views
-                </div>
-
-                <div class="last-reply">
-                    Oct 12 2021
-                    <br>By <b><a href="">User</a></b>
-                </div>
-            </div>
-
-            <div class="table-row">
-                <div class="subjects">
-                    <a href="">Is learning Python on 2021 worth it?</a>
-                    <br>
-                    <span>Started by <b><a href="">User</a></b> .</span>
-                </div>
-                <div class="replies">
-                    2 replies <br> 125 views
-                </div>
-
-                <div class="last-reply">
-                    Oct 12 2021
-                    <br>By <b><a href="">User</a></b>
-                </div>
-            </div>
-
-            <div class="table-row">
-                <div class="subjects">
-                    <a href="">Is learning Python on 2021 worth it?</a>
-                    <br>
-                    <span>Started by <b><a href="">User</a></b> .</span>
-                </div>
-                <div class="replies">
-                    2 replies <br> 125 views
-                </div>
-
-                <div class="last-reply">
-                    Oct 12 2021
-                    <br>By <b><a href="">User</a></b>
-                </div>
             </div>
 
 
             <div class="table-row">
+
                 <div class="subjects">
-                    <a href="">Is learning Python on 2021 worth it?</a>
-                    <br>
-                    <span>Started by <b><a href="">User</a></b> .</span>
-                </div>
-                <div class="replies">
-                    2 replies <br> 125 views
+                  <?php
+                  $query = "SELECT * FROM discussion_board";
+
+                  $run = $conn->query($query);
+                  $i=0;
+
+
+                  while($row = $run->fetch_array()) {
+                  if($i==0){
+
+
+                ?>
+
+                  <form class="" action="studentPostDetails.php" method="get">
+
+                    <input type="hidden" name="id" id="id" value="<?php echo $row['id']; ?>">
+                    <div class="author-div">
+                      <span>Author:  <?php echo $row['creator']; ?></span>
+                    </div>
+
+                  <input type="submit" id="title" value="<?php echo $row['title']; ?>">
+                  <br>
+
+
+                   </form>
+                   <?php
+                     }
+                   }
+                 ?>
+
+
                 </div>
 
-                <div class="last-reply">
-                    Oct 12 2021
-                    <br>By <b><a href="">User</a></b>
-                </div>
             </div>
 
-            <div class="table-row">
-                <div class="subjects">
-                    <a href="">Is learning Python on 2021 worth it?</a>
-                    <br>
-                    <span>Started by <b><a href="">User</a></b> .</span>
-                </div>
-                <div class="replies">
-                    2 replies <br> 125 views
-                </div>
 
-                <div class="last-reply">
-                    Oct 12 2021
-                    <br>By <b><a href="">User</a></b>
-                </div>
-            </div>
-
-            <div class="table-row">
-                <div class="subjects">
-                    <a href="">Is learning Python on 2021 worth it?</a>
-                    <br>
-                    <span>Started by <b><a href="">User</a></b> .</span>
-                </div>
-                <div class="replies">
-                    2 replies <br> 125 views
-                </div>
-
-                <div class="last-reply">
-                    Oct 12 2021
-                    <br>By <b><a href="">User</a></b>
-                </div>
-            </div>
-
-            <div class="table-row">
-                <div class="subjects">
-                    <a href="">Is learning Python on 2021 worth it?</a>
-                    <br>
-                    <span>Started by <b><a href="">User</a></b> .</span>
-                </div>
-                <div class="replies">
-                    2 replies <br> 125 views
-                </div>
-
-                <div class="last-reply">
-                    Oct 12 2021
-                    <br>By <b><a href="">User</a></b>
-                </div>
-            </div>
-            <!--ends here-->
+        <button class="post-button"><a href="studentCreatePost.php">Submit New Post</a></button>
         </div>
 
   </body>
-
 
 </html>

@@ -5,15 +5,17 @@ require_once "php/config.php";
 session_start();
 
 //processing form data when form is submitted
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+// $_SERVER["REQUEST_METHOD"] == "POST"
+if(isset($_POST['submit'])){
 
   $username = mysqli_real_escape_string($conn,$_POST['username']);
   $password = mysqli_real_escape_string($conn,$_POST['password']);
+  echo $password;
 
-  $sql = "SELECT id FROM users WHERE username = '$username'";
+  $sql = "SELECT id FROM users WHERE password = '$password' and username='$username'";
   $result = mysqli_query($conn,$sql);
   $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-  $active = $row['active'];
+
 
   $count = mysqli_num_rows($result);
 
@@ -21,9 +23,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
          session_start();
          $_SESSION["username"] = $username;
          $_SESSION['id'] = $row['id'];
-         header("location: Student/studentCourses.php");
+         header("location: welcome.php");
       }else {
          $error = "Your Login Name or Password is invalid";
+         echo $error;
       }
    }
   ?>
@@ -31,7 +34,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   <html>
   <head>
       <title> Log In</title>
-      <link rel="stylesheet" href="style.css"/>
+      <style><?php include 'style.css'; ?></style>
 
   </head>
 
@@ -68,7 +71,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 
         <section class="form login">
-          <form action=" " method="post">
+          <form action="index.php" method="post">
             <table border="0" align="center">
             <tbody
               <tr>
@@ -87,10 +90,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                   <input type="password" name=password maxlength="20" maxlength="20" required>
                 </td>
               </tr>
-              <tr>
+              <tr class="submit-section">
                 <td colspan="2" align="center" class="submit_button">
-                  <input type="submit" value="Login">
-                  <input type="reset" value="Clear">
+                  <button class="login" type="submit" name='submit' value="Login">Login</button>
+                  <button class="login" type="reset" value="Clear">Clear</button>
 
                 </td>
               </tr>
