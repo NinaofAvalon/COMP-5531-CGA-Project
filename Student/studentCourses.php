@@ -76,7 +76,7 @@ while($row= $run->fetch_array()) {
 
 
 
-<form class="" action="../CGAExplanation.php" method="post">
+<form class="" action="studentContact.php" method="post">
 
 
 <input type="hidden" name="" value="<?php echo $row['course_section']; ?>">

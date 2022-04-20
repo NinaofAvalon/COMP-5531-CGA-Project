@@ -232,7 +232,11 @@
     <br>
     <br>
     <?php
-    $query = "SELECT * FROM TA where id = (SELECT TA_id from course where course_name='$coursename' and course_section='$course_section')";
+    $query = "SELECT * FROM TA 
+    join course_ta ct on ta.id = ct.ta_id
+    join course on course.id = ct.course_id
+    where course.course_name='$coursename' and course.course_section='$course_section'";
+    // $query = "SELECT * FROM TA where id = (SELECT TA_id from course where course_name='$coursename' and course_section='$course_section')";
     $run = $conn -> query($query);
     $row = $run -> fetch_array();
      ?>
