@@ -2,9 +2,9 @@
     
    include('../session.php');
    require_once "../php/config.php";
-   $query = "select id, user_id,first_name,last_name,birth_date, phone, email from test.instructor";
+   $query = "select id, user_id,first_name,last_name,birth_date, phone, email from instructor";
    $result = mysqli_query($conn,$query);
-   $qthisterm = "select termname from test.term where is_term_now = 'YES' ";
+   $qthisterm = "select termname from term where is_term_now = 'YES' ";
    $resthisterm = mysqli_query($conn,$qthisterm);
    
    while($rowinprocess = mysqli_fetch_assoc($resthisterm))
@@ -216,7 +216,7 @@
              <!--
                 <?php
                
-                $uniquequery = "SELECT instructor_id, concat ( course_name, course_term) as 'course_unique'  FROM test.course GROUP BY id";
+                $uniquequery = "SELECT instructor_id, concat ( course_name, course_term) as 'course_unique'  FROM course GROUP BY id";
                 $uniqueresult = mysqli_query($conn,$uniquequery);
                 while($uniquer = mysqli_fetch_assoc($uniqueresult)){
                     

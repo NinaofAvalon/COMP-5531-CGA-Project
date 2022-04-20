@@ -1,7 +1,7 @@
 ﻿<?php
    include('../session.php');
    
-   $qthisterm = "select termname from test.term where is_term_now = 'YES' ";
+   $qthisterm = "select termname from term where is_term_now = 'YES' ";
    $resthisterm = mysqli_query($conn,$qthisterm);
    
    while($rowinprocess = mysqli_fetch_assoc($resthisterm))
@@ -28,7 +28,7 @@
         // Attempt insert query execution
         if($newPassword == $confirmNewPassword){
         $username = $_SESSION["username"];
-        $sql = "UPDATE test.users SET password='$newPassword' WHERE username='$username'";
+        $sql = "UPDATE users SET password='$newPassword' WHERE username='$username'";
         if(mysqli_query($conn, $sql)){
           //prevent form to be resubmitted multiple times
           header("Location:adminPassword.php");

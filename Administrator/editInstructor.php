@@ -1,7 +1,7 @@
 <?php
    include('../session.php');
    $Iid = $_GET['GetId'];
-   $query = "select id, user_id,first_name,last_name,birth_date, phone, email from test.instructor where id = '".$Iid."'  ";
+   $query = "select id, user_id,first_name,last_name,birth_date, phone, email from instructor where id = '".$Iid."'  ";
    $result = mysqli_query($conn,$query);
    
    while($row = mysqli_fetch_assoc($result))
@@ -21,7 +21,7 @@
      
 }
 
-$qthisterm = "select termname from test.term where is_term_now = 'YES' ";
+$qthisterm = "select termname from term where is_term_now = 'YES' ";
 $resthisterm = mysqli_query($conn,$qthisterm);
 
 while($rowinprocess = mysqli_fetch_assoc($resthisterm))
