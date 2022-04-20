@@ -202,7 +202,7 @@
 
     <?php
     $coursename = $_SESSION['course_name'];
-    $course_id = $_SESSION['id'];
+    $course_id = $_SESSION['course_id'];
     $query = "SELECT * from instructor where id=(select instructor_id from course_taught where course_id='$course_id')";
     $run = $conn -> query($query);
     $row = $run -> fetch_array();
@@ -236,7 +236,6 @@
     join course_ta ct on ta.id = ct.ta_id
     join course on course.id = ct.course_id
     where course.course_name='$coursename' and course.course_section='$course_section'";
-    // $query = "SELECT * FROM TA where id = (SELECT TA_id from course where course_name='$coursename' and course_section='$course_section')";
     $run = $conn -> query($query);
     $row = $run -> fetch_array();
      ?>
