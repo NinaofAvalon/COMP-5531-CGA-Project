@@ -384,8 +384,10 @@ CREATE TABLE `stud_in_group` (
 
 LOCK TABLES `stud_in_group` WRITE;
 /*!40000 ALTER TABLE `stud_in_group` DISABLE KEYS */;
+INSERT INTO `stud_in_group` VALUES (1000,1001),(1001,1002),(1002,1003),(1000,1005),(1000,1006);
 /*!40000 ALTER TABLE `stud_in_group` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 --
 -- Table structure for table `student`
