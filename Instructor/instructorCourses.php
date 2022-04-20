@@ -48,7 +48,7 @@
 
 <?php
 
-$query = "SELECT course.course_name,course.course_term,course.course_id,course.course_section, instructor.id
+$query = "SELECT course.course_name,course.course_term,course.id as course_id,course.course_section, instructor.id
 from instructor
 inner join course_taught ct on instructor.id = ct.instructor_id
 inner join course on ct.course_id = course.id
@@ -60,17 +60,8 @@ while($row= $run->fetch_array()) {
   if($i==0){
 ?>
 <button align=center class="dropdownbtn">Winter 2022</button>
-
-<?php
-$run = $conn->query($query);
-
-while($row= $run->fetch_array()) {
-
-
- ?>
-
 <div class="dropdownlist-content">
-<form class="" action="../welcome.php" method="post">
+<form class="" action="instructorTutorInfo.php" method="post">
   <?php $_SESSION['course_name']= $row['course_name'];
         $_SESSION['course_section']= $row['course_section'];
         $_SESSION['course']= $row['course_id'];

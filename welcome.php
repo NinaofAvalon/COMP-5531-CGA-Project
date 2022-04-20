@@ -86,7 +86,7 @@
         <font size="4">
           <ul>
             <li <?php echo (in_array("instructor", $userRoles))? "" : "style='display:none;'" ?>>
-              <a href="Instrucotr/">
+              <a href="Instructor/instructorCourses.php">
                 <b>
                   <font color="black">Instructor Section</font>
                 </b>
