@@ -2,7 +2,7 @@
    include('../session.php');
 
    $username = $_SESSION['username'];
-   $course_id = $_SESSION["id"];
+   $course_id = $_SESSION["course_id"];
    $group_id = $_SESSION['group_id'];
 
    if(isset($_POST['submit'])){
@@ -176,20 +176,6 @@
               <a href="studentProjects.php">
                 <b>
                   <font color="black">Upload Files</font>
-                </b>
-              </a>
-            </li>
-          </ul>
-        </font>
-      </b>
-
-      <b>
-        <font size="4">
-          <ul>
-            <li>
-              <a href="studentFeed.php">
-                <b>
-                  <font color="black">Feed</font>
                 </b>
               </a>
             </li>

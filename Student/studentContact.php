@@ -2,6 +2,16 @@
    include('../session.php');
 
   $course_section=  $_SESSION["course_section"];
+  $student_id =$_SESSION["student_id"];
+  $course_id = $_SESSION["course_id"];
+
+  //student group_id
+  $query4= "SELECT group_id from group_full_info where course_id='$course_id' and student_id='$student_id'";
+  $run4 = $conn->query($query4);
+  $row4= $run4->fetch_array();
+  $_SESSION['group_id'] = $row4['group_id'];
+  $group_id = $_SESSION['group_id'];
+
 
 
 
@@ -202,7 +212,7 @@
 
     <?php
     $coursename = $_SESSION['course_name'];
-    $course_id = $_SESSION['id'];
+    $course_id = $_SESSION['course_id'];
     $query = "SELECT * from instructor where id=(select instructor_id from course_taught where course_id='$course_id')";
     $run = $conn -> query($query);
     $row = $run -> fetch_array();
@@ -232,7 +242,10 @@
     <br>
     <br>
     <?php
-    $query = "SELECT * FROM TA where id = (SELECT TA_id from course where course_name='$coursename' and course_section='$course_section')";
+    $query = "SELECT * FROM TA
+    join course_ta ct on ta.id = ct.ta_id
+    join course on course.id = ct.course_id
+    where course.course_name='$coursename' and course.course_section='$course_section'";
     $run = $conn -> query($query);
     $row = $run -> fetch_array();
      ?>

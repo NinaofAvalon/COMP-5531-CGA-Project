@@ -22,8 +22,8 @@ if(isset($_POST['submit'])){
   if($count == 1) {
          session_start();
          $_SESSION["username"] = $username;
-
-         header("location:Student/StudentCourses.php");
+         $_SESSION['id'] = $row['id'];
+         header("location: welcome.php");
       }else {
          $error = "Your Login Name or Password is invalid";
          echo $error;

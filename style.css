@@ -16,6 +16,17 @@ body{
   padding-bottom:15px;
 }
 
+.header1{
+  background-color: #B7CADB;
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-left: 10px;
+  width: 100%;
+  padding-right: 10px;
+  padding-bottom:15px;
+}
 button.login {
   background-color: #B7CADB;
   border: none;
@@ -50,8 +61,33 @@ button.login {
   padding-left: 10px;
   padding-right: 10px;
   top:2%;
+}
 
 
+.menu1{
+  background-color: #B7CADB;
+  width: 12%;
+  padding-top: 1%;
+  padding-bottom: 100%;
+  margin-top:5.7%;
+  position:fixed;
+  left: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+  top:-1px;
+}
+
+.menu-welcome{
+  background-color: #B7CADB;
+  width: 12%;
+  padding-top: 1%;
+  padding-bottom: 100%;
+  margin-top:5.7%;
+  position:fixed;
+  left: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+  top:1%;
 }
 
 .main_home{

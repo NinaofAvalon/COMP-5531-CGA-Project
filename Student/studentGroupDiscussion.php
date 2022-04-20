@@ -1,6 +1,6 @@
 <?php
    include('../session.php');
-   $course_id = $_SESSION["id"];
+   $course_id = $_SESSION["course_id"];
    $group_id = $_SESSION['group_id'];
 
 

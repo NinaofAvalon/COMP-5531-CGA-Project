@@ -1,7 +1,7 @@
 <?php
    include('../session.php');
 
-   $course_id =$_SESSION['id'];
+   $course_id =$_SESSION['course_id'];
    $username = $_SESSION['username'];
 
    if(isset($_POST['submit'])){
@@ -12,7 +12,10 @@
 
      //sql query
      $username = $_SESSION['username'];
-     $sql = "INSERT INTO uploads(username,file,course_id) values ('$username','$fileName','$course_id')";
+     $course_name = $_SESSION['course_name'];
+     date_default_timezone_set('America/New_York');
+     $file_date = date('Y-m-d H:i:s');
+     $sql = "INSERT INTO uploads(username,file, course_id, file_date) select '$username','$fileName', id, '$file_date' from course c where c.course_name = '$course_name' limit 1";
 
        if(mysqli_query($conn, $sql)){
          move_uploaded_file($fileTmpName, $path);

@@ -1,9 +1,8 @@
 <?php
    include('../session.php');
    $username = $_SESSION['username'];
-   $group_name = $_SESSION['group_name'];
-   $group_leader =$_SESSION["leader_id"];
    $group_id = $_SESSION["group_id"];
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -239,7 +238,7 @@
             <td><?php echo $row1['leader_id'];?></td>
             <td><?php echo $row1['first_name'];?>  <?php echo $row1['last_name']?></td>
             <td><?php echo $row1['email'];?></td>
-            <td><?php echo $row2['COUNT(group_id)'];?>/4</td>
+            <td><?php echo $row2['COUNT(group_id)'];?>/5</td>
           </tr>
       </tbody>
   </table>

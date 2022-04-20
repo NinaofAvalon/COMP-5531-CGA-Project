@@ -3,7 +3,7 @@
    //get student id
    $student_id = $_SESSION['student_id'];
    $username = $_SESSION['username'];
-   $id = $_SESSION['id'];
+   $id = $_SESSION['course_id'];
 
 
    if(isset($_POST['submit'])){
@@ -33,8 +33,8 @@
 
         // Attempt insert query execution
 
-        $sql = "INSERT INTO feed (fullName,username,feedContent,course_name)
-                    VALUES ('$full_name', '$username', '$feed_content','$course_name')";
+        $sql = "INSERT INTO feed (fullName,username,feedContent,course_id)
+                    VALUES ('$full_name', '$username', '$feed_content','$id')";
         if(mysqli_query($conn, $sql)){
           //prevent form to be resubmitted multiple times
           header("Location:studentFeed.php");
@@ -260,7 +260,7 @@
           </div>
           <!-- feed starts -->
           <?php
-          $query2 = "SELECT feed.fullName,feed.id, feed.feedContent, feed.username, users.profilePicture, users.username FROM feed LEFT JOIN users ON feed.username=users.username";
+          $query2 = "SELECT feed.fullName,feed.id, feed.feedContent, feed.username, users.profilePicture, users.username FROM feed LEFT JOIN users ON feed.username=users.username where course_id='$id'";
           $run2 = $conn->query($query2);
 
            while($row2 = $run2->fetch_array()) {

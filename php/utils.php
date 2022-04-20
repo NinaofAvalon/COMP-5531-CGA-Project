@@ -3,7 +3,7 @@ function getRoleByUserId($conn, $user_id)
 {
     session_start();
     $hasRoles = array();
-    $roles = array("student", "ta", "instructor");
+    $roles = array("student", "ta", "instructor", "administrator");
     foreach ($roles as $value) {
         $query = "select * from users join " . $value ." as a on users.id = a.user_id where users.id = " . $user_id;
         $result = mysqli_query($conn, $query);
