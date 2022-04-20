@@ -14,8 +14,34 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+--
+-- Table structure for table `administrator`
+--
+
+DROP TABLE IF EXISTS `administrator`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `administrator` (
+  `admin_id` int NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(100) NOT NULL,
+  `user_id` int NOT NULL,
+  PRIMARY KEY (`admin_id`),
+  KEY `user_name` (`user_name`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `administrator_ibfk_1` FOREIGN KEY (`user_name`) REFERENCES `users` (`username`),
+  CONSTRAINT `administrator_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `administrator`
+--
+
+LOCK TABLES `administrator` WRITE;
+/*!40000 ALTER TABLE `administrator` DISABLE KEYS */;
+INSERT INTO `administrator` VALUES (1,'admin00',1027),(2,'admin01',1038);
+/*!40000 ALTER TABLE `administrator` ENABLE KEYS */;
+UNLOCK TABLES;
 -- Table structure for table `chat`
 --
 
@@ -70,7 +96,7 @@ CREATE TABLE `class_group` (
 
 LOCK TABLES `class_group` WRITE;
 /*!40000 ALTER TABLE `class_group` DISABLE KEYS */;
-INSERT INTO `class_group` VALUES (10,'group 10',1005,NULL),(12,'group 12',1003,NULL);
+INSERT INTO `class_group` VALUES (10,'group 10',1005,1041),(12,'group 12',1003,NULL);
 /*!40000 ALTER TABLE `class_group` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -113,6 +139,7 @@ DROP TABLE IF EXISTS `course_enrolled`;
 CREATE TABLE `course_enrolled` (
   `course_id` int NOT NULL,
   `student_id` int NOT NULL,
+  `grade` int DEFAULT NULL,
   PRIMARY KEY (`course_id`,`student_id`),
   KEY `course_enrolled_ibfk_1` (`student_id`),
   CONSTRAINT `course_enrolled_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`) ON DELETE CASCADE,
@@ -126,8 +153,28 @@ CREATE TABLE `course_enrolled` (
 
 LOCK TABLES `course_enrolled` WRITE;
 /*!40000 ALTER TABLE `course_enrolled` DISABLE KEYS */;
-INSERT INTO `course_enrolled` VALUES (1036,1001),(1036,1002),(1036,1003),(1036,1004),(1041,1005),(1041,1006),(1036,1007),(1041,1007);
+INSERT INTO `course_enrolled` VALUES (1036,1001,NULL),(1036,1002,NULL),(1036,1003,NULL),(1036,1004,NULL),(1041,1005,90),(1041,1006,88),(1041,1007,76),(1050,1001,90),(1054,1008,NULL);
 /*!40000 ALTER TABLE `course_enrolled` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `course_ta`
+--
+
+DROP TABLE IF EXISTS `course_ta`;
+CREATE TABLE  `course_ta`  (
+   id  int(11) NOT NULL AUTO_INCREMENT,
+   course_id  int(11) NOT NULL,
+   ta_id int(11) NOT NULL,
+  PRIMARY KEY ( id )
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `course_ta`
+--
+
+LOCK TABLES `course_ta` WRITE;
+insert into `course_ta`  (course_id, ta_id) values (1036,133456),(1037,133457),(1038,133458),(1039,133459),(1040,133462),(1041,133463),(1043,133463),(1042,133456),(1043,133457),(1044,133458),(1045,133459),(1046,133462);
 UNLOCK TABLES;
 
 --
@@ -153,7 +200,7 @@ CREATE TABLE `course_taught` (
 
 LOCK TABLES `course_taught` WRITE;
 /*!40000 ALTER TABLE `course_taught` DISABLE KEYS */;
-INSERT INTO `course_taught` VALUES (1036,123456),(1042,123456),(1037,123457),(1043,123457),(1038,123458),(1044,123458),(1039,123459),(1045,123459),(1040,123460),(1046,123460),(1041,123461);
+INSERT INTO `course_taught` VALUES (1050,123457),(1041,123461),(1051,123463),(1054,123464);
 /*!40000 ALTER TABLE `course_taught` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -188,6 +235,28 @@ LOCK TABLES `discussion_board` WRITE;
 INSERT INTO `discussion_board` VALUES (1001,'test post','m_adels','this is a test post','2022-04-04',NULL),(1002,'This is another post','m_adels','this is another test post','22-04-06 05:13pm',NULL),(1003,'This is another post','m_adels','this is another test post','22-04-06 05:13pm',NULL),(1004,'let\'s talk about this','m_adels','this is interesting','22-04-06 05:18pm',NULL),(1005,'another one','m_adels','hello','22-04-06 05:19pm',NULL),(1006,'this is my post','m_adels','whaddup','22-04-06 05:20pm',NULL),(1007,'Post','a_ulyss','This is my first post','22-04-07 01:36am',NULL),(1008,'another','a_ulyss','and another one','22-04-07 01:38am',NULL);
 /*!40000 ALTER TABLE `discussion_board` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `emails`
+--
+
+DROP TABLE IF EXISTS `emails`;
+CREATE TABLE `emails` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `recipient` int(11) NOT NULL,
+  `sender` int(11) NOT NULL,
+  `email_subject` varchar(100) DEFAULT NULL,
+  `email_body` varchar(100) DEFAULT NULL,
+  `email_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`) 
+  -- accept null value but no duplicate
+) ENGINE=InnoDB AUTO_INCREMENT=1006 DEFAULT CHARSET=latin1;
+
+
+LOCK TABLES `emails` WRITE;
+insert into emails(recipient, sender, email_subject, email_body, email_date) value( 1006,1024, 'hello world', 'this is my first email.', '2022-04-12 22:19:06');
+UNLOCK TABLES;
+
 
 --
 -- Table structure for table `events`
@@ -307,6 +376,35 @@ CREATE TABLE `likes` (
 LOCK TABLES `likes` WRITE;
 /*!40000 ALTER TABLE `likes` DISABLE KEYS */;
 /*!40000 ALTER TABLE `likes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `notices`
+--
+
+DROP TABLE IF EXISTS `notices`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `notices` (
+  `notice_id` int NOT NULL AUTO_INCREMENT,
+  `admin_name` varchar(100) DEFAULT NULL,
+  `content` text NOT NULL,
+  `posting_time` varchar(100) DEFAULT NULL,
+  `valid` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`notice_id`),
+  KEY `admin_name` (`admin_name`),
+  CONSTRAINT `notices_ibfk_1` FOREIGN KEY (`admin_name`) REFERENCES `users` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `notices`
+--
+
+LOCK TABLES `notices` WRITE;
+/*!40000 ALTER TABLE `notices` DISABLE KEYS */;
+INSERT INTO `notices` VALUES (1,'admin00','This is my first notice.','2022-04-20T00:49:54',1),(2,'admin01','I am admin01.','2022-04-18 05:22:01',0),(3,'admin00','hello','2022-04-19 10:22:01',1),(4,'admin00','hellohi','2022-04-19 10:22:01',0),(7,'admin00','This will be avalaible at 8:45 pm.','2022-04-21T01:17:24',1);
+/*!40000 ALTER TABLE `notices` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -435,6 +533,7 @@ DROP TABLE IF EXISTS `term`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `term` (
   `term_id` int NOT NULL AUTO_INCREMENT,
+  `termname` varchar(100) DEFAULT NULL,
   `term_season` varchar(10) DEFAULT NULL,
   `term_year` varchar(10) DEFAULT NULL,
   `term_begin_date` varchar(100) DEFAULT NULL,
@@ -442,7 +541,7 @@ CREATE TABLE `term` (
   `is_term_now` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`term_id`),
   UNIQUE KEY `term` (`is_term_now`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -451,7 +550,7 @@ CREATE TABLE `term` (
 
 LOCK TABLES `term` WRITE;
 /*!40000 ALTER TABLE `term` DISABLE KEYS */;
-INSERT INTO `term` VALUES (1,'Winter','2021','2021-01-06','2021-04-22',NULL),(2,'Fall','2021','2021-09-06','2021-12-22',NULL),(3,'Winter','2022','2022-01-06','2022-04-23','YES');
+INSERT INTO `term` VALUES (1,'Winter 2021','Winter','2021','2021-01-01','2021-04-19',NULL),(2,'Summer 2021','Summer','2021','2021-05-03','2021-08-15',NULL),(3,'Winter 2022','Winter','2022','2022-01-10','2022-04-28','YES'),(9,'Summer 2022','Fall','2022','2022-09-01','2022-12-24',NULL),(10,'Fall 2021','Fall','2021','2021-09-01','2021-12-30',NULL);
 /*!40000 ALTER TABLE `term` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -508,7 +607,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1006,'m_adels','56789','maureen_adelson@hotmail.ca',_binary 'MaureenAdelson_1.jpg'),(1007,'d_daniel','12345','derek_daniels@gmail.com',NULL),(1008,'j_smith','12345','jack_smith@gmail.com',NULL),(1009,'m_micha','12345','malakai_michael@gmail.com',NULL),(1010,'b_blurp','12345','barbara_blurph@gmail.com',NULL),(1011,'a_hamilt','12345','andrea_hamilton@gmail.com',NULL),(1012,'k_jacquel','12345','keisha_jacquet@gmail.com',NULL),(1013,'d_burnh','12345','daniel_burnham@gmail.com',NULL),(1014,'j_anselm','12345','john_anselme@gmail.com',NULL),(1015,'m_dorvi','12345','marie_dorvilier@gmail.com',NULL),(1016,'b_hilai','12345','becky_hilaire@gmail.com',NULL),(1017,'a_ulyss','12345','athena_ulysse@gmail.com',NULL),(1018,'k_guerr','12345','karol_guerrier@gmail.com',NULL),(1019,'d_moomg','12345','denzel_moomg@gmail.com',NULL),(1020,'j_peters','12345','jeremiah_peterson@gmail.com',NULL),(1021,'m_washi','12345','may_washington@gmail.com',NULL),(1022,'b_phili','12345','bella_philips@gmail.com',NULL),(1023,'a_skyle','12345','amber_skyler@gmail.com',NULL),(1024,'k_kylep','12345','kevin_kylepson@gmail.com',NULL);
+INSERT INTO `users` VALUES (1006,'m_adels','56789','maureen_adelson@hotmail.ca',_binary 'MaureenAdelson_1.jpg'),(1007,'d_daniel','12345','derek_daniels@gmail.com',NULL),(1008,'j_smith','12345','jack_smith@gmail.com',NULL),(1009,'m_micha','12345','malakai_michael@gmail.com',NULL),(1010,'b_blurp','12345','barbara_blurph@gmail.com',NULL),(1011,'a_hamilt','12345','andrea_hamilton@gmail.com',NULL),(1012,'k_jacquel','12345','keisha_jacquet@gmail.com',NULL),(1013,'d_burnh','12345','daniel_burnham@gmail.com',NULL),(1014,'j_anselm','12345','john_anselme@gmail.com',NULL),(1015,'m_dorvi','12345','marie_dorvilier@gmail.com',NULL),(1016,'b_hilai','12345','becky_hilaire@gmail.com',NULL),(1017,'a_ulyss','12345','athena_ulysse@gmail.com',NULL),(1018,'k_guerr','12345','karol_guerrier@gmail.com',NULL),(1019,'d_moomg','12345','denzel_moomg@gmail.com',NULL),(1020,'j_peters','12345','jeremiah_peterson@gmail.com',NULL),(1021,'m_washi','12345','may_washington@gmail.com',NULL),(1022,'b_phili','12345','bella_philips@gmail.com',NULL),(1023,'a_skyle','12345','amber_skyler@gmail.com',NULL),(1024,'k_kylep','12345','kevin_kylepson@gmail.com',NULL),(1025,'l_haan','l_haan1234','luuuuuu@gmail.com', NULL),(1026,'h_may957','h_may9571234','helenmay@gmail.com', NULL),(1027,'admin00','12345678','admin00@concordia.com', NULL),(1028,'s_zho102','s_zho1021234','iluvfri@hotmail.com', NULL),(1029,'L_Sch725','L_Sch7251234','iluvmeetings@gmail.com', NULL),(1030,'h_gfd261','h_gfd2611234','iluvftyri@hotmail.com', NULL),(1031,'Y_Bus525','Y_Bus5251234','selfmapping@gmail.com', NULL),(1032,'Y_Luc739','Y_Luc7391234','yoyoluca@gmail.com', NULL),(1033,'F_Che681','F_Che6811234','fancychen@gmail.com', NULL),(1034,'y_zhe523','y_zhe5231234','youwang@gmail.com', NULL),(1035,'y_con451','y_con4511234','yuqiyuqi@hotmail.com', NULL),(1036,'c_wan68','c_wan681234','chenglu03@gmail.com', NULL),(1037,'j_hui199','j_hui1991234','josahui@foxmail.com', NULL),(1038,'admin01','12345678','admin01@concordia.com', NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -521,40 +620,6 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
-DROP TABLE IF EXISTS `emails`;
-CREATE TABLE `emails` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `recipient` int(11) NOT NULL,
-  `sender` int(11) NOT NULL,
-  `email_subject` varchar(100) DEFAULT NULL,
-  `email_body` varchar(100) DEFAULT NULL,
-  `email_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`) 
-  -- accept null value but no duplicate
-) ENGINE=InnoDB AUTO_INCREMENT=1006 DEFAULT CHARSET=latin1;
 
 
-LOCK TABLES `emails` WRITE;
-insert into emails(recipient, sender, email_subject, email_body, email_date) value( 1006,1024, 'hello world', 'this is my first email.', '2022-04-12 22:19:06');
-UNLOCK TABLES;
-
---
--- Table structure for table `course_ta`
---
-
-DROP TABLE IF EXISTS `course_ta`;
-CREATE TABLE  `course_ta`  (
-   id  int(11) NOT NULL AUTO_INCREMENT,
-   course_id  int(11) NOT NULL,
-   ta_id int(11) NOT NULL,
-  PRIMARY KEY ( id )
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `course_ta`
---
-
-LOCK TABLES `course_ta` WRITE;
-insert into `course_ta`  (course_id, ta_id) values (1036,133456),(1037,133457),(1038,133458),(1039,133459),(1040,133462),(1041,133463),(1043,133463),(1042,133456),(1043,133457),(1044,133458),(1045,133459),(1046,133462);
-UNLOCK TABLES;
 -- Dump completed on 2022-04-18 23:17:27
