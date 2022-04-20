@@ -1,6 +1,8 @@
 <?php
    include('../session.php');
 
+   $username = $_SESSION["username"];
+
    $post_id = $_GET["id"];
 
    if(isset($_POST['submit'])){
@@ -62,7 +64,7 @@
             <td align="right">
               <i>
                 <b>
-                  <a href="../welcome.php">
+                  <a href="StudentFeed.php">
                     <font class="home_link" color="black">Home</font>
                   </a>
                 </b>
@@ -183,20 +185,6 @@
         <font size="4">
           <ul>
             <li>
-              <a href="studentFeed.php">
-                <b>
-                  <font color="black">Feed</font>
-                </b>
-              </a>
-            </li>
-          </ul>
-        </font>
-      </b>
-
-      <b>
-        <font size="4">
-          <ul>
-            <li>
               <a href="studentPassword.php">
                 <b>
                   <font color="black">Change Password</font>
@@ -247,6 +235,7 @@
           $query = "SELECT * FROM discussion_board where id='$post_id'";
           $run = $conn->query($query);
           $row = $run->fetch_array();
+
            ?>
             <!--Original thread-->
             <div class="head">
@@ -257,7 +246,6 @@
             <div class="body">
                 <div class="authors">
                     <div class="username" name=author><?php echo $row['creator']; ?></div>
-                    <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt="">
 
                 </div>
                 <div class="content" name="orignal_post">
@@ -288,7 +276,6 @@
                <div class="body-replies">
                    <div class="authors">
                        <div class="username"><?php echo $row['creator']; ?></div>
-                       <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt="">
 
                    </div>
                    <div class="content">

@@ -66,7 +66,7 @@
             <td align="right">
               <i>
                 <b>
-                  <a href="../welcome.php">
+                  <a href="StudentFeed.php">
                     <font class="home_link" color="black">Home</font>
                   </a>
                 </b>

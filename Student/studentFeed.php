@@ -77,7 +77,7 @@
             <td align="right">
               <i>
                 <b>
-                  <a href="../welcome.php">
+                  <a href="StudentFeed.phpp">
                     <font class="home_link" color="black">Home</font>
                   </a>
                 </b>
@@ -193,21 +193,6 @@
           </ul>
         </font>
       </b>
-
-      <b>
-        <font size="4">
-          <ul>
-            <li>
-              <a href="studentFeed.php">
-                <b>
-                  <font color="black">Feed</font>
-                </b>
-              </a>
-            </li>
-          </ul>
-        </font>
-      </b>
-
       <b>
         <font size="4">
           <ul>
@@ -297,26 +282,14 @@
                 </div>
               </div>
 
-
-
-              <div class="post-feeder">
-
-                  <!-- implement like/unlike functionality -->
-                  <!-- user has liked the post -->
-                  <!-- <span><a href="" class="unlike" id="<?php echo $row2['id']; ?>"><img src="../heart.png"></a></span> -->
-
-                  <!-- user has not liked the post -->
-                  <!-- <span><a href="" class="like" id="<?php echo $row2['id']; ?>"><img src="../love.png"></a></span> -->
-
-              </div>
-
-              <?php
-            }
-
-               ?>
             </div>
 
           </div>
+
+                        <?php
+                      }
+
+                         ?>
 
         </div>
 
