@@ -77,6 +77,19 @@ button.login {
   top:-1px;
 }
 
+.menu_instructor {
+    background-color: #B7CADB;
+    width: 12%;
+    padding-top: 1%;
+    padding-bottom: 100%;
+    margin-top: 5.7%;
+    position: fixed;
+    left: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    top: 4%;
+}
+
 .main_home{
   margin-left:200px;
   margin-top: 130px;

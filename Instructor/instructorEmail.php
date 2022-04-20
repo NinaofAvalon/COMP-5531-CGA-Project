@@ -1,6 +1,42 @@
 ﻿<?php
-include('../session.php');
- ?>
+  include('../session.php');
+
+
+
+   if(isset($_POST['submit'])){
+
+     if($conn === false){
+    die("ERROR: Could not connect. "
+          . mysqli_connect_error());
+        }
+
+     //get user Message
+     $newEmail = mysqli_real_escape_string(
+        $conn, $_REQUEST['instructorNewEmail']);
+
+    $confirmNewEmail =  mysqli_real_escape_string(
+       $conn, $_REQUEST['instructorNewEmailConfirmation']);
+
+        // Attempt insert query execution
+        if($newEmail == $confirmNewEmail){
+        $username = $_SESSION["username"];
+        $sql = "UPDATE users SET email='$newEmail' WHERE username='$username'";
+        if(mysqli_query($conn, $sql)){
+          //prevent form to be resubmitted multiple times
+          header("Location:instructorEmail.php");
+          die();
+        } else{
+            echo "ERROR: Message not sent!!!";
+        }
+
+        // Close connection
+        mysqli_close($conn);
+      } else{
+        header("Location:instructorEmailIncorrect.php");
+      }
+   }
+
+?>
 
 <!DOCTYPE html>
 <html>
@@ -48,7 +84,7 @@ include('../session.php');
         </div>
 
         <!-- menu -->
-        <div class="menu" height="100%" width="150px">
+        <div class="menu_instructor" height="100%" width="150px">
             <hr>
             <b>
                 <font size="4">
@@ -171,23 +207,26 @@ include('../session.php');
         </div>
 
     <!-- main page -->
-     <div class="main_home">
+ <div class="main_home">
+
 
     <b>Change Email</b>
     <br>
     <br>
- <form action="instructorProcessChangeEmail.php" method="POST">
+    <form action="instructorEmail.php" method="POST">
 
-  <table border="1" width="100%">
+ <table border="1" width="100%">
     <tbody>
           <tr bgcolor="F6E5F5">
-             <th>Enter New Email</th><td><input type="text" name="instructorNewEmail"></td>
+            <th>Enter New Email</th>
+            <td><input type="text" name="instructorNewEmail"></td>
 
-          </tr>
+            </tr>
             <tr bgcolor="F6E5F5">
-             <th>Confirm New Email</th> <td><input type="text" name="instructorNewEmailConfirmation"></td>
-
-          </tr>
+            <th>Confirm New Email</th>
+             <td><input type="text" name="instructorNewEmailConfirmation"></td>
+       
+        </tr>
 
             </tbody>
   </table>
@@ -195,7 +234,6 @@ include('../session.php');
 <br>
    <button name="submit">Submit</button>
     </form>
-
 
 </body>
 </html>

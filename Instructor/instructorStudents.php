@@ -13,7 +13,7 @@ inner join course_enrolled on student.student_id = course_enrolled.student_id wh
 <html>
 <head>
     <link rel="stylesheet" href="../style.css" />
-    <title>Tutor Information</title>
+    <title>Student Information</title>
 </head>
 <body>
 
@@ -24,7 +24,7 @@ inner join course_enrolled on student.student_id = course_enrolled.student_id wh
                 <tbody>
                     <tr width="100%">
                         <td width="5%" align="left"><h2>CGA</h2></td>
-                        <td align="center"><font size="5"><b>Tutor Information</b></font></td>
+                        <td align="center"><font size="5"><b>Student Information</b></font></td>
                     </tr>
                 </tbody>
             </table>
@@ -55,7 +55,7 @@ inner join course_enrolled on student.student_id = course_enrolled.student_id wh
         </div>
 
         <!-- menu -->
-        <div class="menu" height="100%" width="150px">
+        <div class="menu_instructor" height="100%" width="150px">
             <hr>
             <b>
                 <font size="4">

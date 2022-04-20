@@ -1,14 +1,48 @@
 ﻿<?php
-include('../session.php'); 
-require_once("connection.php");
-?>
+  include('../session.php');
 
+
+
+   if(isset($_POST['submit'])){
+
+     if($conn === false){
+    die("ERROR: Could not connect. "
+          . mysqli_connect_error());
+        }
+
+     //get user Message
+     $newPassword = mysqli_real_escape_string(
+        $conn, $_REQUEST['instructorNewPassword']);
+
+    $confirmNewPassword =  mysqli_real_escape_string(
+       $conn, $_REQUEST['instructorNewPasswordConfirmation']);
+
+        // Attempt insert query execution
+        if($newPassword == $confirmNewPassword){
+        $username = $_SESSION["username"];
+        $sql = "UPDATE users SET password='$newPassword' WHERE username='$username'";
+        if(mysqli_query($conn, $sql)){
+          //prevent form to be resubmitted multiple times
+          header("Location:instructorPassword.php");
+          die();
+        } else{
+            echo "ERROR: Message not sent!!!";
+        }
+
+        // Close connection
+        mysqli_close($conn);
+      } else{
+        header("Location:instructorPasswordIncorrect.php");
+      }
+   }
+
+?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <link rel="stylesheet" href="../style.css" />
-    <title>Add Group Member</title>
+    <title>Change Password</title>
 </head>
 <body>
 
@@ -19,7 +53,7 @@ require_once("connection.php");
                 <tbody>
                     <tr width="100%">
                         <td width="5%" align="left"><h2>CGA</h2></td>
-                        <td align="center"><font size="5"><b>Add Group Member</b></font></td>
+                        <td align="center"><font size="5"><b>Change Password</b></font></td>
                     </tr>
                 </tbody>
             </table>
@@ -130,7 +164,7 @@ require_once("connection.php");
                     </ul>
                 </font>
             </b>
- <b>
+  <b>
                 <font size="4">
                     <ul>
                         <li>
@@ -172,44 +206,32 @@ require_once("connection.php");
             </b>
         </div>
 
-  <!-- Main -->
-  <!-- Main -->
-    <div class="main_home">
+    <!-- main page -->
+      <div class="main_home">
+    <b>
+       <font color="black">Error: Please enter the same password</font>
+    </b>
+    <form action="instructorPassword.php" method="POST">
 
-    <b>Add new Group</b>
-    <br>
-    <br>
-
-  <table border="1" width="100%">
+ <table border="1" width="100%">
     <tbody>
           <tr bgcolor="F6E5F5">
-             <th>Student ID</th>
-          </tr>
-</thead>
+            <th>Enter New Password</th>
+            <td><input type="text" name="instructorNewPassword"></td>
 
-<tbody>
-                 <?php
-                        $id = intval($_GET['id']);
-                  ?>
+            </tr>
+            <tr bgcolor="F6E5F5">
+            <th>Confirm New Password</th>
+             <td><input type="text" name="instructorNewPasswordConfirmation"></td>
+       
+        </tr>
 
-            <form action="instructorGroupMemberInsert.php?Id=<?php echo $_GET['id']; ?>" method="post">   
-            <tr>
-                <td><input type="number" placeholder=" Student ID " name="student_id"></td>
-                <input type="hidden" name="id" value="<?php if(isset($id)) echo $id;?>">                      
-              </tr>
+            </tbody>
+  </table>
 
-        </tbody>
-        </table>
-                    <br>
-                    <button name="update">Continue</button>
-                    </form>
-                     
-                    <br>
-<form action="instructorGroupMembersInfo.php?GetId=<?php echo $_GET['id']; ?>" method="post">
-                    <br>  
-                    <button name="update">Done</button>
-                    </form>
+<br>
+   <button name="submit">Submit</button>
+    </form>
 
 </body>
 </html>
-

@@ -55,7 +55,7 @@ include('../session.php');
         </div>
 
         <!-- menu -->
-        <div class="menu" height="100%" width="150px">
+        <div class="menu_instructor" height="100%" width="150px">
             <hr>
             <b>
                 <font size="4">
@@ -190,7 +190,6 @@ include('../session.php');
                         <th>File</th>
                         <th>Uploaded by</th>
                         <th>Date</th>
-                        <th>Delete</th>
                     </tr>
                     </thead>
 
@@ -207,8 +206,6 @@ include('../session.php');
                         <td><a href="download.php?file=<?php echo $row['file']?>"><?php echo $row['file']?></a></td>
                         <td><?php echo $student_name ?></td>
                         <td><?php echo $date ?></td>
-                        <td><a href="instructorProjectDelete.php?del=<?php echo $file ?>"> Delete </a></td>
-
                     </tr>
                     <?php
                     }

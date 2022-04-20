@@ -2,7 +2,7 @@
 include('../session.php');
 require_once("connection.php");
 $id = $_GET['GetId'];
-$query = "select student.student_id, student.first_name,student.last_name,student.phone, course_enrolled.grade, student.email, stud_in_group.group_id from student inner join stud_in_group on student.student_id = stud_in_group.student_id
+$query = "select student.student_id, student.first_name,student.last_name,student.phone, course_enrolled.grade, users.email, stud_in_group.group_id from student join users on users.id = student.user_id inner join stud_in_group on student.student_id = stud_in_group.student_id
 inner join course_enrolled on student.student_id = course_enrolled.student_id where student.student_id ='".$id."' ";
 $result = mysqli_query($con,$query);
 ?>
@@ -54,7 +54,7 @@ $result = mysqli_query($con,$query);
         </div>
 
         <!-- menu -->
-        <div class="menu" height="100%" width="150px">
+        <div class="menu_instructor" height="100%" width="150px">
             <hr>
             <b>
                 <font size="4">
@@ -185,7 +185,7 @@ $result = mysqli_query($con,$query);
   <table border="1" width="100%">
     <tbody>
           <tr bgcolor="F6E5F5">
-             <th>ID</th>
+             <th>Student ID</th>
              <th>First Name</th>
              <th>Last Name</th>
              <th>Email</th>
@@ -212,7 +212,7 @@ $result = mysqli_query($con,$query);
                             <td><?php echo $id ?></td>
                             <td><input type="text"  placeholder=" First Name" name="fname" value =" <?php echo $fname ?> "></td>
                             <td><input type="text"  placeholder=" Last Name" name="lname" value =" <?php echo $lname ?> "></td>
-                            <td><input type="email"  placeholder=" Email " name="email" value =" <?php echo $email ?> "></td>
+                            <td><?php echo $email ?></td>
                             <td><input type="number"  placeholder=" Group " name="group" value =" <?php echo $group ?> " > </td>
                             <td><input type="number"  placeholder=" Grade " name="grade" value =" <?php echo $grade ?> "></td>
                         </tr>

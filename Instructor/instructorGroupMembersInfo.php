@@ -2,8 +2,9 @@
 include('../session.php');
 require_once("connection.php");
 $id = intval($_GET['GetId']);
-$query = "select student.student_id, student.first_name,student.last_name, student.email from project.student inner join project.stud_in_group on project.student.student_id = project.stud_in_group.student_id
-where group_id = '$id'";
+$query = "select student.student_id, student.first_name,student.last_name, users.email, stud_in_group.group_id from student join users on users.id = student.user_id inner join stud_in_group on student.student_id = stud_in_group.student_id
+where
+group_id = '$id'";
 $result = mysqli_query($con,$query);
 ?>
 
@@ -53,7 +54,7 @@ $result = mysqli_query($con,$query);
         </div>
 
         <!-- menu -->
-        <div class="menu" height="100%" width="150px">
+        <div class="menu_instructor" height="100%" width="150px">
             <hr>
             <b>
                 <font size="4">

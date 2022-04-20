@@ -1,21 +1,23 @@
 ﻿<?php
 
 require_once("connection.php");
-$mysqli = new mysqli(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
+$mysqli = new mysqli("localhost", "root", "root", "project");
 
 
 if(isset($_POST['update']))
 {
     $id = $_GET['Id'];
+    $user_id = $_POST['user_id'];
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
     $email = $_POST['email'];
     $group = $_POST['group'];
     $grade = $_POST['grade'];
 
-
-    $query = "update project.student set first_name = '".$fname."', last_name = '".$lname."', email = '".$email."' 
+    $query = "update student set first_name = '".$fname."', last_name = '".$lname."'
                 where student_id ='".$id."';";
+    $query .= "update users set email = '".$email."' 
+                where users.id ='".$user_id."';";
     $query .= "update project.course_enrolled set grade = '".$grade."' 
                 where student_id ='".$id."';";
     $query .= "update project.stud_in_group set group_id = '".$group."' 

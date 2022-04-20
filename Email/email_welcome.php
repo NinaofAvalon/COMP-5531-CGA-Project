@@ -64,7 +64,7 @@
         <font size="4">
           <ul>
             <li>
-              <a href="Student/studentContact.php">
+              <a href="compose.php">
                 <b>
                   <font color="black">Compose</font>
                 </b>

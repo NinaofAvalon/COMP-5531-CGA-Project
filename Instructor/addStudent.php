@@ -51,7 +51,7 @@ require_once("connection.php");
         </div>
 
         <!-- menu -->
-        <div class="menu" height="100%" width="150px">
+        <div class="menu_instructor" height="100%" width="150px">
             <hr>
             <b>
                 <font size="4">
@@ -184,7 +184,8 @@ require_once("connection.php");
   <table border="1" width="100%">
     <tbody>
           <tr bgcolor="F6E5F5">
-             <th>ID</th>
+             <th>Student ID</th>
+             <th>User ID</th>
              <th>First Name</th>
              <th>Last Name</th>
              <th>Email</th>
@@ -198,6 +199,7 @@ require_once("connection.php");
             <form action="instructorStudentInsert.php" method="post">
               <tr>
                 <td><input type="number" placeholder=" ID " name="id"></td>
+                <td><input type="number" placeholder=" User ID " name="user_id"></td>
                 <td><input type="text" placeholder=" First Name " name="fName"></td>
                 <td><input type="text" placeholder=" Last Name " name="lName"></td>
                 <td><input type="email" placeholder=" Email " name="email"></td>
