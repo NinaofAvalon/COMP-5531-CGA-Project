@@ -3,8 +3,8 @@ include('../session.php');
 
     $course = $_SESSION['course'];
     require_once("connection.php");
-    $query = "select student.student_id, student.first_name,student.last_name,student.phone, course_enrolled.grade, student.email, stud_in_group.group_id from project.student inner join project.stud_in_group on project.student.student_id = project.stud_in_group.student_id
-inner join project.course_enrolled on project.student.student_id = project.course_enrolled.student_id where course_id = '".$course."'";
+    $query = "select student.student_id, student.first_name,student.last_name,student.phone, course_enrolled.grade, users.email, stud_in_group.group_id from student join users on users.id = student.user_id inner join stud_in_group on student.student_id = stud_in_group.student_id
+inner join course_enrolled on student.student_id = course_enrolled.student_id where course_id = '".$course."'";
     $result = mysqli_query($con,$query);
 
  ?>

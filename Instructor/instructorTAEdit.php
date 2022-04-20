@@ -2,7 +2,7 @@
 include('session.php');
 require_once("connection.php");
 $id = $_GET['GetId'];
-$query = "select id,user_id,first_name,last_name,birth_date, phone,email from project.TA where id ='".$id."' ";
+$query = "select id,user_id,first_name,last_name,birth_date, phone,email from TA where id ='".$id."' ";
 $result = mysqli_query($con,$query);
 ?>
 
