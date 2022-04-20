@@ -48,10 +48,12 @@
 
 <?php
 
-$query = "SELECT course.course_name,course.course_section, course.course_id, instructor.id
-          from instructor
-          inner join course on instructor.instructor_course = course.course_name
-          having instructor.id = (select instructor.id from instructor where user_id = (select id from users where username='$username'))";
+$query = "SELECT course.course_name,course.course_term,course.course_id,course.course_section, instructor.id
+from instructor
+inner join course_taught ct on instructor.id = ct.instructor_id
+inner join course on ct.course_id = course.course_id
+having instructor.id = (select instructor.id from instructor where user_id = (select id from users where username='$username'))";
+
 $run = $conn->query($query);
 $i=0;
 while($row= $run->fetch_array()) {
