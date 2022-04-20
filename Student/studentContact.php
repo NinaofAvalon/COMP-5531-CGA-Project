@@ -1,18 +1,16 @@
 <?php
-   include('session.php');
+   include('../session.php');
 
-   $instructor_fname = "SELECT * FROM instructor WHERE username = '$username'";
-   $instructor_lname;
-   $instructor_phone;
-   $instructor_office;
-   $instructor_email;
+  $course_section=  $_SESSION["course_section"];
+
+
 
 ?>
 ﻿<!DOCTYPE html>
 <html>
 <head>
     <title>Contact Information</title>
-    <style><?php include 'style.css'; ?></style>
+    <style><?php include '../style.css'; ?></style>
 
 </head>
 <body>
@@ -33,7 +31,7 @@
           <td align="right">
             <i>
               <b>
-                <a href="../welcome.php">
+                <a href="StudentFeed.php">
                   <font class="home_link" color="black">Home</font>
                 </a>
               </b>
@@ -59,9 +57,9 @@
     <b >
       <font size="4">
         <i>
-          COMP 5531/Winter 2022
+          <?php echo htmlspecialchars($_SESSION["course_name"]); ?>/Winter 2022
           <br>
-          Section NN
+          SECTION <?php echo htmlspecialchars($_SESSION["course_section"]); ?>
         </i>
       </font>
     </b>
@@ -150,19 +148,6 @@
       </font>
     </b>
 
-    <b>
-      <font size="4">
-        <ul>
-          <li>
-            <a href="studentFeed.php">
-              <b>
-                <font color="black">Feed</font>
-              </b>
-            </a>
-          </li>
-        </ul>
-      </font>
-    </b>
 
     <b>
       <font size="4">
@@ -191,6 +176,20 @@
         </ul>
       </font>
     </b>
+
+    <b>
+      <font size="4">
+        <ul>
+          <li>
+            <a href="studentProfilePicture.php">
+              <b>
+                <font color="black">Change Profile Picture</font>
+              </b>
+            </a>
+          </li>
+        </ul>
+      </font>
+    </b>
   </div>
 
 
@@ -201,21 +200,26 @@
       <br>
       <br>
 
+    <?php
+    $coursename = $_SESSION['course_name'];
+    $course_id = $_SESSION['course_id'];
+    $query = "SELECT * from instructor where id=(select instructor_id from course_taught where course_id='$course_id')";
+    $run = $conn -> query($query);
+    $row = $run -> fetch_array();
+     ?>
     <table border="1" width="100%">
       <tbody>
             <tr bgcolor="F6E5F5">
-                <th>First name</th>
-                <th>Last name</th>
+                <th>First Name</th>
+                <th>Last Name</th>
                 <th>Phone</th>
-                <th>Office</th>
                 <th>Email</th>
             </tr>
             <tr>
-              <td>First name</td>
-              <td>Last name</td>
-              <td>Phone</td>
-              <td>Office</td>
-              <td>email</td>
+              <td><?php echo $row['first_name']; ?></td>
+              <td><?php echo $row['last_name']; ?></td>
+              <td><?php echo $row['phone']; ?></td>
+              <td><?php echo $row['email']; ?></td>
             </tr>
         </tbody>
     </table>
@@ -227,22 +231,27 @@
     <b>Course TA</b>
     <br>
     <br>
-
+    <?php
+    $query = "SELECT * FROM TA 
+    join course_ta ct on ta.id = ct.ta_id
+    join course on course.id = ct.course_id
+    where course.course_name='$coursename' and course.course_section='$course_section'";
+    $run = $conn -> query($query);
+    $row = $run -> fetch_array();
+     ?>
   <table border="1" width="100%">
     <tbody>
           <tr bgcolor="F6E5F5">
               <th>First name</th>
               <th>Last name</th>
               <th>Phone</th>
-              <th>Office</th>
               <th>Email</th>
           </tr>
           <tr>
-            <td>First name</td>
-            <td>Last name</td>
-            <td>Phone</td>
-            <td>Office</td>
-            <td>email</td>
+            <td><?php echo $row['first_name']; ?></td>
+            <td><?php echo $row['last_name']; ?></td>
+            <td><?php echo $row['phone']; ?></td>
+            <td><?php echo $row['email']; ?></td>
           </tr>
       </tbody>
   </table>

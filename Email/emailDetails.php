@@ -12,7 +12,6 @@ require_once "../php/config.php";
 session_start();
 
 // $user_check = $_SESSION['id'];
-echo "aaa";
 if (isset($_GET['email_id'])) {
   $user_check = $_GET['email_id'];
 }
@@ -79,7 +78,7 @@ if ($count == 1) {
           <td align="right">
             <i>
               <b>
-                <a href="welcome.php">
+                <a href="../welcome.php">
                   <font class="home_link" color="black">Home</font>
                 </a>
               </b>

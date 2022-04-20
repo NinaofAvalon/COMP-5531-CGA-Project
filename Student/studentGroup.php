@@ -1,5 +1,9 @@
 <?php
    include('../session.php');
+   $username = $_SESSION['username'];
+   $group_name = $_SESSION['group_name'];
+   $group_leader =$_SESSION["leader_id"];
+   $group_id = $_SESSION["group_id"];
 ?>
 <!DOCTYPE html>
 <html>
@@ -27,7 +31,7 @@
           <td align="right">
             <i>
               <b>
-                <a href="../welcome.php">
+                <a href="StudentFeed.php">
                   <font class="home_link" color="black">Home</font>
                 </a>
               </b>
@@ -53,9 +57,9 @@
     <b >
       <font size="4">
         <i>
-          COMP 5531/Winter 2022
+          <?php echo htmlspecialchars($_SESSION["course_name"]); ?>/Winter 2022
           <br>
-          Section NN
+          SECTION <?php echo htmlspecialchars($_SESSION["course_section"]); ?>
         </i>
       </font>
     </b>
@@ -148,20 +152,6 @@
       <font size="4">
         <ul>
           <li>
-            <a href="studentFeed.php">
-              <b>
-                <font color="black">Feed</font>
-              </b>
-            </a>
-          </li>
-        </ul>
-      </font>
-    </b>
-
-    <b>
-      <font size="4">
-        <ul>
-          <li>
             <a href="studentPassword.php">
               <b>
                 <font color="black">Change Password</font>
@@ -185,30 +175,71 @@
         </ul>
       </font>
     </b>
+    <b>
+      <font size="4">
+        <ul>
+          <li>
+            <a href="studentProfilePicture.php">
+              <b>
+                <font color="black">Change Profile Picture</font>
+              </b>
+            </a>
+          </li>
+        </ul>
+      </font>
+    </b>
   </div>
 
   <!-- Table -->
   <div class="main_home">
 
-    <b>Course Instructor</b>
     <br>
     <br>
 
+    <?php
+    //all group members
+    $query ="SELECT class_group.group_id,class_group.group_name,class_group.leader_id,class_group.course_id, stud_in_group.student_id,student.first_name, student.last_name, users.email
+            FROM class_group
+            inner join stud_in_group ON class_group.group_id=stud_in_group.group_id
+            inner join student on stud_in_group.student_id=student.student_id
+            inner join users on student.user_id = users.id
+            having group_id = '$group_id'";
+
+    //leader information
+    $query1 ="SELECT class_group.group_id,class_group.group_name,class_group.leader_id,class_group.course_id, stud_in_group.student_id,student.first_name, student.last_name, users.email
+              FROM class_group
+              inner join stud_in_group ON class_group.group_id=stud_in_group.group_id
+              inner join student on stud_in_group.student_id=student.student_id
+              inner join users on student.user_id = users.id
+              having group_id = '$group_id' AND student_id=leader_id";
+    $run1 = $conn -> query($query1);
+    $row1= $run1 ->fetch_array();
+
+    //group count Members
+    $query2 = "SELECT COUNT(group_id)
+                FROM stud_in_group
+                WHERE group_id='$group_id'";
+
+
+    $run2 = $conn -> query($query2);
+    $row2= $run2 ->fetch_array();
+
+     ?>
   <table border="1" width="100%">
     <tbody>
           <tr bgcolor="F6E5F5">
               <th>Group Name</th>
               <th>Leader ID</th>
-              <th>Name</th>
+              <th>Leader Name</th>
               <th>Leader Email</th>
               <th>Number of Members/Capacity</th>
           </tr>
           <tr>
-            <td>group_name</td>
-            <td>leader_ID</td>
-            <td>name</td>
-            <td>leader_email</td>
-            <td>Number of Members/Capacity</td>
+            <td><?php echo $row1['group_name'];?></td>
+            <td><?php echo $row1['leader_id'];?></td>
+            <td><?php echo $row1['first_name'];?>  <?php echo $row1['last_name']?></td>
+            <td><?php echo $row1['email'];?></td>
+            <td><?php echo $row2['COUNT(group_id)'];?>/4</td>
           </tr>
       </tbody>
   </table>
@@ -220,22 +251,46 @@
   <br>
   <br>
 
+
+
 <table border="1" width="100%">
+
+
   <tbody>
+
+
         <tr bgcolor="F6E5F5">
             <th>Student_ID</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
         </tr>
+
         <tr>
-          <td>student_id</td>
-          <td>first_name</td>
-          <td>last_name</td>
-          <td>email</td>
+          <?php
+          $run = $conn -> query($query);
+          $i=0;
+          while($row = $run ->fetch_array()){
+
+          if($i==0){
+
+
+           ?>
+
+          <td><?php echo $row['student_id'];?></td>
+          <td><?php echo $row['first_name'];?></td>
+          <td><?php echo $row['last_name'];?></td>
+          <td><?php echo $row['email'];?></td>
         </tr>
+
+        <?php
+        }
+        }
+         ?>
     </tbody>
 </table>
+
+
 
   <div class="main_home">
 
