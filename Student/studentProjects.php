@@ -1,6 +1,9 @@
 <?php
    include('../session.php');
 
+   $course_id =$_SESSION['id'];
+   $username = $_SESSION['username'];
+
    if(isset($_POST['submit'])){
       $fileName = $_FILES['file']['name'];
       $fileTmpName = $_FILES['file']['tmp_name'];
@@ -48,7 +51,7 @@
           <td align="right">
             <i>
               <b>
-                <a href="../welcome.php">
+                <a href="StudentFeed.php">
                   <font class="home_link" color="black">Home</font>
                 </a>
               </b>
@@ -169,20 +172,6 @@
       <font size="4">
         <ul>
           <li>
-            <a href="studentFeed.php">
-              <b>
-                <font color="black">Feed</font>
-              </b>
-            </a>
-          </li>
-        </ul>
-      </font>
-    </b>
-
-    <b>
-      <font size="4">
-        <ul>
-          <li>
             <a href="studentPassword.php">
               <b>
                 <font color="black">Change Password</font>
@@ -232,7 +221,7 @@
 
 
         <?php
-        $query = "SELECT * FROM uploads";
+        $query = "SELECT * FROM uploads where username='$username' and course_id='$course_id'";
         $run = $conn->query($query);
         while($row=$run->fetch_array()){
         ?>

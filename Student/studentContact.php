@@ -1,6 +1,8 @@
 <?php
    include('../session.php');
 
+  $course_section=  $_SESSION["course_section"];
+
 
 
 ?>
@@ -29,7 +31,7 @@
           <td align="right">
             <i>
               <b>
-                <a href="../welcome.php">
+                <a href="StudentFeed.php">
                   <font class="home_link" color="black">Home</font>
                 </a>
               </b>
@@ -146,19 +148,6 @@
       </font>
     </b>
 
-    <b>
-      <font size="4">
-        <ul>
-          <li>
-            <a href="studentFeed.php">
-              <b>
-                <font color="black">Feed</font>
-              </b>
-            </a>
-          </li>
-        </ul>
-      </font>
-    </b>
 
     <b>
       <font size="4">
@@ -213,7 +202,8 @@
 
     <?php
     $coursename = $_SESSION['course_name'];
-    $query = "SELECT * FROM instructor where instructor_course='$coursename'";
+    $course_id = $_SESSION['id'];
+    $query = "SELECT * from instructor where id=(select instructor_id from course_taught where course_id='$course_id')";
     $run = $conn -> query($query);
     $row = $run -> fetch_array();
      ?>
@@ -242,10 +232,7 @@
     <br>
     <br>
     <?php
-    $query = "SELECT * FROM TA 
-    join course_ta ct on ta.id = ct.ta_id
-    join course on course.id = ct.course_id
-    where course.course_name='$coursename'";
+    $query = "SELECT * FROM TA where id = (SELECT TA_id from course where course_name='$coursename' and course_section='$course_section')";
     $run = $conn -> query($query);
     $row = $run -> fetch_array();
      ?>

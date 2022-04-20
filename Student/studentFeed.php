@@ -1,7 +1,10 @@
 <?php
    include('../session.php');
-   $username = $_SESSION["username"];
-   $course_name = $_SESSION["course_name"];
+   //get student id
+   $student_id = $_SESSION['student_id'];
+   $username = $_SESSION['username'];
+   $id = $_SESSION['id'];
+
 
    if(isset($_POST['submit'])){
 
@@ -27,8 +30,6 @@
      $post_content = mysqli_real_escape_string(
         $conn, $_REQUEST['post-content']);
 
-        //likes
-        $likes = 0;
 
         // Attempt insert query execution
 
@@ -76,7 +77,7 @@
             <td align="right">
               <i>
                 <b>
-                  <a href="../welcome.php">
+                  <a href="StudentFeed.phpp">
                     <font class="home_link" color="black">Home</font>
                   </a>
                 </b>
@@ -192,21 +193,6 @@
           </ul>
         </font>
       </b>
-
-      <b>
-        <font size="4">
-          <ul>
-            <li>
-              <a href="studentFeed.php">
-                <b>
-                  <font color="black">Feed</font>
-                </b>
-              </a>
-            </li>
-          </ul>
-        </font>
-      </b>
-
       <b>
         <font size="4">
           <ul>
@@ -296,26 +282,14 @@
                 </div>
               </div>
 
-
-
-              <div class="post-feeder">
-
-                  <!-- implement like/unlike functionality -->
-                  <!-- user has liked the post -->
-                  <!-- <span><a href="" class="unlike" id="<?php echo $row2['id']; ?>"><img src="../heart.png"></a></span> -->
-
-                  <!-- user has not liked the post -->
-                  <!-- <span><a href="" class="like" id="<?php echo $row2['id']; ?>"><img src="../love.png"></a></span> -->
-
-              </div>
-
-              <?php
-            }
-
-               ?>
             </div>
 
           </div>
+
+                        <?php
+                      }
+
+                         ?>
 
         </div>
 

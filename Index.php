@@ -5,7 +5,7 @@ require_once "php/config.php";
 session_start();
 
 //processing form data when form is submitted
-// $_SERVER["REQUEST_METHOD"] == "POST"
+$_SERVER["REQUEST_METHOD"] == "POST";
 if(isset($_POST['submit'])){
 
   $username = mysqli_real_escape_string($conn,$_POST['username']);

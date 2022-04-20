@@ -2,6 +2,8 @@
    include('../session.php');
 
    $username = $_SESSION['username'];
+   $course_id = $_SESSION["id"];
+   $group_id = $_SESSION['group_id'];
 
    if(isset($_POST['submit'])){
 
@@ -21,8 +23,8 @@
         date_default_timezone_set('America/Montreal');
         $date=date('y-m-d h:ia');
         $username = $_SESSION["username"];
-        $sql = "INSERT INTO discussion_board (title,creator,content,creation_date)
-                    VALUES ('$post_title', '$username', '$post_content','$date')";
+        $sql = "INSERT INTO discussion_board (title,creator,content,creation_date,course_id,group_id)
+                    VALUES ('$post_title', '$username', '$post_content','$date','$course_id','$group_id')";
         if(mysqli_query($conn, $sql)){
           //prevent form to be resubmitted multiple times
           header("Location:studentGroupDiscussion.php");
@@ -64,7 +66,7 @@
             <td align="right">
               <i>
                 <b>
-                  <a href="../welcome.php">
+                  <a href="StudentFeed.php">
                     <font class="home_link" color="black">Home</font>
                   </a>
                 </b>

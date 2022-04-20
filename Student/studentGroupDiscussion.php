@@ -1,5 +1,7 @@
 <?php
    include('../session.php');
+   $course_id = $_SESSION["id"];
+   $group_id = $_SESSION['group_id'];
 
 
 
@@ -30,7 +32,7 @@
           <td align="right">
             <i>
               <b>
-                <a href="../welcome.php">
+                <a href="StudentFeed.php">
                   <font class="home_link" color="black">Home</font>
                 </a>
               </b>
@@ -147,19 +149,6 @@
       </font>
     </b>
 
-    <b>
-      <font size="4">
-        <ul>
-          <li>
-            <a href="studentFeed.php">
-              <b>
-                <font color="black">Feed</font>
-              </b>
-            </a>
-          </li>
-        </ul>
-      </font>
-    </b>
 
     <b>
       <font size="4">
@@ -219,7 +208,7 @@
 
                 <div class="subjects">
                   <?php
-                  $query = "SELECT * FROM discussion_board";
+                  $query = "SELECT * FROM discussion_board where course_id='$course_id' and group_id='$group_id'";
 
                   $run = $conn->query($query);
                   $i=0;
