@@ -96,7 +96,7 @@ CREATE TABLE `class_group` (
 
 LOCK TABLES `class_group` WRITE;
 /*!40000 ALTER TABLE `class_group` DISABLE KEYS */;
-INSERT INTO `class_group` VALUES (10,'group 10',1005,1041),(12,'group 12',1003,1036),(20,'group 9',1011,1036);
+INSERT INTO `class_group` VALUES (1000,'Group1',1001,1036),(1001,'Group2',1002,1036),(1002,'Group3',1003,1036),(1003,'Group4',1004,1037),(1004,'Group5',1005,1038);
 /*!40000 ALTER TABLE `class_group` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -324,17 +324,22 @@ UNLOCK TABLES;
 -- Table structure for table `instructor`
 --
 
+--
+-- Table structure for table `instructor`
+--
+
 DROP TABLE IF EXISTS `instructor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `instructor` (
-  `id` int NOT NULL,
-  `user_id` int DEFAULT NULL,
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
   `first_name` varchar(100) DEFAULT NULL,
   `last_name` varchar(100) DEFAULT NULL,
   `birth_date` date DEFAULT NULL,
-  `phone` int DEFAULT NULL,
+  `phone` varchar(100) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
+  `instructor_course` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `instructor_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
@@ -347,7 +352,7 @@ CREATE TABLE `instructor` (
 
 LOCK TABLES `instructor` WRITE;
 /*!40000 ALTER TABLE `instructor` DISABLE KEYS */;
-INSERT INTO `instructor` VALUES (123456,1007,'Derek','Daniels','1959-04-20',514610998,'derek_daniels@gmail.com'),(123457,1008,'Jack','Smith','1970-06-03',514655099,'jack_smith@gmail.com'),(123458,1009,'Malakai','Michael','1988-10-03',514655099,'malakai_michael@gmail.com'),(123459,1010,'Barbara','Blurp','1930-06-03',514655099,'barbara_blurph@gmail.com'),(123460,1011,'Andrea','Hamilton','1970-01-01',514655099,'andrea_hamilton@gmail.com'),(123461,1012,'Keisha','Jacquet','1990-02-03',514655099,'keisha_jacquet@gmail.com');
+INSERT INTO `instructor` VALUES (123456,1006,'Nina','Abdou','1959-04-20','514610998','n_abdo@hotmail.com','COMP5567'),(123457,1008,'Jack','Smith','1970-06-03','514655099','jack_smith@gmail.com','COMP5531'),(123458,1009,'Malakai','Michael','1988-10-03','514655099','malakai_michael@gmail.com','COMP5544'),(123459,1010,'Barbara','Blurp','1930-06-03','514655099','barbara_blurph@gmail.com','COMP1124'),(123460,1011,'Andrea','Hamilton','1970-01-01','514655099','andrea_hamilton@gmail.com','ENCS6721'),(123461,1012,'Keisha','Jacquet','1990-02-03','514655099','keisha_jacquet@gmail.com','COMP5523');
 /*!40000 ALTER TABLE `instructor` ENABLE KEYS */;
 UNLOCK TABLES;
 
