@@ -473,6 +473,7 @@ CREATE TABLE `uploads` (
 
 LOCK TABLES `uploads` WRITE;
 /*!40000 ALTER TABLE `uploads` DISABLE KEYS */;
+INSERT INTO `uploads` VALUES (1,'j_smith',_binary 'Asg3.pdf',1036,'2022-04-19 23:14:46');
 /*!40000 ALTER TABLE `uploads` ENABLE KEYS */;
 UNLOCK TABLES;
 
