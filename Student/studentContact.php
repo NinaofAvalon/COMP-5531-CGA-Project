@@ -12,9 +12,6 @@
   $_SESSION['group_id'] = $row4['group_id'];
   $group_id = $_SESSION['group_id'];
 
-
-
-
 ?>
 ﻿<!DOCTYPE html>
 <html>
@@ -243,7 +240,7 @@
     <br>
     <?php
     $query = "SELECT * FROM TA
-    join course_ta ct on ta.id = ct.ta_id
+    join course_ta ct on TA.id = ct.TA_id
     join course on course.id = ct.course_id
     where course.course_name='$coursename' and course.course_section='$course_section'";
     $run = $conn -> query($query);

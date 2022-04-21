@@ -40,7 +40,7 @@
               </i>
               <i>
                 <b>
-                  <a href="../logout.php">
+                  <a href="logout.php">
                     <font color="black">Logout</font>
                   </a>
                 </b>
