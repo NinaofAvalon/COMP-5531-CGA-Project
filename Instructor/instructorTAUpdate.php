@@ -6,9 +6,8 @@ if(isset($_POST['update']))
 {
     $id = $_GET['Id'];
     $phone = $_POST['phone'];
-    $email = $_POST['email'];
 
-    $query = "update TA set phone = '".$phone."' , email = '".$email."'  
+    $query = "update project.TA set phone = '".$phone."'  
                 where id ='".$id."' ";
     $result = mysqli_query($con,$query);
 

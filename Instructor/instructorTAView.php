@@ -3,7 +3,7 @@ include('../session.php');
 //echo 'Record Added Successfully';
  
 require_once("connection.php");
-$query = "select TA_id,TA_firstName,TA_lastName,TA_email,TA_section, TA_group from TA";
+$query = "select TA_id,TA_firstName,TA_lastName,TA_email,TA_section, TA_group from project.TA";
 $result = mysqli_query($con,$query);
 
 

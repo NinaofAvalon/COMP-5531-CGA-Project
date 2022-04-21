@@ -2,7 +2,7 @@
 include('session.php');
 require_once("connection.php");
 $id = $_GET['GetId'];
-$query = "select id,user_id,first_name,last_name,birth_date, phone,email from TA where id ='".$id."' ";
+$query = "select id,user_id,first_name,last_name,birth_date, phone,email from project.TA where id ='".$id."' ";
 $result = mysqli_query($con,$query);
 ?>
 
@@ -186,7 +186,6 @@ $result = mysqli_query($con,$query);
   <table border="1" width="100%">
     <tbody>
           <tr bgcolor="F6E5F5">
-             <th>ID</th>
              <th>First Name</th>
              <th>Last Name</th>
              <th>Phone</th>
@@ -209,11 +208,10 @@ $result = mysqli_query($con,$query);
                         ?>
                  <form action="instructorTAUpdate.php?Id=<?php echo $id ?>" method="post">
                         <tr>
-                            <td><?php echo $id ?></td>
                             <td><?php echo $firstName ?></td>
                             <td><?php echo $lastName ?></td>
-                            <td><input type="email"  placeholder=" Email " name="email" value =" <?php echo $email ?> "></td>
                             <td><input type="phone"  placeholder=" Phone " name="phone" value =" <?php echo $phone ?> "></td>
+                            <td><?php echo $email ?></td>
                         </tr>
                         <?php
                         }

@@ -1,10 +1,6 @@
 ﻿<?php
 include('../session.php');
 require_once("connection.php");
-$id = $_GET['GetId'];
-$query = "select student.student_id, student.first_name,student.last_name,student.phone, course_enrolled.grade, student.email, stud_in_group.group_id from project.student inner join project.stud_in_group on project.student.student_id = project.stud_in_group.student_id
-inner join project.course_enrolled on project.student.student_id = project.course_enrolled.student_id where student.student_id ='".$id."' ";
-$result = mysqli_query($con,$query);
 ?>
 
 
@@ -12,7 +8,7 @@ $result = mysqli_query($con,$query);
 <html>
 <head>
     <link rel="stylesheet" href="../style.css" />
-    <title>Edit Student Information</title>
+    <title>Add New Tutor</title>
 </head>
 <body>
 
@@ -23,7 +19,7 @@ $result = mysqli_query($con,$query);
                 <tbody>
                     <tr width="100%">
                         <td width="5%" align="left"><h2>CGA</h2></td>
-                        <td align="center"><font size="5"><b>Edit Student Information</b></font></td>
+                        <td align="center"><font size="5"><b>Add New Tutor</b></font></td>
                     </tr>
                 </tbody>
             </table>
@@ -134,7 +130,7 @@ $result = mysqli_query($con,$query);
                     </ul>
                 </font>
             </b>
- <b>
+  <b>
                 <font size="4">
                     <ul>
                         <li>
@@ -175,60 +171,45 @@ $result = mysqli_query($con,$query);
                 </font>
             </b>
         </div>
- <!-- Table -->
+
+  <!-- Main -->
     <div class="main_home">
 
-    <b>Students</b>
+    <b>This user is not in the CGA databse and only the system administrator can add new users. Please pick a CGA user.</b>
     <br>
     <br>
 
   <table border="1" width="100%">
     <tbody>
           <tr bgcolor="F6E5F5">
-             <th>ID</th>
+             <th>User ID</th>
+             <th>Tutor ID</th>
              <th>First Name</th>
              <th>Last Name</th>
-             <th>Email</th>
-             <th>Group</th>
-             <th>Grade</th>
+             <th>Phone</th>
           </tr>
 </thead>
 
 <tbody>
 
+            <form action="instructorTAInsert.php" method="post">
+              <tr>
+                <td><input type="number" placeholder=" User ID " name="user_id"></td>
+                <td><input type="number" placeholder=" Tutor ID " name="ta_id"></td>
+                <td><input type="text" placeholder=" First Name " name="fName"></td>
+                <td><input type="text" placeholder=" Last Name " name="lName"></td>
+                <td><input type="number" placeholder=" Phone " name="phone"></td>
+              </tr>
 
-                        <?php
-                       while($row = mysqli_fetch_assoc($result))
-                        {
-                            $id = $row['student_id'];
-                            $fname = $row['first_name'];
-                            $lname = $row['last_name'];
-                            $email = $row['email'];
-                            $grade = $row['grade'];
-                            $group = $row['group_id'];
-                        ?>
-                 <form action="instructorStudentUpdate.php?Id=<?php echo $id ?>" method="post">
-                        <tr>
-                            <td><?php echo $id ?></td>
-                            <td><input type="text"  placeholder=" First Name" name="fname" value =" <?php echo $fname ?> "></td>
-                            <td><input type="text"  placeholder=" Last Name" name="lname" value =" <?php echo $lname ?> "></td>
-                            <td><input type="email"  placeholder=" Email " name="email" value =" <?php echo $email ?> "></td>
-                            <td><input type="number"  placeholder=" Group " name="group" value =" <?php echo $group ?> " > </td>
-                            <td><input type="number"  placeholder=" Grade " name="grade" value =" <?php echo $grade ?> "></td>
-                        </tr>
-                        <?php
-                        }
-                        ?>
-
-                    </tbody>
-  </table>
+        </tbody>
+        </table>
 
                     <br>
-                    <button name="update">Update</button>
-                    </form>
+                    <!--<input type="submit" name="submit" value="Submit">-->
+                    <button name="submit">Submit</button>
+                  </form>
 
-<br>
+
 </body>
 </html>
-
 

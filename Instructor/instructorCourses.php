@@ -61,7 +61,7 @@ while($row= $run->fetch_array()) {
 ?>
 <button align=center class="dropdownbtn">Winter 2022</button>
 <div class="dropdownlist-content">
-<form class="" action="instructorTutorInfo.php" method="post">
+<form class="" action="../welcome.php" method="post">
   <?php $_SESSION['course_name']= $row['course_name'];
         $_SESSION['course_section']= $row['course_section'];
         $_SESSION['course']= $row['course_id'];

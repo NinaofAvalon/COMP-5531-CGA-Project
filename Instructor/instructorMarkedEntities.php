@@ -4,7 +4,7 @@ include('../session.php');
     $course = $_SESSION['course'];
 
     require_once("connection.php");
-    $query = "select uploads.id,uploads.username,file,file_date, uploads.course_id from uploads where course_id = '".$course."'";
+    $query = "select project.uploads.id,project.uploads.username,file,file_date, project.uploads.course_id from project.uploads where course_id = '".$course."'";
     $result = mysqli_query($con,$query);
 
  ?>

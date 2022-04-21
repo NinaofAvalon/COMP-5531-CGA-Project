@@ -2,7 +2,7 @@
 include('../session.php');
 require_once("connection.php");
 $id = $_GET['GetId'];
-$query = "select group_id,group_name,leader_id from class_group where group_id ='".$id."' ";
+$query = "select group_id,group_name,leader_id from project.class_group where group_id ='".$id."' ";
 $result = mysqli_query($con,$query); 
 ?>
 

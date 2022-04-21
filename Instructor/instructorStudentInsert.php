@@ -3,7 +3,7 @@
 include('../session.php');
 $course = $_SESSION['course'];
 require_once("connection.php");
-$mysqli = new mysqli(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
+$mysqli = new mysqli("localhost", "root", "root", "project");
 
 if (isset($_POST['submit'])) // isset() function - checks whether a variable is set, which means that it has to be declared and is not NULL
 {
@@ -20,11 +20,11 @@ if (isset($_POST['submit'])) // isset() function - checks whether a variable is 
         $grade = $_POST['grade'];
         $email = $_POST['email'];
 
-        $query = " insert into student(student_id,first_name,last_name,email)
+        $query = " insert into project.student(student_id,first_name,last_name,email)
 VALUES('$id','$fname','$lname','$email');";
-        $query .= " insert into course_enrolled(course_id, student_id, grade)
+        $query .= " insert into project.course_enrolled(course_id, student_id, grade)
 VALUES('$course', '$id', '$grade');";
-        $query .= " insert into stud_in_group(group_id, student_id)
+        $query .= " insert into project.stud_in_group(group_id, student_id)
 VALUES('$group', '$id')";
 
         $result = mysqli_multi_query($mysqli, $query);

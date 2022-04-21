@@ -1,7 +1,7 @@
 ﻿<?php
 
 require_once("connection.php");
-$mysqli = new mysqli(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
+$mysqli = new mysqli("localhost", "root", "root", "project");
 $course = $_SESSION['course'];
 
 

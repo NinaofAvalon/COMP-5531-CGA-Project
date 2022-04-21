@@ -5,7 +5,7 @@ include('../session.php');
 
     require_once("connection.php");
 
-    $query = "select group_id,group_name,leader_id, course_id from class_group where course_id = '".$course."'";
+    $query = "select group_id,group_name,leader_id, course_id from project.class_group where course_id = '".$course."'";
     $result = mysqli_query($con,$query);
 
  ?>
