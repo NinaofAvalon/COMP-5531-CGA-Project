@@ -2,7 +2,7 @@
 include('../session.php');
 require_once("connection.php");
 $id = intval($_GET['GetId']);
-$query = "select student.student_id, student.first_name,student.last_name, users.email from student inner join stud_in_group on student.student_id = stud_in_group.student_id
+$query = "select student.student_id, student.first_name,student.last_name, users.email from student inner join stud_in_group on student.student_id = stud_in_group.student_id 
 inner join users on student.user_id = users.id where group_id = '$id' order by last_name";
 $result = mysqli_query($con,$query);
 ?>
