@@ -2,8 +2,8 @@
 include('../session.php');
 require_once("connection.php");
 $id = $_GET['GetId'];
-$query = "select student.student_id, student.first_name,student.last_name,student.phone, course_enrolled.grade from project.student
-inner join project.course_enrolled on project.student.student_id = project.course_enrolled.student_id where student.student_id ='".$id."' ";
+$query = "select student.student_id, student.first_name,student.last_name,student.phone, course_enrolled.grade from student
+inner join course_enrolled on student.student_id = course_enrolled.student_id where student.student_id ='".$id."' ";
 $result = mysqli_query($con,$query);
 ?>
 

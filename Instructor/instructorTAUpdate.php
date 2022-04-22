@@ -7,7 +7,7 @@ if(isset($_POST['update']))
     $id = $_GET['Id'];
     $phone = $_POST['phone'];
 
-    $query = "update project.TA set phone = '".$phone."'  
+    $query = "update TA set phone = '".$phone."'  
                 where id ='".$id."' ";
     $result = mysqli_query($con,$query);
 

@@ -1,7 +1,7 @@
 ﻿<?php
 
 require_once("connection.php");
-$mysqli = new mysqli("localhost", "root", "root", "project");
+$mysqli = new mysqli("qtc5531.encs.concordia.ca", "qtc55314", "rkf3kQ", "qtc55314");
 
 
 if(isset($_POST['update']))

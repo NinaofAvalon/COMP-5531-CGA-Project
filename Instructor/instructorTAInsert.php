@@ -2,7 +2,7 @@
 include('../session.php');
 $course = $_SESSION['course'];
 require_once("connection.php");
-$mysqli = new mysqli("localhost", "root", "root", "project");
+$mysqli = new mysqli("qtc5531.encs.concordia.ca", "qtc55314", "rkf3kQ", "qtc55314");
 
 
 if (isset($_POST['submit'])) // isset() function - checks whether a variable is set, which means that it has to be declared and is not NULL

@@ -1,6 +1,6 @@
 ﻿<?php
 include('../session.php');
-$mysqli = new mysqli("localhost", "root", "root", "project");
+$mysqli = new mysqli("qtc5531.encs.concordia.ca", "qtc55314", "rkf3kQ", "qtc55314");
 require_once("connection.php");
 $course = $_SESSION['course'];
 
@@ -25,7 +25,7 @@ where course_enrolled.course_id = '$course' and student.student_id = '$student_i
 
 
         if($result2->num_rows == 0){
-        $query = " insert into project.stud_in_group(group_id,student_id)
+        $query = " insert into stud_in_group(group_id,student_id)
 VALUES('$id','$student_id')";
 
         $result3 = mysqli_query($con,$query);

@@ -1,7 +1,7 @@
 ﻿<?php
 
 require_once("connection.php");
-$mysqli = new mysqli("localhost", "root", "root", "project");
+$mysqli = new mysqli("qtc5531.encs.concordia.ca", "qtc55314", "rkf3kQ", "qtc55314");
 $course = $_SESSION['course'];
 
 if(isset($_POST['update']))
@@ -24,7 +24,7 @@ WHERE course_id = '$course' and student.student_id = '$leader_id'");
                                     }
      
         
-        else{ $query = "update project.class_group set leader_id = '".$leader_id."' 
+        else{ $query = "update class_group set leader_id = '".$leader_id."' 
                 where group_id ='".$id."' ";
         $result3 = mysqli_query($con,$query);
 

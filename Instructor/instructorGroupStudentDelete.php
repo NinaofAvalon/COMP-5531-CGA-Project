@@ -2,7 +2,7 @@
 
 require_once("connection.php");
 $course = $_SESSION['course'];
-$mysqli = new mysqli("localhost", "root", "root", "project");
+$mysqli = new mysqli("qtc5531.encs.concordia.ca", "qtc55314", "rkf3kQ", "qtc55314");
 
 
 if( isset($_GET['del']))
@@ -15,7 +15,7 @@ inner join class_group on student.student_id = class_group.leader_id WHERE cours
 
     if($result->num_rows == 0){
 
-    $query = "delete from project.stud_in_group
+    $query = "delete from stud_in_group
                 where student_id ='".$id."' ";
     $result2 = mysqli_query($con,$query);
 
