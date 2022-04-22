@@ -174,6 +174,43 @@ include('../session.php');
 
         <!-- Home -->
     <div class="main_home">
+    <b>Notices </b>
+ 
+ <br><br>
+     <table border="1" width="50%">
+             
+         <tbody>
+                 
+               <tr bgcolor="d5e8da">
+                   <th>Notice</th>
+                   <th width="20%">Time </th>
+
+               </tr>
+     <?php
+         $querynotice = "select content, posting_time from notices where valid = '1'";
+         $resultnotice = mysqli_query($conn,$querynotice);
+         
+         while($rownotice = mysqli_fetch_assoc($resultnotice))
+             {
+                   $content  = $rownotice['content'];
+                   $time = $rownotice['posting_time'];
+                   if($time <= substr(date("c"),0,19))
+                     {
+                        $Ptime = str_replace('T',' ',$time);
+     ?>   
+                   <tr>
+                     <td><?php echo $content ?></td>
+                     <td><?php echo $Ptime ?></td>
+                   </tr>
+                <?php }  ?>
+     <?php }?>
+               
+               
+              
+           </tbody>
+         
+         
+     </table>
     <!-- Headings -->
     <h2>Welcome to CrsMgr Group-work Assistant(CGA)</h2>
 
