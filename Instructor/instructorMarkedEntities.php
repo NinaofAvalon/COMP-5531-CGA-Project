@@ -180,7 +180,7 @@ include('../session.php');
         <!-- Table -->
         <div class="main_home">
 
-            <b>Students</b>
+            <b>Marked Entities</b>
             <br>
             <br>
 
