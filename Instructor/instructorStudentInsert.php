@@ -35,7 +35,7 @@ VALUES('$course', '$student_id')";
             header("location:instructorStudents.php");
         }
         else{
-            echo 'Please check your query';
+            echo 'This id is already assigned to a student in this course.';
         }
 }   }}
 else
