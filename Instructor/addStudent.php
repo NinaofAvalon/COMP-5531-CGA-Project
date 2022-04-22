@@ -184,12 +184,10 @@ require_once("connection.php");
   <table border="1" width="100%">
     <tbody>
           <tr bgcolor="F6E5F5">
-             <th>ID</th>
+             <th>User ID</th>
+             <th>Student ID</th>
              <th>First Name</th>
              <th>Last Name</th>
-             <th>Email</th>
-             <th>Group</th>
-             <th>Grade</th>
           </tr>
 </thead>
 
@@ -197,12 +195,10 @@ require_once("connection.php");
 
             <form action="instructorStudentInsert.php" method="post">
               <tr>
-                <td><input type="number" placeholder=" ID " name="id"></td>
+                <td><input type="number" placeholder=" User ID " name="user_id"></td>
+                <td><input type="number" placeholder=" Student ID " name="student_id"></td>
                 <td><input type="text" placeholder=" First Name " name="fName"></td>
                 <td><input type="text" placeholder=" Last Name " name="lName"></td>
-                <td><input type="email" placeholder=" Email " name="email"></td>
-                <td><input type="number" placeholder=" Group " name="group"></td>
-                <td><input type="number" placeholder=" Grade " name="grade"></td>
               </tr>
 
         </tbody>

@@ -1,7 +1,42 @@
 <?php
 include('../session.php');
     $_SESSION["username"];
- ?>
+
+   if(isset($_POST['submit'])){
+
+     if($conn === false){
+    die("ERROR: Could not connect. "
+          . mysqli_connect_error());
+        }
+
+     //get user Message
+     $newPassword = mysqli_real_escape_string(
+        $conn, $_REQUEST['instructorNewPassword']);
+
+    $confirmNewPassword =  mysqli_real_escape_string(
+       $conn, $_REQUEST['instructorNewPasswordConfirmation']);
+
+        // Attempt insert query execution
+        if($newPassword == $confirmNewPassword){
+        $username = $_SESSION["username"];
+        $sql = "UPDATE users SET password='$newPassword' WHERE username='$username'";
+        if(mysqli_query($conn, $sql)){
+          //prevent form to be resubmitted multiple times
+
+          header("Location:instructorPassword.php");
+          die();
+        } else{
+            echo "ERROR: Message not sent!!!";
+        }
+
+        // Close connection
+        mysqli_close($conn);
+      } else{
+                  header("Location:instructorPasswordsIncorrect.php");
+      }
+   }
+
+?>
 
 <!DOCTYPE html>
 <html>
@@ -178,7 +213,7 @@ include('../session.php');
     <b>Change Password</b>
     <br>
     <br>
-    <form action="instructorProcessChangePassword.php" method="POST">
+    <form action="instructorPassword.php" method="POST">
 
  <table border="1" width="100%">
     <tbody>

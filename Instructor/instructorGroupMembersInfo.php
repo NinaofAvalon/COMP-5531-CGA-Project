@@ -2,8 +2,8 @@
 include('../session.php');
 require_once("connection.php");
 $id = intval($_GET['GetId']);
-$query = "select student.student_id, student.first_name,student.last_name, student.email from project.student inner join project.stud_in_group on project.student.student_id = project.stud_in_group.student_id
-where group_id = '$id'";
+$query = "select student.student_id, student.first_name,student.last_name, users.email from student inner join stud_in_group on student.student_id = stud_in_group.student_id
+inner join users on student.user_id = users.id where group_id = '$id' order by last_name";
 $result = mysqli_query($con,$query);
 ?>
 
@@ -185,7 +185,6 @@ $result = mysqli_query($con,$query);
   <table border="1" width="100%">
     <tbody>
           <tr bgcolor="F6E5F5">
-             <th>Student ID</th>
              <th>First Name</th>
              <th>Last Name</th>
              <th>Email</th>
@@ -205,11 +204,10 @@ $result = mysqli_query($con,$query);
                         ?>
 
                         <tr>
-                            <td><?php echo $student_id ?></td>
                             <td><?php echo $firstName ?></td>
                             <td><?php echo $lastName ?></td>
                             <td><?php echo $email ?></td>
-                            <td><a href="instructorGroupStudentDelete.php?del=<?php echo $student_id ?>"> Delete </a></td>
+                            <td><a href="instructorGroupStudentDelete.php?del=<?php echo $student_id. '&id='.$id; ?>"> Delete </a></td>
                         </tr>
 
                         <?php

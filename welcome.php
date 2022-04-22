@@ -1,4 +1,4 @@
-<?php
+﻿<?php
    require('php/utils.php');
    include('session.php');
    if (!isset($_SESSION['id'])) {
@@ -40,7 +40,7 @@
               </i>
               <i>
                 <b>
-                  <a href="logout.php">
+                  <a href="../logout.php">
                     <font color="black">Logout</font>
                   </a>
                 </b>
@@ -54,7 +54,7 @@
 
 
     <!-- menu -->
-    <div class="menu-welcome" height="100%" width="150px">
+    <div class="menu" height="100%" width="150px">
       <hr>
       <b>
         <font size="4">
@@ -86,23 +86,9 @@
         <font size="4">
           <ul>
             <li <?php echo (in_array("instructor", $userRoles))? "" : "style='display:none;'" ?>>
-              <a href="Instructor/instructorCourses.php">
+              <a href="Instructor/instructorHome.php">
                 <b>
                   <font color="black">Instructor Section</font>
-                </b>
-              </a>
-            </li>
-          </ul>
-        </font>
-      </b>
-      <b>
-      <b>
-        <font size="4">
-          <ul>
-            <li <?php echo (in_array("administrator", $userRoles))? "" : "style='display:none;'" ?>>
-              <a href="Administrator/adminHome.php">
-                <b>
-                  <font color="black">Administrator Section</font>
                 </b>
               </a>
             </li>
@@ -128,11 +114,11 @@
     <div class="main_home">
 
       <p>
-       This webpage allows you to navigate to Student, TA, Insturctor, Administrator section based on your roles.
+       This webpage allows you to navigate to Student, TA, Instructor, Administrator section based on your roles.
 
    </p>
 
-
+   
     </div>
 
 </body>

@@ -175,7 +175,8 @@ require_once("connection.php");
   <!-- Main -->
     <div class="main_home">
 
-    <b>This user is not in the CGA databse and only the system administrator can add new users. Please pick a CGA user.</b>
+    <b>This user is not in the CGA database. Only the system administator can add new users. Please enter a user as a tutor.
+</b>
     <br>
     <br>
 

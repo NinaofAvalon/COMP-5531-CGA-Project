@@ -4,7 +4,7 @@ include('../session.php');
     $course = $_SESSION['course'];
 
     require_once("connection.php");
-    $query = "select project.uploads.id,project.uploads.username,file,file_date, project.uploads.course_id from project.uploads where course_id = '".$course."'";
+    $query = "select uploads.id,uploads.username,file,file_date, uploads.course_id from uploads where course_id = '".$course."'";
     $result = mysqli_query($con,$query);
 
  ?>
@@ -199,6 +199,7 @@ include('../session.php');
                     <?php
                     while($row = mysqli_fetch_assoc($result))
                     {
+                    $id = $row['id'];
                     $file = $row['file'];
                     $student_name = $row['username'];
                     $date = $row['file_date'];
@@ -207,7 +208,7 @@ include('../session.php');
                         <td><a href="download.php?file=<?php echo $row['file']?>"><?php echo $row['file']?></a></td>
                         <td><?php echo $student_name ?></td>
                         <td><?php echo $date ?></td>
-                        <td><a href="instructorProjectDelete.php?del=<?php echo $file ?>"> Delete </a></td>
+                        <td><a href="instructorProjectDelete.php?del=<?php echo $id ?>"> Delete </a></td>
 
                     </tr>
                     <?php

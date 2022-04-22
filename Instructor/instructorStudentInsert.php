@@ -7,37 +7,37 @@ $mysqli = new mysqli("localhost", "root", "root", "project");
 
 if (isset($_POST['submit'])) // isset() function - checks whether a variable is set, which means that it has to be declared and is not NULL
 {
-    if (empty($_POST['id']) || empty($_POST['fName']) || empty($_POST['lName']) || empty($_POST['email']) || empty($_POST['group']) || empty($_POST['grade']))
+    if (empty($_POST['user_id']) || empty($_POST['student_id']) || empty($_POST['fName']) || empty($_POST['lName']))
     {
          echo 'Please Fill in the blanks';
     }
     else
     {
-        $id = $_POST['id'];
+        $user_id = $_POST['user_id'];
+        $student_id = $_POST['student_id'];
         $fname = $_POST['fName'];
         $lname = $_POST['lName'];
-        $group = $_POST['group'];
-        $grade = $_POST['grade'];
-        $email = $_POST['email'];
 
-        $query = " insert into project.student(student_id,first_name,last_name,email)
-VALUES('$id','$fname','$lname','$email');";
-        $query .= " insert into project.course_enrolled(course_id, student_id, grade)
-VALUES('$course', '$id', '$grade');";
-        $query .= " insert into project.stud_in_group(group_id, student_id)
-VALUES('$group', '$id')";
+        $result = $mysqli->query("SELECT id FROM users WHERE id = '$user_id'");
 
-        $result = mysqli_multi_query($mysqli, $query);
+        if($result->num_rows == 0){header("location:instructorStudentsIncorrect.php");}
+        else{
+        $query = " insert into student(student_id,user_id, first_name,last_name)
+VALUES('$student_id','$user_id','$fname','$lname');";
+        $query .= "update student SET last_name = TRIM(last_name);";
+        $query .= " insert into course_enrolled(course_id, student_id)
+VALUES('$course', '$student_id')";
+  
+        $result2 = mysqli_multi_query($mysqli, $query);
 
-        if ($result)
+        if ($result2)
         {
             header("location:instructorStudents.php");
         }
         else{
             echo 'Please check your query';
         }
-    }
-}
+}   }}
 else
 {
     echo 'Please check your connection';

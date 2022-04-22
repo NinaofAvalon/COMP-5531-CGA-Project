@@ -19,22 +19,27 @@ if (isset($_POST['submit'])) // isset() function - checks whether a variable is 
         $lname = $_POST['lName'];
         $phone = $_POST['phone'];
 
+        $result = $mysqli->query("SELECT id FROM users WHERE id = '$user_id'");
+
+        if($result->num_rows == 0){header("location:instructorTutorInfoIncorrect.php");}
+        else{
+
         $query = " select @email from users where id = '".$user_id."';";
         $query .= " insert into TA(id,user_id,first_name,last_name, phone, email) VALUES('$ta_id','$user_id','$fname', '$lname', '$phone', '@email');";
         $query .= " insert into course_ta(course_id, ta_id)
 VALUES('$course', '$ta_id')";
 
 
-        $result = mysqli_multi_query($mysqli, $query);
+        $result2 = mysqli_multi_query($mysqli, $query);
 
-        if ($result)
+        if ($result2)
         {
             header("location:instructorTutorInfo.php");
         }
         else{
             echo 'Please check your query';
         }
-    }
+    }}
 }
 else
 {
