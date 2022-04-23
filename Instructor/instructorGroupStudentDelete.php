@@ -11,7 +11,7 @@ if( isset($_GET['del']))
     $group_id = $_GET['id'];
 
     $result = $mysqli->query("SELECT group_id FROM student inner join course_enrolled on student.student_id = course_enrolled.student_id
-inner join class_group on student.student_id = class_group.leader_id WHERE course_enrolled.course_id =  '$course' and class_group.leader_id = '$id' and class_group.group_id='$group_id'");
+inner join class_group on student.student_id = class_group.leader_id WHERE course_enrolled.course_id =  '$course' and class_group.leader_id = '$id'");
 
     if($result->num_rows == 0){
 
