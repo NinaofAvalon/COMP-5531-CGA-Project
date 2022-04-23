@@ -19,11 +19,11 @@ if (isset($_POST['update'])) // isset() function - checks whether a variable is 
         $result = $mysqli->query("SELECT course_id FROM course_enrolled WHERE student_id = '$student_id' and course_id = '$course'");
         if($result->num_rows == 0){header("location:instructorGroupMemberIncorrect.php?id=".$id);}
         else{
-        $result2 = $mysqli->query("SELECT student.student_id, stud_in_group.group_id
-from student
-inner join course_enrolled on student.student_id = course_enrolled.student_id
-inner join stud_in_group on student.student_id = stud_in_group.student_id
-where course_enrolled.course_id = '$course' and student.student_id = '$student_id' and group_id='$group_id'");
+        $result2 = $mysqli->query("SELECT student.student_id, group_id
+          from student
+          inner join course_enrolled on student.student_id = course_enrolled.student_id
+          inner join stud_in_group on student.student_id = stud_in_group.student_id
+          where course_enrolled.course_id = '$course' and student.student_id = '$student_id'");
 
 
         if($result2->num_rows == 0){
