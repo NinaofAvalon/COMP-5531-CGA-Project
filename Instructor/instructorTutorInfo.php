@@ -2,8 +2,8 @@
 include('../session.php');
 require_once("connection.php");
 $course = $_SESSION['course'];
-$query = "select TA.id,TA.first_name,TA.last_name, TA.phone,TA.email from TA inner join course_ta on TA.id = course_ta.ta_id
-where course_id = '".$course."' order by last_name";
+$query = "select TA.id,TA.first_name,TA.last_name, TA.phone,users.email from project.TA inner join project.course_ta on project.TA.id = project.course_ta.ta_id
+inner join users on users.id = TA.user_id where course_id = '".$course."' order by last_name";
 $result = mysqli_query($con,$query);
 
  ?>
