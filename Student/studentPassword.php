@@ -88,7 +88,7 @@
     <b >
       <font size="4">
         <i>
-          <?php echo htmlspecialchars($_SESSION["course_name"]); ?>/Winter 2022
+          <?php echo htmlspecialchars($_SESSION["course_name"]); ?>/<?php echo htmlspecialchars($_SESSION["course_term"]); ?>
           <br>
           SECTION <?php echo htmlspecialchars($_SESSION["course_section"]); ?>
         </i>
@@ -164,6 +164,19 @@
         </ul>
       </font>
     </b>
+    <b>
+                   <font size="4">
+                       <ul>
+                           <li>
+                               <a href="../Email/inbox.php">
+                                   <b>
+                                       <font color="black">Email</font>
+                                   </b>
+                               </a>
+                           </li>
+                       </ul>
+                   </font>
+               </b>
 
     <b>
       <font size="4">

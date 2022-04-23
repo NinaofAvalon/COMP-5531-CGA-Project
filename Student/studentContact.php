@@ -4,6 +4,7 @@
   $course_section=  $_SESSION["course_section"];
   $student_id =$_SESSION["student_id"];
   $course_id = $_SESSION["course_id"];
+  $course_term = $_SESSION["course_term"];
 
   //student group_id
   $query4= "SELECT group_id from group_full_info where course_id='$course_id' and student_id='$student_id'";
@@ -64,7 +65,7 @@
     <b >
       <font size="4">
         <i>
-          <?php echo htmlspecialchars($_SESSION["course_name"]); ?>/Winter 2022
+          <?php echo htmlspecialchars($_SESSION["course_name"]); ?>/<?php echo htmlspecialchars($_SESSION["course_term"]); ?>
           <br>
           SECTION <?php echo htmlspecialchars($_SESSION["course_section"]); ?>
         </i>
@@ -140,6 +141,19 @@
         </ul>
       </font>
     </b>
+    <b>
+                   <font size="4">
+                       <ul>
+                           <li>
+                               <a href="../Email/inbox.php">
+                                   <b>
+                                       <font color="black">Email</font>
+                                   </b>
+                               </a>
+                           </li>
+                       </ul>
+                   </font>
+               </b>
 
     <b>
       <font size="4">
@@ -210,7 +224,11 @@
     <?php
     $coursename = $_SESSION['course_name'];
     $course_id = $_SESSION['course_id'];
-    $query = "SELECT * from instructor where id=(select instructor_id from course_taught where course_id='$course_id')";
+    $query = "SELECT instructor.first_name, instructor.last_name, instructor.phone, users.email, users.username, course.id
+from instructor
+inner join users on instructor.user_id = users.id
+inner join course on course.instructor_id = instructor.id
+having id = '$course_id'";
     $run = $conn -> query($query);
     $row = $run -> fetch_array();
      ?>
@@ -239,10 +257,11 @@
     <br>
     <br>
     <?php
-    $query = "SELECT * FROM TA
-    join course_ta ct on TA.id = ct.TA_id
-    join course on course.id = ct.course_id
-    where course.course_name='$coursename' and course.course_section='$course_section'";
+    $query = "SELECT TA.first_name, TA.last_name, TA.phone, users.email, users.username, course_ta.course_id
+from TA
+inner join users on TA.user_id = users.id
+inner join course_ta on course_ta.ta_id = TA.id
+having course_id = '$course_id'";
     $run = $conn -> query($query);
     $row = $run -> fetch_array();
      ?>

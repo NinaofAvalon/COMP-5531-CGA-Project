@@ -1,4 +1,4 @@
-<?php
+﻿<?php
    require('php/utils.php');
    include('session.php');
    if (!isset($_SESSION['id'])) {
@@ -54,7 +54,7 @@
 
 
     <!-- menu -->
-    <div class="menu-welcome" height="100%" width="150px">
+    <div class="menu" height="100%" width="150px">
       <hr>
       <b>
         <font size="4">
@@ -72,7 +72,7 @@
       <b>
         <font size="4">
           <ul>
-            <li <?php echo (in_array("ta", $userRoles))? "" : "style='display:none;'" ?>>
+            <li <?php echo (in_array("TA", $userRoles))? "" : "style='display:none;'" ?>>
               <a href="TA/taCourses.php">
                 <b>
                   <font color="black">TA Section</font>
@@ -95,42 +95,80 @@
           </ul>
         </font>
       </b>
-      <b>
-      <b>
-        <font size="4">
-          <ul>
-            <li <?php echo (in_array("administrator", $userRoles))? "" : "style='display:none;'" ?>>
-              <a href="Administrator/adminHome.php">
-                <b>
-                  <font color="black">Administrator Section</font>
-                </b>
-              </a>
-            </li>
-          </ul>
-        </font>
-      </b>
-      <b>
-        <font size="4">
-          <ul>
-            <li>
-              <a href="Email/inbox.php">
-                <b>
-                  <font color="black">Email System</font>
-                </b>
-              </a>
-            </li>
-          </ul>
-        </font>
-      </b>
+
     </div>
 
     <!-- Main section -->
     <div class="main_home">
 
       <p>
-       This webpage allows you to navigate to Student, TA, Insturctor, Administrator section based on your roles.
+      This website is made with the intent to facilitate the academic lives of teachers, TAs and students alike.
 
-   </p>
+  </p>
+
+  <p>
+      <strong>Features</strong>
+  </p>
+
+  <ul>
+      <li><strong>Contact Information</strong></li>
+  </ul>
+
+  <p>
+      List the contact information for the instructor and tutor for the course.
+  </p>
+
+  <ul>
+      <li><strong>Course Group</strong></li>
+  </ul>
+
+  <p>
+      List detail information of your current group.
+  </p>
+
+  <ul>
+      <li><strong>Group Discussion</strong></li>
+  </ul>
+
+  <p>
+      Share and discuss ideas with your teammates on a message board.
+  </p>
+
+  <ul>
+      <li><strong>Assignment/Project Upload</strong></li>
+      <ul>
+          <li>Upload/Update your submission files before preset deadline</li>
+      </ul>
+      <ul>
+          <li>Upload your late submission files with preset penalty</li>
+      </ul>
+      <ul>
+          <li>View your current upload info for your individual/group works</li>
+      </ul>
+      <ul>
+          <li>View your current upload info for your individual/group works</li>
+      </ul>
+      <ul>
+          <li><strong>Note: For group work, only the group leader can upload files. Make sure the group members agree on the contents of the files being uploaded.</strong></li>
+      </ul>
+  </ul>
+
+  <ul>
+      <li><strong>Change Password</strong></li>
+  </ul>
+
+  <p>
+      Change your password for access to the system.
+  </p>
+
+  <ul>
+      <li><strong>Change Email</strong></li>
+  </ul>
+
+  <p>
+      Update your email which is recorded in the system. Make sure to change your username to the ones as required by the instructor.
+  </p>
+
 
 
     </div>

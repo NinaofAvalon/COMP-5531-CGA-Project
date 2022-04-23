@@ -49,7 +49,7 @@
           <td align="right">
             <i>
               <b>
-                <a href="StudentFeed.php">
+                <a href="../welcome.php">
                   <font class="home_link" color="black">Home</font>
                 </a>
               </b>
@@ -159,6 +159,20 @@
             <a href="studentProjects.php">
               <b>
                 <font color="black">Upload Files</font>
+              </b>
+            </a>
+          </li>
+        </ul>
+      </font>
+    </b>
+
+    <b>
+      <font size="4">
+        <ul>
+          <li>
+            <a href="studentFeed.php">
+              <b>
+                <font color="black">Feed</font>
               </b>
             </a>
           </li>

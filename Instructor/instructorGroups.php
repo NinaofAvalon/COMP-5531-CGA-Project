@@ -5,7 +5,8 @@ include('../session.php');
 
     require_once("connection.php");
 
-    $query = "select group_id,group_name,leader_id, course_id from class_group where course_id = '".$course."'";
+    $query = "select group_id,group_name,leader_id, course_id, first_name, last_name from class_group inner join student
+on leader_id = student_id where course_id ='".$course."'";
     $result = mysqli_query($con,$query);
 
  ?>
@@ -140,7 +141,7 @@ include('../session.php');
                 <font size="4">
                     <ul>
                         <li>
-                            <a href="../Email/email_welcome.php">
+                            <a href="../Email/inbox.php">
                                 <b>
                                     <font color="black">Email</font>
                                 </b>
@@ -190,10 +191,9 @@ include('../session.php');
             <table border="1" width="100%">
                 <tbody>
                     <tr bgcolor="F6E5F5">
-                        <th>Group ID</th>
                         <th>Group Name</th>
-                        <th>Leader ID</th>
-                        <th>List</th>
+                        <th>Leader</th>
+                        <th>Members</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
@@ -202,17 +202,19 @@ include('../session.php');
                 <tbody>
 
                     <?php
+                    $space = " ";
                     while($row = mysqli_fetch_assoc($result))
                     {
                     $id = $row['group_id'];
                     $groupName = $row['group_name'];
                     $leaderID = $row['leader_id'];
+                    $leaderfn = $row['first_name'];
+                    $leaderln = $row['last_name'];
                 ?>
 
                     <tr>
-                        <td><?php echo $id ?></td>
                         <td><?php echo $groupName ?></td>
-                        <td><?php echo $leaderID ?></td>
+                        <td><?php echo $leaderfn?><?php echo $space?> <?php echo $leaderln?></td>
                         <td><a href="instructorGroupMembersInfo.php?GetId=<?php echo $id ?>"> List </a></td>
                         <td><a href="instructorGroupLeaderEdit.php?GetId=<?php echo $id ?>"> Edit </a></td>
                         <td><a href="instructorGroupLeaderDelete.php?del=<?php echo $id ?>"> Delete </a></td>

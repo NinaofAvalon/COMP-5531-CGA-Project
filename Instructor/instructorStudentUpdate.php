@@ -1,7 +1,7 @@
 ﻿<?php
 
 require_once("connection.php");
-$mysqli = new mysqli(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
+$mysqli = new mysqli("qtc5531.encs.concordia.ca", "qtc55314", "rkf3kQ", "qtc55314");
 
 
 if(isset($_POST['update']))
@@ -9,18 +9,14 @@ if(isset($_POST['update']))
     $id = $_GET['Id'];
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
-    $email = $_POST['email'];
-    $group = $_POST['group'];
     $grade = $_POST['grade'];
 
-
-    $query = "update project.student set first_name = '".$fname."', last_name = '".$lname."', email = '".$email."' 
+    $query = "update student set first_name = '".$fname."', last_name = '".$lname."' 
                 where student_id ='".$id."';";
-    $query .= "update project.course_enrolled set grade = '".$grade."' 
-                where student_id ='".$id."';";
-    $query .= "update project.stud_in_group set group_id = '".$group."' 
+    $query .= "update student SET last_name = TRIM(last_name);";
+    $query .= "update course_enrolled set grade = '".$grade."' 
                 where student_id ='".$id."'";
-
+   
     $result = mysqli_multi_query($mysqli, $query);
 
     if ($result)

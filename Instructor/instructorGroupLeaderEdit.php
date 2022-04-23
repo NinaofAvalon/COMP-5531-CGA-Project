@@ -184,7 +184,6 @@ $result = mysqli_query($con,$query);
   <table border="1" width="100%">
     <tbody>
           <tr bgcolor="F6E5F5">
-             <th>Group ID</th>
              <th>Group Name</th>
              <th>Leader ID</th>
           </tr>
@@ -203,7 +202,6 @@ $result = mysqli_query($con,$query);
                         ?>
                  <form action="instructorGroupLeaderUpdate.php?Id=<?php echo $id ?>" method="post">
                         <tr>
-                            <td><?php echo $id ?></td>
                             <td><?php echo $name ?></td>
                             <td><input type="number"  placeholder=" Leader ID " name="leader_id" value =" <?php echo $leader_id ?> " > </td>
                         </tr>

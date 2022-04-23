@@ -3,7 +3,7 @@ include('../session.php');
 require_once("connection.php");
 $course = $_SESSION['course'];
 $query = "select TA.id,TA.first_name,TA.last_name, TA.phone,TA.email from TA inner join course_ta on TA.id = course_ta.ta_id
-where course_id = '".$course."'";
+where course_id = '".$course."' order by last_name";
 $result = mysqli_query($con,$query);
 
  ?>
@@ -188,7 +188,6 @@ $result = mysqli_query($con,$query);
   <table border="1" width="100%">
     <tbody>
           <tr bgcolor="F6E5F5">
-             <th>ID</th>
              <th>First Name</th>
              <th>Last Name</th>
              <th>Phone</th>
@@ -211,7 +210,6 @@ $result = mysqli_query($con,$query);
 
                         ?>
                         <tr>
-                            <td><?php echo $id ?></td>
                             <td><?php echo $firstName ?></td>
                             <td><?php echo $lastName ?></td>
                             <td><?php echo $phone ?></td>

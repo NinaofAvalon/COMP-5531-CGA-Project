@@ -19,6 +19,7 @@
     $_SESSION['course_name']= $_REQUEST['course_name'];
     $_SESSION['course_section']= $_REQUEST['course_section'];
     $_SESSION['group_id']= $_REQUEST['group_id'];
+    $_SESSION['course_term']=$_REQUEST['course_term'];
 
 
     header("Location: studentContact.php");
@@ -97,6 +98,7 @@ while($row= $run->fetch_array()) {
 
   <input  type="hidden" name="course_id" id="course_id" value="<?php echo $row['course_id']; ?>" ></input>
   <input type="submit" class="course-name" name="course_name" id="course_name" value="<?php echo $row['course_name']; ?>" ></input>
+  <input  type="hidden" name="course_term" id="course_term" value="<?php echo $row['course_term']; ?>"></input>
   <input  type="hidden" name="course_section" id="course_section" value="<?php echo $row['course_section']; ?>" ></input>
 
 </form>

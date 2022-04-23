@@ -1,26 +1,29 @@
 ﻿<?php
-    
+
    include('../session.php');
    require_once "../php/config.php";
-   $query = "select id, user_id,first_name,last_name,birth_date, phone, email from instructor";
+   $query = "SELECT instructor.first_name, instructor.last_name,instructor.birth_date, instructor.phone, users.email, users.username, course.id
+from instructor
+inner join users on instructor.user_id = users.id
+inner join course on course.instructor_id = instructor.id";
    $result = mysqli_query($conn,$query);
    $qthisterm = "select termname from term where is_term_now = 'YES' ";
    $resthisterm = mysqli_query($conn,$qthisterm);
-   
+
    while($rowinprocess = mysqli_fetch_assoc($resthisterm))
    {
     $thisTname = $rowinprocess['termname'];
     }
-    
+
     $Role = 'Instructor';
-   
+
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <title>Instructor Sections</title>
-    <style><?php include '../style.css'; ?></style>   
+    <style><?php include '../style.css'; ?></style>
 </head>
 <body>
      <!-- header -->
@@ -58,9 +61,9 @@
       </tbody>
     </table>
   </div>
-  
-  
-  
+
+
+
   <!-- menu -->
   <div class="menu" height="100%" width="150px">
     <hr>
@@ -167,21 +170,21 @@
         </ul>
       </font>
     </b>
- </div>  
- 
- 
+ </div>
+
+
     <!-- administrators -->
-    
+
  <div class="main_home">
-     
+
 
     <b>Instructor Information <a href="editNewInstructor.php"><button class="administrator"  style="position: absolute; right: 0.5%; margin: 2px;" type="reset" value="Insert">Insert</button></a>
     </b>
-    
+
     <br><br>
 
     <table border="1" width="100%">
-            
+
         <tbody>
               <tr bgcolor="F6E5F5">
                   <th>ID</th>
@@ -196,16 +199,16 @@
                   while($row = mysqli_fetch_assoc($result))
                   {
                   $ID  = $row['id'];
-                  $fname = $row['first_name'];   
-                  $lname = $row['last_name']; 
-                  $bday = $row['birth_date'];  
+                  $fname = $row['first_name'];
+                  $lname = $row['last_name'];
+                  $bday = $row['birth_date'];
                   $phone = $row['phone'];
                   $email =  $row['email'];
-                  
-                  
+
+
               ?>
-              
-              
+
+
               <tr>
                 <td><?php echo $ID ?></td>
                 <td><?php echo $fname ?></td>
@@ -215,11 +218,11 @@
                 <td><?php echo $email ?></td>
              <!--
                 <?php
-               
+
                 $uniquequery = "SELECT instructor_id, concat ( course_name, course_term) as 'course_unique'  FROM course GROUP BY id";
                 $uniqueresult = mysqli_query($conn,$uniquequery);
                 while($uniquer = mysqli_fetch_assoc($uniqueresult)){
-                    
+
                     $ins_id = $uniquer['instructor_id'];
                     $eachrow = $uniquer['course_unique'];
                     if ($ins_id == $ID){
@@ -229,33 +232,33 @@
                 ?>
                 <td><?php echo $coursedetail ?></td>
             -->
-                <td colspan="3" align="center"><a href="editInstructor.php?GetId=<?php echo $ID ?>"> <button class="administrator" type="reset" value="Clear">Edit</button> </a> 
-                <a href="deleteInstructor.php?del=<?php echo $ID ?>"><button class="administrator" type="reset" value="Clear">Delete</button></a> 
-                 <a href="RoleCourses.php?GetId=<?php echo $ID ?>&Role=<?php echo $Role ?>&fname=<?php echo $fname ?>&lname=<?php echo $lname ?> "><button class="administrator" type="reset" value="Clear">Teach</button></a> 
-                 
+                <td colspan="3" align="center"><a href="editInstructor.php?GetId=<?php echo $ID ?>"> <button class="administrator" type="reset" value="Clear">Edit</button> </a>
+                <a href="deleteInstructor.php?del=<?php echo $ID ?>"><button class="administrator" type="reset" value="Clear">Delete</button></a>
+                 <a href="RoleCourses.php?GetId=<?php echo $ID ?>&Role=<?php echo $Role ?>&fname=<?php echo $fname ?>&lname=<?php echo $lname ?> "><button class="administrator" type="reset" value="Clear">Teach</button></a>
+
                  </td>
               </tr>
-              
+
         <?php
         }
         ?>
           </tbody>
-        
-        
+
+
     </table>
 
     <br>
 
     <hr>
-  
+
 
 <div class="main_home">
 
-    
+
 
     <!-- Links -->
-    
-    
-    
+
+
+
 </body>
 </html>

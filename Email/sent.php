@@ -26,11 +26,11 @@ $ses_sql = mysqli_query($conn,"select emails.id as email_id, users.username as u
       <title> Email sent</title>
       <link rel="stylesheet" href="../style.css"/>
       <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
   </head>
   <body>
-  
+
     <!-- header -->
     <div class="header" height="20%" scrolling="no">
       <table border="0" width="100%">
@@ -73,7 +73,6 @@ $ses_sql = mysqli_query($conn,"select emails.id as email_id, users.username as u
       <b >
         <font size="4">
           <i>
-            COMP 5531/Winter 2022
             <br>
             Email System
           </i>
@@ -121,13 +120,24 @@ $ses_sql = mysqli_query($conn,"select emails.id as email_id, users.username as u
           </ul>
         </font>
       </b>
+      <b>
+        <font size="4">
+          <ul>
+                <b>
+                  <form>
+ <input type="button" class="button-email" value="Back" onclick="history.back()">
+</form>
+                </b>
+          </ul>
+        </font>
+      </b>
 
     </div>
 
     <!-- Main section -->
     <div class="main_home">
         <h1>
-            Simulated Sent For <?php echo htmlspecialchars($_SESSION["username"]); ?> 
+            Simulated Sent For <?php echo htmlspecialchars($_SESSION["username"]); ?>
         </h1>
 
         <div class="row">
@@ -171,7 +181,7 @@ $ses_sql = mysqli_query($conn,"select emails.id as email_id, users.username as u
             </div>
         </div>
     </div>
-    
+
 
 </body>
 

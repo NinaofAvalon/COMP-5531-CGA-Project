@@ -5,7 +5,7 @@ require_once("connection.php");
 if( isset($_GET['del']))
 {
     $id = $_GET['del'];
-    $query = "delete from  project.uploads where file = '".$file."' ";
+    $query = "delete from  uploads where id = '".$id."' ";
     $result = mysqli_query($con,$query);
 
     if ($result){

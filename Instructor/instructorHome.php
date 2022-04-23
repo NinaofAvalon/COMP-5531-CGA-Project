@@ -1,48 +1,13 @@
 ﻿<?php
 include('../session.php');
-    $_SESSION["username"];
-
-   if(isset($_POST['submit'])){
-
-     if($conn === false){
-    die("ERROR: Could not connect. "
-          . mysqli_connect_error());
-        }
-
-     //get user Message
-     $newPassword = mysqli_real_escape_string(
-        $conn, $_REQUEST['instructorNewPassword']);
-
-    $confirmNewPassword =  mysqli_real_escape_string(
-       $conn, $_REQUEST['instructorNewPasswordConfirmation']);
-
-        // Attempt insert query execution
-        if($newPassword == $confirmNewPassword){
-        $username = $_SESSION["username"];
-        $sql = "UPDATE users SET password='$newPassword' WHERE username='$username'";
-        if(mysqli_query($conn, $sql)){
-          //prevent form to be resubmitted multiple times
-
-          header("Location:instructorPassword.php");
-          die();
-        } else{
-            echo "ERROR: Message not sent!!!";
-        }
-
-        // Close connection
-        mysqli_close($conn);
-      } else{
-                  header("Location:instructorPasswordsIncorrect.php");
-      }
-   }
-
-?>
+    session_start();
+ ?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <link rel="stylesheet" href="../style.css" />
-    <title>Change Password</title>
+    <title>Home</title>
 </head>
 <body>
 
@@ -53,7 +18,7 @@ include('../session.php');
                 <tbody>
                     <tr width="100%">
                         <td width="5%" align="left"><h2>CGA</h2></td>
-                        <td align="center"><font size="5"><b>Change Password</b></font></td>
+                        <td align="center"><font size="5"><b>Home</b></font></td>
                     </tr>
                 </tbody>
             </table>
@@ -164,7 +129,7 @@ include('../session.php');
                     </ul>
                 </font>
             </b>
-  <b>
+              <b>
                 <font size="4">
                     <ul>
                         <li>
@@ -177,6 +142,7 @@ include('../session.php');
                     </ul>
                 </font>
             </b>
+
             <b>
                 <font size="4">
                     <ul>
@@ -206,33 +172,133 @@ include('../session.php');
             </b>
         </div>
 
-    <!-- main page -->
- <div class="main_home">
+        <!-- Home -->
+    <div class="main_home">
+    <b>Notices </b>
+
+ <br><br>
+     <table border="1" width="50%">
+
+         <tbody>
+
+               <tr bgcolor="d5e8da">
+                   <th>Notice</th>
+                   <th width="20%">Time </th>
+
+               </tr>
+     <?php
+         $querynotice = "select content, posting_time from notices where valid = '1'";
+         $resultnotice = mysqli_query($conn,$querynotice);
+
+         while($rownotice = mysqli_fetch_assoc($resultnotice))
+             {
+                   $content  = $rownotice['content'];
+                   $time = $rownotice['posting_time'];
+                   if($time <= substr(date("c"),0,19))
+                     {
+                        $Ptime = str_replace('T',' ',$time);
+     ?>
+                   <tr>
+                     <td><?php echo $content ?></td>
+                     <td><?php echo $Ptime ?></td>
+                   </tr>
+                <?php }  ?>
+     <?php }?>
 
 
-    <b>Please enter the same password</b>
-    <br>
-    <form action="instructorPassword.php" method="POST">
 
- <table border="1" width="100%">
-    <tbody>
-          <tr bgcolor="F6E5F5">
-            <th>Enter New Password</th>
-            <td><input type="text" name="instructorNewPassword"></td>
+           </tbody>
 
-            </tr>
-            <tr bgcolor="F6E5F5">
-            <th>Confirm New Password</th>
-             <td><input type="text" name="instructorNewPasswordConfirmation"></td>
-       
-        </tr>
 
-            </tbody>
-  </table>
+     </table>
+    <!-- Headings -->
+    <h2>Welcome to CrsMgr Group-work Assistant(CGA)</h2>
 
-<br>
-   <button name="submit">Submit</button>
-    </form>
+    <!-- Paragraph -->
+    <p>
+        This webpage allows you to set up and update students, TAs, groups, members of each group, and the group marked entities.
+        The features offered as menus are explained below.
 
+    </p>
+
+    <p>
+        <strong>Features</strong>
+    </p>
+
+    <ul>
+        <li><strong>Tutor Information</strong></li>
+        <ul>
+            <li>List the contact information for the tutors for the course.</li>
+        </ul>
+        <ul>
+            <li>Insert tutors for the course.</li>
+        </ul>
+        <ul>
+            <li>Update tutors for the course.</li>
+        </ul>
+    </ul>
+
+    <ul>
+        <li><strong>Students</strong></li>
+        <ul>
+            <li>View detailed information of all students in the section.</li>
+        </ul>
+        <ul>
+            <li>Insert set of students.</li>
+        </ul>
+    </ul>
+
+
+
+    <ul>
+        <li><strong>Course Groups</strong></li>
+        <ul>
+            <li>View detailed information of all section groups.</li>
+        </ul>
+        <ul>
+            <li>Insert groups in the section.</li>
+        </ul>
+        <ul>
+            <li>Make changes to teammates in groups over the term.</li>
+        </ul>
+    </ul>
+
+
+    <ul>
+        <li><strong>Discussion Board</strong></li>
+    </ul>
+
+    <p>
+        Read the ideas discussed by students on a message board and add suggestions and comments.
+    </p>
+
+    <ul>
+        <li><strong>Marked Entities</strong></li>
+        <ul>
+            <li>Download assignments and projects uploaded by student groups</li>
+        </ul>
+        <ul>
+            <li>Insert marked entities for group assignments and projects</li>
+        </ul>
+
+    </ul>
+
+    <ul>
+        <li><strong>Change Password</strong></li>
+    </ul>
+
+    <p>
+        Change your password for access to the system.
+    </p>
+
+    <ul>
+        <li><strong>Change Username</strong></li>
+    </ul>
+
+    <p>
+        Update your username which is recorded in the system.
+    </p>
+
+</div>
 </body>
 </html>

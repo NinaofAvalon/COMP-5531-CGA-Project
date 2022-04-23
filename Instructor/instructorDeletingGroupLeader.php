@@ -1,48 +1,17 @@
 ﻿<?php
 include('../session.php');
-    $_SESSION["username"];
-
-   if(isset($_POST['submit'])){
-
-     if($conn === false){
-    die("ERROR: Could not connect. "
-          . mysqli_connect_error());
-        }
-
-     //get user Message
-     $newPassword = mysqli_real_escape_string(
-        $conn, $_REQUEST['instructorNewPassword']);
-
-    $confirmNewPassword =  mysqli_real_escape_string(
-       $conn, $_REQUEST['instructorNewPasswordConfirmation']);
-
-        // Attempt insert query execution
-        if($newPassword == $confirmNewPassword){
-        $username = $_SESSION["username"];
-        $sql = "UPDATE users SET password='$newPassword' WHERE username='$username'";
-        if(mysqli_query($conn, $sql)){
-          //prevent form to be resubmitted multiple times
-
-          header("Location:instructorPassword.php");
-          die();
-        } else{
-            echo "ERROR: Message not sent!!!";
-        }
-
-        // Close connection
-        mysqli_close($conn);
-      } else{
-                  header("Location:instructorPasswordsIncorrect.php");
-      }
-   }
-
+require_once("connection.php");
+$id = intval($_GET['id']);
+$query = "select student.student_id, student.first_name,student.last_name, users.email from student inner join stud_in_group on student.student_id = stud_in_group.student_id
+inner join users on student.user_id = users.id where group_id = '$id' order by last_name";
+$result = mysqli_query($con,$query);
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <link rel="stylesheet" href="../style.css" />
-    <title>Change Password</title>
+    <title>Group Information</title>
 </head>
 <body>
 
@@ -53,7 +22,7 @@ include('../session.php');
                 <tbody>
                     <tr width="100%">
                         <td width="5%" align="left"><h2>CGA</h2></td>
-                        <td align="center"><font size="5"><b>Change Password</b></font></td>
+                        <td align="center"><font size="5"><b>Group Information</b></font></td>
                     </tr>
                 </tbody>
             </table>
@@ -164,7 +133,7 @@ include('../session.php');
                     </ul>
                 </font>
             </b>
-  <b>
+ <b>
                 <font size="4">
                     <ul>
                         <li>
@@ -206,33 +175,56 @@ include('../session.php');
             </b>
         </div>
 
-    <!-- main page -->
- <div class="main_home">
+ <!-- Table -->
+    <div class="main_home">
 
-
-    <b>Please enter the same password</b>
+    <b>Cannot Delete a Group Leader. Please select another group leader first.</b>
     <br>
-    <form action="instructorPassword.php" method="POST">
+    <br>
 
- <table border="1" width="100%">
+  <table border="1" width="100%">
     <tbody>
           <tr bgcolor="F6E5F5">
-            <th>Enter New Password</th>
-            <td><input type="text" name="instructorNewPassword"></td>
+             <th>First Name</th>
+             <th>Last Name</th>
+             <th>Email</th>
+             <th>Delete</th>
+          </tr>
+</thead>
 
-            </tr>
-            <tr bgcolor="F6E5F5">
-            <th>Confirm New Password</th>
-             <td><input type="text" name="instructorNewPasswordConfirmation"></td>
-       
-        </tr>
+<tbody>
 
-            </tbody>
+                        <?php
+                        while($row = mysqli_fetch_assoc($result))
+                        {
+                        $student_id = $row['student_id'];
+                        $firstName = $row['first_name'];
+                        $lastName = $row['last_name'];
+                        $email = $row['email'];
+                        ?>
+
+                        <tr>
+                            <td><?php echo $firstName ?></td>
+                            <td><?php echo $lastName ?></td>
+                            <td><?php echo $email ?></td>
+                            <td><a href="instructorGroupStudentDelete.php?del=<?php echo $student_id. '&id='.$id; ?>"> Delete </a></td>
+                        </tr>
+
+                        <?php
+                        }
+                        ?>
+
+                    </tbody>
   </table>
-
 <br>
-   <button name="submit">Submit</button>
-    </form>
+            <br>
+            <div>
+                <div class="form-body">
+                    <form action="addGroupMember.php?id=<?php echo $id ?>" method="post">
+                        <!--<input type="submit" name="submit" value="Submit">-->
+                        <button name="submit">Add new Member</button>
+                    </form>
 
+                </div>
 </body>
 </html>

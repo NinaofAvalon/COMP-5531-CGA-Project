@@ -1,5 +1,6 @@
 <?php
 include('../session.php');
+$course = $_SESSION['course'];
 require_once("connection.php");
  ?>
 
@@ -185,7 +186,7 @@ require_once("connection.php");
 
                 <div class="subjects">
                   <?php
-                  $query = "SELECT * FROM discussion_board";
+                  $query = "SELECT * FROM discussion_board where course_id = '$course'";
 
                   $run = $conn->query($query);
                   $i=0;

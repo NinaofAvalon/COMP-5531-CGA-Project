@@ -3,8 +3,8 @@ include('../session.php');
 
     $course = $_SESSION['course'];
     require_once("connection.php");
-    $query = "select student.student_id, student.first_name,student.last_name,student.phone, course_enrolled.grade, users.email, stud_in_group.group_id from student join users on users.id = student.user_id inner join stud_in_group on student.student_id = stud_in_group.student_id
-inner join course_enrolled on student.student_id = course_enrolled.student_id where course_id = '".$course."'";
+    $query = "select student.student_id, student.first_name,student.last_name,student.phone, course_enrolled.grade, users.email from student
+inner join course_enrolled on student.student_id = course_enrolled.student_id inner join users on student.user_id = users.id where course_id = '".$course."' order by last_name";
     $result = mysqli_query($con,$query);
 
  ?>
@@ -13,7 +13,7 @@ inner join course_enrolled on student.student_id = course_enrolled.student_id wh
 <html>
 <head>
     <link rel="stylesheet" href="../style.css" />
-    <title>Tutor Information</title>
+    <title>Student Information</title>
 </head>
 <body>
 
@@ -24,7 +24,7 @@ inner join course_enrolled on student.student_id = course_enrolled.student_id wh
                 <tbody>
                     <tr width="100%">
                         <td width="5%" align="left"><h2>CGA</h2></td>
-                        <td align="center"><font size="5"><b>Tutor Information</b></font></td>
+                        <td align="center"><font size="5"><b>Student Information</b></font></td>
                     </tr>
                 </tbody>
             </table>
@@ -188,11 +188,9 @@ inner join course_enrolled on student.student_id = course_enrolled.student_id wh
             <table border="1" width="100%">
                 <tbody>
                     <tr bgcolor="F6E5F5">
-                        <th>ID</th>
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Email</th>
-                        <th>Group</th>
                         <th>Grade</th>
                         <th>Edit</th>
                         <th>Delete</th>
@@ -209,16 +207,13 @@ inner join course_enrolled on student.student_id = course_enrolled.student_id wh
                     $firstName = $row['first_name'];
                     $lastName = $row['last_name'];
                     $email = $row['email'];
-                    $group = $row['group_id'];
                     $grade = $row['grade'];
 
                     ?>
                     <tr>
-                        <td><?php echo $id ?></td>
                         <td><?php echo $firstName ?></td>
                         <td><?php echo $lastName ?></td>
                         <td><?php echo $email ?></td>
-                        <td><?php echo $group ?></td>
                         <td><?php echo $grade ?></td>
                         <td><a href="instructorStudentEdit.php?GetId=<?php echo $id ?>"> Edit </a></td>
                         <td><a href="instructorStudentDelete.php?del=<?php echo $id ?>"> Delete </a></td>

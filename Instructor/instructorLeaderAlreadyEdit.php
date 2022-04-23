@@ -1,16 +1,16 @@
 ﻿<?php
 include('../session.php');
-
-    //echo 'Record Added Successfully';
-
-    require_once("connection.php");
- ?>
+require_once("connection.php");
+$id = $_GET['GetId'];
+$query = "select group_id,group_name,leader_id from class_group where group_id ='".$id."' ";
+$result = mysqli_query($con,$query); 
+?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <link rel="stylesheet" href="../style.css" />
-    <title>Email Changed</title>
+    <title>Edit Group Information</title>
 </head>
 <body>
 
@@ -21,7 +21,7 @@ include('../session.php');
                 <tbody>
                     <tr width="100%">
                         <td width="5%" align="left"><h2>CGA</h2></td>
-                        <td align="center"><font size="5"><b>Email Changed</b></font></td>
+                        <td align="center"><font size="5"><b>Edit Group Information</b></font></td>
                     </tr>
                 </tbody>
             </table>
@@ -132,7 +132,7 @@ include('../session.php');
                     </ul>
                 </font>
             </b>
-  <b>
+ <b>
                 <font size="4">
                     <ul>
                         <li>
@@ -173,5 +173,50 @@ include('../session.php');
                 </font>
             </b>
         </div>
+
+ <!-- Table -->
+    <div class="main_home">
+
+    <b>Group Leader is already a member of another group. Please enter a student leader who is in this group.</b>
+    <br>
+    <br>
+
+  <table border="1" width="100%">
+    <tbody>
+          <tr bgcolor="F6E5F5">
+             <th>Group Name</th>
+             <th>Leader ID</th>
+          </tr>
+</thead>
+
+<tbody>
+
+
+                        <?php
+                        while($row = mysqli_fetch_assoc($result))
+                        {
+                        $id = $row['group_id'];
+                        $name = $row['group_name'];
+                        $leader_id = $row['leader_id'];
+
+                        ?>
+                 <form action="instructorGroupLeaderUpdate.php?Id=<?php echo $id ?>" method="post">
+                        <tr>
+                            <td><?php echo $name ?></td>
+                            <td><input type="number"  placeholder=" Leader ID " name="leader_id" value =" <?php echo $leader_id ?> " > </td>
+                        </tr>
+                        <?php
+                        }
+                        ?>
+
+                    </tbody>
+  </table>
+
+                    <br>
+                    <button name="update">Update</button>
+                    </form>
+
+<br>
 </body>
 </html>
+

@@ -91,7 +91,7 @@
       <b >
         <font size="4">
           <i>
-            <?php echo htmlspecialchars($_SESSION["course_name"]); ?>/Winter 2022
+            <?php echo substr($_SESSION["course_name"],0,-3); ?>/<?php echo htmlspecialchars($_SESSION["course_term"]); ?>
             <br>
             SECTION <?php echo htmlspecialchars($_SESSION["course_section"]); ?>
           </i>
@@ -103,7 +103,7 @@
         <font size="4">
           <ul>
             <li>
-              <a href="studentGroupDiscussion.php">
+              <a href="taDiscussionBoard.php">
                 <b>
                   <font color="black">Discussion Board</font>
                 </b>
@@ -112,6 +112,32 @@
           </ul>
         </font>
       </b>
+      <b>
+        <font size="4">
+          <ul>
+            <li>
+              <a href="taProjects.php">
+                <b>
+                  <font color="black">Download Files</font>
+                </b>
+              </a>
+            </li>
+          </ul>
+        </font>
+      </b>
+      <b>
+                     <font size="4">
+                         <ul>
+                             <li>
+                                 <a href="../Email/inbox.php">
+                                     <b>
+                                         <font color="black">Email</font>
+                                     </b>
+                                 </a>
+                             </li>
+                         </ul>
+                     </font>
+                 </b>
 
     </div>
 

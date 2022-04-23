@@ -185,7 +185,7 @@ $course = $_SESSION['course'];
   <table border="1" width="100%">
     <tbody>
           <tr bgcolor="F6E5F5">
-             <th>ID</th>
+             <th>Group ID</th>
              <th>Group Name</th>
              <th>Leader ID</th>
           </tr>
@@ -195,7 +195,7 @@ $course = $_SESSION['course'];
 
             <form action="instructorGroupInsert.php" method="post">
               <tr>
-                <td><input type="number" placeholder=" ID " name="group_id"></td>
+                <td><input type="number" placeholder=" Group ID " name="group_id"></td>
                 <td><input type="text" placeholder=" Group Name " name="groupName"></td>
                 <td><input type="number" placeholder=" Leader ID " name="leader_id"></td>
               </tr>

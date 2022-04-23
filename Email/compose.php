@@ -17,13 +17,13 @@ $message = '';
 if (!empty($_POST['sent'])
 && !empty($_POST['subject'])
 && !empty($_POST['body'])) {
-    
+
     // $stmt = $conn->prepare("INSERT INTO new_project.emails(recipient, sender, email_subject, email_body) VALUES (:recipient, :sender, :email_subject, :email_body)");
     $recipient = mysqli_real_escape_string($conn,$_POST['sent']);
-    
+
     $sqlForRecipient = "select * from users where username = '$recipient'";
     $result = mysqli_query($conn, $sqlForRecipient);
-    
+
     $count = mysqli_num_rows($result);
     if($count == 1) {
       $user_id = $_SESSION["id"];
@@ -38,8 +38,8 @@ if (!empty($_POST['sent'])
       echo $resultInsertEmail;
       header("Location: ./sent.php");
     }
-    
-    
+
+
 }
 
 
@@ -52,11 +52,11 @@ if (!empty($_POST['sent'])
       <title> Email Inbox</title>
       <link rel="stylesheet" href="../style.css"/>
       <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
   </head>
   <body>
-  
+
     <!-- header -->
     <div class="header" height="20%" scrolling="no">
       <table border="0" width="100%">
@@ -99,7 +99,7 @@ if (!empty($_POST['sent'])
       <b >
         <font size="4">
           <i>
-            COMP 5531/Winter 2022
+
             <br>
             Email System
           </i>
@@ -147,13 +147,24 @@ if (!empty($_POST['sent'])
           </ul>
         </font>
       </b>
+      <b>
+        <font size="4">
+          <ul>
+                <b>
+                  <form>
+ <input type="button" class="button-email" value="Back" onclick="history.back()">
+</form>
+                </b>
+          </ul>
+        </font>
+      </b>
 
     </div>
 
     <!-- Main section -->
     <div class="main_home">
         <h1>
-            Simulated Inbox For <?php echo htmlspecialchars($_SESSION["username"]); ?> 
+            Simulated Inbox For <?php echo htmlspecialchars($_SESSION["username"]); ?>
         </h1>
 
         <div class="row mb-4">
@@ -174,19 +185,19 @@ if (!empty($_POST['sent'])
                               <label for="body">Body</label>
                               <textarea  type="text" name="body" class="form-control" id="body" aria-describedby="bodyHelp"></textarea>
                           </div>
-                          
+
                           <button type="submit" class="btn btn-primary">Submit</button>
                       </form>
                   </div>
               </div>
           </div>
         </div>
-        
+
 
 
 
     </div>
-    
+
 
 </body>
 

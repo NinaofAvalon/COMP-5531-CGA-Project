@@ -1,22 +1,35 @@
 ﻿<?php
 
 require_once("connection.php");
+$course = $_SESSION['course'];
+$mysqli = new mysqli("qtc5531.encs.concordia.ca", "qtc55314", "rkf3kQ", "qtc55314");
+
 
 if( isset($_GET['del']))
 {
     $id = $_GET['del'];
-    $query = "delete from project.stud_in_group
-                where student_id ='".$id."' ";
-    $result = mysqli_query($con,$query);
+    $group_id = $_GET['id'];
 
-    if ($result){
-        header("location:instructorGroups.php");
+    $result = $mysqli->query("SELECT group_id FROM student inner join course_enrolled on student.student_id = course_enrolled.student_id
+inner join class_group on student.student_id = class_group.leader_id WHERE course_enrolled.course_id =  '$course' and class_group.leader_id = '$id'");
+
+    if($result->num_rows == 0){
+
+    $query = "delete from stud_in_group
+                where student_id ='".$id."' ";
+    $result2 = mysqli_query($con,$query);
+
+    if ($result2){
+        header("location:instructorGroupMembersInfo.php?GetId=".$group_id);
     }
     else
-    {
+     {
         echo 'Please check your Query';
-    }
+
+     }}
+    else{header("location:instructorDeletingGroupLeader.php?id=".$group_id);}
 }
+
 else
 {
     header("location:instructorGroups.php");

@@ -5,7 +5,7 @@ require_once("connection.php");
 if( isset($_GET['del']))
 {
     $id = $_GET['del'];
-    $query = "delete from  project.class_group where group_id = '".$id."' ";
+    $query = "delete from  class_group where group_id = '".$id."' ";
     $result = mysqli_query($con,$query);
 
     if ($result){

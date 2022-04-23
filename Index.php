@@ -10,10 +10,11 @@ if(isset($_POST['submit'])){
 
   $username = mysqli_real_escape_string($conn,$_POST['username']);
   $password = mysqli_real_escape_string($conn,$_POST['password']);
-  echo $password;
+
 
   $sql = "SELECT id FROM users WHERE password = '$password' and username='$username'";
   $result = mysqli_query($conn,$sql);
+
   $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
 
