@@ -1,13 +1,12 @@
 ﻿<?php
 include('../session.php');
-require_once("connection.php");
 ?>
 
 
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="../style.css" />
+    <style><?php include '../style.css'; ?></style>
     <title>Add New Tutor</title>
 </head>
 <body>
@@ -170,6 +169,17 @@ require_once("connection.php");
                     </ul>
                 </font>
             </b>
+            <b>
+       <font size="4">
+         <ul>
+               <b>
+                 <form>
+<input type="button" class="button-email" value="Back" onclick="history.back()">
+</form>
+               </b>
+         </ul>
+       </font>
+     </b>
         </div>
 
   <!-- Main -->
@@ -213,4 +223,3 @@ require_once("connection.php");
 
 </body>
 </html>
-

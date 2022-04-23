@@ -2,17 +2,16 @@
 include('../session.php');
 
     $course = $_SESSION['course'];
-    require_once("connection.php");
     $query = "select student.student_id, student.first_name,student.last_name,student.phone, course_enrolled.grade, users.email from student
 inner join course_enrolled on student.student_id = course_enrolled.student_id inner join users on student.user_id = users.id where course_id = '".$course."' order by last_name";
-    $result = mysqli_query($con,$query);
+    $result = mysqli_query($conn,$query);
 
  ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="../style.css" />
+    <style><?php include '../style.css'; ?></style>
     <title>Student Information</title>
 </head>
 <body>
@@ -175,6 +174,17 @@ inner join course_enrolled on student.student_id = course_enrolled.student_id in
                     </ul>
                 </font>
             </b>
+            <b>
+       <font size="4">
+         <ul>
+               <b>
+                 <form>
+<input type="button" class="button-email" value="Back" onclick="history.back()">
+</form>
+               </b>
+         </ul>
+       </font>
+     </b>
         </div>
 
 

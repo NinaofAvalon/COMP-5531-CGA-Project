@@ -2,7 +2,6 @@
 
 include('../session.php');
 $course = $_SESSION['course'];
-require_once("connection.php");
 $mysqli = new mysqli("qtc5531.encs.concordia.ca", "qtc55314", "rkf3kQ", "qtc55314");
 
 if (isset($_POST['submit'])) // isset() function - checks whether a variable is set, which means that it has to be declared and is not NULL
@@ -27,7 +26,7 @@ VALUES('$student_id','$user_id','$fname','$lname');";
         $query .= "update student SET last_name = TRIM(last_name);";
         $query .= " insert into course_enrolled(course_id, student_id)
 VALUES('$course', '$student_id')";
-  
+
         $result2 = mysqli_multi_query($mysqli, $query);
 
         if ($result2)

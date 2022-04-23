@@ -1,6 +1,5 @@
 <?php
    include('session.php');
-   require_once("connection.php");
 
 
    $username = $_SESSION['username'];
@@ -190,16 +189,27 @@
           <li>
             <a href="instructorUsername.php">
               <b>
-                <font color="black">Change Username</font>
+                <font color="black">Change Email</font>
               </b>
             </a>
           </li>
         </ul>
       </font>
     </b>
+    <b>
+       <font size="4">
+         <ul>
+               <b>
+                 <form>
+<input type="button" class="button-email" value="Back" onclick="history.back()">
+</form>
+               </b>
+         </ul>
+       </font>
+     </b>
   </div>
 
-    
+
 
 
     <div class="main_home">

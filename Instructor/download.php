@@ -1,6 +1,6 @@
 ﻿<?php
 
-include('session.php');
+include('../session.php'); 
 
 if(!empty($_GET['file'])){
 

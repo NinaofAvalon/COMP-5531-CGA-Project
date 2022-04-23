@@ -1,6 +1,5 @@
 ﻿<?php
-include('../session.php'); 
-require_once("connection.php");
+include('../session.php');
 ?>
 
 
@@ -158,6 +157,17 @@ require_once("connection.php");
                     </ul>
                 </font>
             </b>
+            <b>
+       <font size="4">
+         <ul>
+               <b>
+                 <form>
+<input type="button" class="button-email" value="Back" onclick="history.back()">
+</form>
+               </b>
+         </ul>
+       </font>
+     </b>
         </div>
 
   <!-- Main -->
@@ -180,10 +190,10 @@ require_once("connection.php");
                         $id = intval($_GET['id']);
                   ?>
 
-            <form action="instructorGroupMemberInsert.php?Id=<?php echo $_GET['id']; ?>" method="post">   
+            <form action="instructorGroupMemberInsert.php?Id=<?php echo $_GET['id']; ?>" method="post">
             <tr>
                 <td><input type="number" placeholder=" Student ID " name="student_id"></td>
-                <input type="hidden" name="id" value="<?php if(isset($id)) echo $id;?>">                      
+                <input type="hidden" name="id" value="<?php if(isset($id)) echo $id;?>">
               </tr>
 
         </tbody>
@@ -191,13 +201,12 @@ require_once("connection.php");
                     <br>
                     <button name="update">Continue</button>
                     </form>
-                     
+
                     <br>
 <form action="instructorGroupMembersInfo.php?GetId=<?php echo $_GET['id']; ?>" method="post">
-                    <br>  
+                    <br>
                     <button name="update">Done</button>
                     </form>
 
 </body>
 </html>
-

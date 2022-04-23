@@ -3,14 +3,14 @@ include('session.php');
 require_once("connection.php");
 $id = $_GET['GetId'];
 $query = "select id,user_id,first_name,last_name,birth_date, phone,email from TA where id ='".$id."' ";
-$result = mysqli_query($con,$query);
+$result = mysqli_query($conn,$query);
 ?>
 
 
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="../style.css" />
+    <style><?php include '../style.css'; ?></style>
     <title>Edit Tutor Information</title>
 </head>
 <body>
@@ -173,6 +173,17 @@ $result = mysqli_query($con,$query);
                     </ul>
                 </font>
             </b>
+            <b>
+       <font size="4">
+         <ul>
+               <b>
+                 <form>
+<input type="button" class="button-email" value="Back" onclick="history.back()">
+</form>
+               </b>
+         </ul>
+       </font>
+     </b>
         </div>
 
 

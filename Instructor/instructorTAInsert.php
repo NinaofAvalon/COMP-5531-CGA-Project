@@ -1,7 +1,6 @@
 <?php
 include('../session.php');
 $course = $_SESSION['course'];
-require_once("connection.php");
 $mysqli = new mysqli("qtc5531.encs.concordia.ca", "qtc55314", "rkf3kQ", "qtc55314");
 
 
@@ -18,15 +17,16 @@ if (isset($_POST['submit'])) // isset() function - checks whether a variable is 
         $fname = $_POST['fName'];
         $lname = $_POST['lName'];
         $phone = $_POST['phone'];
+        $birthdate = $_POST['birth_date'];
 
         $result = $mysqli->query("SELECT id FROM users WHERE id = '$user_id'");
 
         if($result->num_rows == 0){header("location:instructorTutorInfoIncorrect.php");}
         else{
 
-        $query = " select @email from users where id = '".$user_id."';";
-        $query .= " insert into TA(id,user_id,first_name,last_name, phone, email) VALUES('$ta_id','$user_id','$fname', '$lname', '$phone', '@email');";
-        $query .= " insert into course_ta(course_id, ta_id)
+        $query = " select @email from users where id = '".$user_id."'";
+        $query = " insert into TA(id,user_id,first_name,last_name,birth_date, phone) VALUES('$ta_id','$user_id','$fname', '$lname','$birth_date', '$phone';";
+        $query = " insert into course_ta(course_id, ta_id)
 VALUES('$course', '$ta_id')";
 
 

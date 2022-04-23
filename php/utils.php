@@ -1,7 +1,6 @@
 <?php
 function getRoleByUserId($conn, $user_id)
 {
-    session_start();
     $hasRoles = array();
     $roles = array("student", "TA", "instructor", "administrator");
     foreach ($roles as $value) {

@@ -1,6 +1,5 @@
 ﻿<?php
-include('../session.php'); 
-require_once("connection.php");
+include('../session.php');
 $course = $_SESSION['course'];
 
 ?>
@@ -172,6 +171,17 @@ $course = $_SESSION['course'];
                     </ul>
                 </font>
             </b>
+            <b>
+       <font size="4">
+         <ul>
+               <b>
+                 <form>
+<input type="button" class="button-email" value="Back" onclick="history.back()">
+</form>
+               </b>
+         </ul>
+       </font>
+     </b>
         </div>
 
   <!-- Main -->

@@ -1,6 +1,6 @@
 ﻿<?php
 
-require_once("connection.php");
+include('../session.php');
 $course = $_SESSION['course'];
 $mysqli = new mysqli("qtc5531.encs.concordia.ca", "qtc55314", "rkf3kQ", "qtc55314");
 
@@ -17,7 +17,7 @@ inner join class_group on student.student_id = class_group.leader_id WHERE cours
 
     $query = "delete from stud_in_group
                 where student_id ='".$id."' ";
-    $result2 = mysqli_query($con,$query);
+    $result2 = mysqli_query($conn,$query);
 
     if ($result2){
         header("location:instructorGroupMembersInfo.php?GetId=".$group_id);

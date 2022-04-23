@@ -32,7 +32,6 @@
 
 
         // Attempt insert query execution
-
         $sql = "INSERT INTO feed (fullName,username,feedContent,course_id)
                     VALUES ('$full_name', '$username', '$feed_content','$id')";
         if(mysqli_query($conn, $sql)){
@@ -247,6 +246,17 @@
           </ul>
         </font>
       </b>
+      <b>
+         <font size="4">
+           <ul>
+                 <b>
+                   <form>
+  <input type="button" class="button-email" value="Back" onclick="history.back()">
+  </form>
+                 </b>
+           </ul>
+         </font>
+       </b>
     </div>
 
     <div class="main_home">

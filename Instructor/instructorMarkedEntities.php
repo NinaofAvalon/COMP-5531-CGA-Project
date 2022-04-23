@@ -3,16 +3,15 @@ include('../session.php');
 
     $course = $_SESSION['course'];
 
-    require_once("connection.php");
     $query = "select uploads.id,uploads.username,file,file_date, uploads.course_id from uploads where course_id = '".$course."'";
-    $result = mysqli_query($con,$query);
+    $result = mysqli_query($conn,$query);
 
  ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="../style.css" />
+  <style><?php include '../style.css'; ?></style>
     <title>Marked Entities</title>
 </head>
 <body>
@@ -175,6 +174,17 @@ include('../session.php');
                     </ul>
                 </font>
             </b>
+            <b>
+       <font size="4">
+         <ul>
+               <b>
+                 <form>
+<input type="button" class="button-email" value="Back" onclick="history.back()">
+</form>
+               </b>
+         </ul>
+       </font>
+     </b>
         </div>
 
         <!-- Table -->

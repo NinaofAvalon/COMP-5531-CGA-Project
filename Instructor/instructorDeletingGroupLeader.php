@@ -1,16 +1,15 @@
 ﻿<?php
 include('../session.php');
-require_once("connection.php");
 $id = intval($_GET['id']);
 $query = "select student.student_id, student.first_name,student.last_name, users.email from student inner join stud_in_group on student.student_id = stud_in_group.student_id
 inner join users on student.user_id = users.id where group_id = '$id' order by last_name";
-$result = mysqli_query($con,$query);
+$result = mysqli_query($conn,$query);
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="../style.css" />
+    <style><?php include '../style.css'; ?></style>
     <title>Group Information</title>
 </head>
 <body>
@@ -173,6 +172,17 @@ $result = mysqli_query($con,$query);
                     </ul>
                 </font>
             </b>
+            <b>
+       <font size="4">
+         <ul>
+               <b>
+                 <form>
+<input type="button" class="button-email" value="Back" onclick="history.back()">
+</form>
+               </b>
+         </ul>
+       </font>
+     </b>
         </div>
 
  <!-- Table -->

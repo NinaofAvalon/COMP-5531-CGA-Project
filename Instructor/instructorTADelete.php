@@ -1,6 +1,6 @@
 <?php
 
-require_once("connection.php");
+include('../session.php');
 $mysqli = new mysqli("qtc5531.encs.concordia.ca", "qtc55314", "rkf3kQ", "qtc55314");
 
 

@@ -1,6 +1,5 @@
 <?php
 include('../session.php');
-require_once("connection.php");
 ?>
 
 
@@ -170,6 +169,17 @@ require_once("connection.php");
                     </ul>
                 </font>
             </b>
+            <b>
+       <font size="4">
+         <ul>
+               <b>
+                 <form>
+<input type="button" class="button-email" value="Back" onclick="history.back()">
+</form>
+               </b>
+         </ul>
+       </font>
+     </b>
         </div>
 
   <!-- Main -->
@@ -187,6 +197,7 @@ require_once("connection.php");
              <th>First Name</th>
              <th>Last Name</th>
              <th>Phone</th>
+             <th>Birth Date</th>
           </tr>
 </thead>
 
@@ -199,6 +210,7 @@ require_once("connection.php");
                 <td><input type="text" placeholder=" First Name " name="fName"></td>
                 <td><input type="text" placeholder=" Last Name " name="lName"></td>
                 <td><input type="number" placeholder=" Phone " name="phone"></td>
+                <td><input type="text" placeholder=" Birth date " name="birth_date"></td>
               </tr>
 
         </tbody>
@@ -212,5 +224,3 @@ require_once("connection.php");
 
 </body>
 </html>
-
-

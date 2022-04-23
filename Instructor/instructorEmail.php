@@ -42,7 +42,7 @@ include('../session.php');
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="../style.css" />
+  <style><?php include '../style.css'; ?></style>
     <title>Change Password</title>
 </head>
 <body>
@@ -205,6 +205,17 @@ include('../session.php');
                     </ul>
                 </font>
             </b>
+            <b>
+       <font size="4">
+         <ul>
+               <b>
+                 <form>
+<input type="button" class="button-email" value="Back" onclick="history.back()">
+</form>
+               </b>
+         </ul>
+       </font>
+     </b>
         </div>
 
     <!-- main page -->
@@ -226,7 +237,7 @@ include('../session.php');
             <tr bgcolor="F6E5F5">
             <th>Confirm New Email</th>
              <td><input type="text" name="instructorNewEmailConfirmation"></td>
-       
+
         </tr>
 
             </tbody>
@@ -238,4 +249,3 @@ include('../session.php');
 
 </body>
 </html>
-

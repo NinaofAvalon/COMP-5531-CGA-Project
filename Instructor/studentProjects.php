@@ -208,18 +208,16 @@
       </font>
     </b>
     <b>
-      <font size="4">
-        <ul>
-          <li>
-            <a href="studentProfilePicture.php">
-              <b>
-                <font color="black">Change Profile Picture</font>
-              </b>
-            </a>
-          </li>
-        </ul>
-      </font>
-    </b>
+         <font size="4">
+           <ul>
+                 <b>
+                   <form>
+  <input type="button" class="button-email" value="Back" onclick="history.back()">
+ </form>
+                 </b>
+           </ul>
+         </font>
+       </b>
   </div>
   <div class="main_home">
     <table border="1" width="100%">

@@ -1,6 +1,5 @@
 <?php
    include('../session.php');
-   require_once("connection.php");
 
 
    $post_id = $_GET["id"];
@@ -42,7 +41,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="../style.css" />
+    <style><?php include '../style.css'; ?></style>
     <title>Discussion Board</title>
 </head>
 <body>
@@ -205,6 +204,17 @@
                     </ul>
                 </font>
             </b>
+            <b>
+       <font size="4">
+         <ul>
+               <b>
+                 <form>
+<input type="button" class="button-email" value="Back" onclick="history.back()">
+</form>
+               </b>
+         </ul>
+       </font>
+     </b>
         </div>
 
 
@@ -229,7 +239,6 @@
             <div class="body">
                 <div class="authors">
                     <div class="username" name=author><?php echo $row['creator']; ?></div>
-                    <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt="">
 
                 </div>
                 <div class="content" name="orignal_post">
@@ -256,7 +265,6 @@
                <div class="body-replies">
                    <div class="authors">
                        <div class="username"><?php echo $row['creator']; ?></div>
-                       <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt="">
 
                    </div>
                    <div class="content">

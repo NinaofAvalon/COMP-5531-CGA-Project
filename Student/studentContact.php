@@ -8,6 +8,10 @@
 
   //student group_id
   $query4= "SELECT group_id from group_full_info where course_id='$course_id' and student_id='$student_id'";
+  $query4 = "SELECT class_group.course_id, stud_in_group.group_id, stud_in_group.student_id
+from stud_in_group
+inner join class_group on class_group.group_id = stud_in_group.group_id
+having student_id ='$student_id' and course_id='$course_id'";
   $run4 = $conn->query($query4);
   $row4= $run4->fetch_array();
   $_SESSION['group_id'] = $row4['group_id'];
@@ -60,7 +64,7 @@
 
 
   <!-- menu -->
-  <div class="menu" height="100%" width="150px">
+  <div class="menu-welcome" height="100%" width="150px">
     <hr>
     <b >
       <font size="4">
@@ -211,6 +215,17 @@
         </ul>
       </font>
     </b>
+    <b>
+       <font size="4">
+         <ul>
+               <b>
+                 <form>
+<input type="button" class="button-email" value="Back" onclick="history.back()">
+</form>
+               </b>
+         </ul>
+       </font>
+     </b>
   </div>
 
 

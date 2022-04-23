@@ -1,17 +1,16 @@
 ﻿<?php
 include('../session.php');
-require_once("connection.php");
 $id = $_GET['GetId'];
 $query = "select student.student_id, student.first_name,student.last_name,student.phone, course_enrolled.grade from student
 inner join course_enrolled on student.student_id = course_enrolled.student_id where student.student_id ='".$id."' ";
-$result = mysqli_query($con,$query);
+$result = mysqli_query($conn,$query);
 ?>
 
 
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="../style.css" />
+    <style><?php include '../style.css'; ?></style>
     <title>Edit Student Information</title>
 </head>
 <body>
@@ -174,6 +173,17 @@ $result = mysqli_query($con,$query);
                     </ul>
                 </font>
             </b>
+            <b>
+       <font size="4">
+         <ul>
+               <b>
+                 <form>
+<input type="button" class="button-email" value="Back" onclick="history.back()">
+</form>
+               </b>
+         </ul>
+       </font>
+     </b>
         </div>
  <!-- Table -->
     <div class="main_home">
@@ -222,5 +232,3 @@ $result = mysqli_query($con,$query);
 <br>
 </body>
 </html>
-
-

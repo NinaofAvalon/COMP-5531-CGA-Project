@@ -1,13 +1,12 @@
 <?php
 include('../session.php');
 $course = $_SESSION['course'];
-require_once("connection.php");
  ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="../style.css" />
+    <style><?php include '../style.css'; ?></style>
     <title>Discussion Board</title>
 </head>
 <body>
@@ -170,6 +169,17 @@ require_once("connection.php");
                     </ul>
                 </font>
             </b>
+            <b>
+       <font size="4">
+         <ul>
+               <b>
+                 <form>
+<input type="button" class="button-email" value="Back" onclick="history.back()">
+</form>
+               </b>
+         </ul>
+       </font>
+     </b>
         </div>
 
   <!-- main section -->
@@ -215,7 +225,7 @@ require_once("connection.php");
 
                 </div>
 
-          
+
   </body>
 
 </html>

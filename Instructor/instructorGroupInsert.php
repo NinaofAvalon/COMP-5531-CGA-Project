@@ -1,6 +1,6 @@
 ﻿<?php
 
-require_once("connection.php");
+include('../session.php');
 $mysqli = new mysqli("qtc5531.encs.concordia.ca", "qtc55314", "rkf3kQ", "qtc55314");
 $course = $_SESSION['course'];
 
@@ -41,8 +41,8 @@ WHERE course_id = '$course' and student.student_id = '$leaderID'");
         else{
             echo 'This group ID is already taken';
         }}
-     
-        
+
+
         else{header("location:instructorLeaderAlreadyInserted.php");}}
 }   }
 else

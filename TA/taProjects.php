@@ -1,24 +1,6 @@
 <?php
    include('../session.php');
 
-   if(isset($_POST['submit'])){
-      $fileName = $_FILES['file']['name'];
-      $fileTmpName = $_FILES['file']['tmp_name'];
-      $path = "../files/".$fileName;
-
-
-     //sql query
-     $username = $_SESSION['username'];
-     $sql = "INSERT INTO uploads(username,file) values ('$username','$fileName')";
-
-       if(mysqli_query($conn, $sql)){
-         move_uploaded_file($fileTmpName, $path);
-         header("Location:studentProjects.php");
-         die();
-       } else{
-         echo "error".mysqli_error($conn);
-       }
-   }
 ?>
 <!DOCTYPE html>
 <html>
@@ -120,6 +102,17 @@
                        </ul>
                    </font>
                </b>
+               <b>
+                  <font size="4">
+                    <ul>
+                          <b>
+                            <form>
+           <input type="button" class="button-email" value="Back" onclick="history.back()">
+           </form>
+                          </b>
+                    </ul>
+                  </font>
+                </b>
   </div>
   <div class="main_home">
     <table border="1" width="100%">

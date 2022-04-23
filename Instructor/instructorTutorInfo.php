@@ -1,17 +1,19 @@
 ﻿<?php
 include('../session.php');
-require_once("connection.php");
 $course = $_SESSION['course'];
-$query = "select TA.id,TA.first_name,TA.last_name, TA.phone,TA.email from TA inner join course_ta on TA.id = course_ta.ta_id
-where course_id = '".$course."' order by last_name";
-$result = mysqli_query($con,$query);
+$query = "SELECT TA.first_name,TA.id, TA.last_name, TA.phone, users.email, users.username, course_ta.course_id
+from TA
+inner join users on TA.user_id = users.id
+inner join course_ta on course_ta.ta_id = TA.id
+having course_id = '$course'";
+$result = mysqli_query($conn,$query);
 
  ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="../style.css" />
+    <style><?php include '../style.css'; ?></style>
     <title>Tutor Information</title>
 </head>
 <body>
@@ -175,6 +177,17 @@ $result = mysqli_query($con,$query);
                     </ul>
                 </font>
             </b>
+            <b>
+       <font size="4">
+         <ul>
+               <b>
+                 <form>
+<input type="button" class="button-email" value="Back" onclick="history.back()">
+</form>
+               </b>
+         </ul>
+       </font>
+     </b>
         </div>
 
 
@@ -235,37 +248,3 @@ $result = mysqli_query($con,$query);
         </div>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

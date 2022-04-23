@@ -3,18 +3,17 @@ include('../session.php');
 
     $course = $_SESSION['course'];
 
-    require_once("connection.php");
 
     $query = "select group_id,group_name,leader_id, course_id, first_name, last_name from class_group inner join student
 on leader_id = student_id where course_id ='".$course."'";
-    $result = mysqli_query($con,$query);
+    $result = mysqli_query($conn,$query);
 
  ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="../style.css" />
+    <style><?php include '../style.css'; ?></style>
     <title>Group Information</title>
 </head>
 <body>
@@ -177,6 +176,17 @@ on leader_id = student_id where course_id ='".$course."'";
                     </ul>
                 </font>
             </b>
+            <b>
+       <font size="4">
+         <ul>
+               <b>
+                 <form>
+<input type="button" class="button-email" value="Back" onclick="history.back()">
+</form>
+               </b>
+         </ul>
+       </font>
+     </b>
         </div>
 
 

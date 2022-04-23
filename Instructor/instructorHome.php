@@ -1,12 +1,12 @@
 ﻿<?php
 include('../session.php');
-    session_start();
+session_start();
  ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="../style.css" />
+    <style><?php include '../style.css'; ?></style>
     <title>Home</title>
 </head>
 <body>
@@ -49,7 +49,7 @@ include('../session.php');
         </div>
 
         <!-- menu -->
-        <div class="menu" height="100%" width="150px">
+        <div class="menu-welcome" height="100%" width="150px">
             <hr>
             <b>
                 <font size="4">
@@ -170,6 +170,17 @@ include('../session.php');
                     </ul>
                 </font>
             </b>
+            <b>
+       <font size="4">
+         <ul>
+               <b>
+                 <form>
+<input type="button" class="button-email" value="Back" onclick="history.back()">
+</form>
+               </b>
+         </ul>
+       </font>
+     </b>
         </div>
 
         <!-- Home -->
