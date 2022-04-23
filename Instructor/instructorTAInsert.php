@@ -24,7 +24,6 @@ if (isset($_POST['submit'])) // isset() function - checks whether a variable is 
         if($result->num_rows == 0){header("location:instructorTutorInfoIncorrect.php");}
         else{
 
-        $query = " select @email from users where id = '".$user_id."'";
         $query = " insert into TA(id,user_id,first_name,last_name,birth_date, phone) VALUES('$ta_id','$user_id','$fname', '$lname','$birth_date', '$phone';";
         $query = " insert into course_ta(course_id, ta_id)
 VALUES('$course', '$ta_id')";
