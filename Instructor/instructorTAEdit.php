@@ -2,7 +2,8 @@
 include('session.php');
 require_once("connection.php");
 $id = $_GET['GetId'];
-$query = "select id,user_id,first_name,last_name,birth_date, phone,email from TA where id ='".$id."' ";
+$query = "select TA.id,user_id,first_name,last_name,birth_date, phone, users.email from project.TA 
+inner join  users on TA.user_id = users.id where TA.id ='".$id."' ";
 $result = mysqli_query($con,$query);
 ?>
 
