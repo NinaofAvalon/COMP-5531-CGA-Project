@@ -278,6 +278,9 @@ inner join users on TA.user_id = users.id
 inner join course_ta on course_ta.ta_id = TA.id
 having course_id = '$course_id'";
     $run = $conn -> query($query);
+    $count = mysqli_num_rows($run);
+    if ($count != 0){
+
     $row = $run -> fetch_array();
      ?>
   <table border="1" width="100%">
@@ -296,8 +299,11 @@ having course_id = '$course_id'";
           </tr>
       </tbody>
   </table>
+  <?php
 
-    <div class="main_home">
+  }
+   ?>
 
+</div>
 </body>
 </html>

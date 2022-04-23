@@ -221,7 +221,10 @@
   <div class="main_home">
 
 
+    <?php
+    if ($group_id != NULL){
 
+     ?>
             <div class="table-head">
                 <div class="subjects">Subjects</div>
 
@@ -269,6 +272,11 @@
 
         <button class="post-button"><a href="studentCreatePost.php">Submit New Post</a></button>
         </div>
+        <?php
+        } else{
+          echo "You have not yet been assigned to a group. Please contact your instructor";
+        }
+         ?>
 
   </body>
 

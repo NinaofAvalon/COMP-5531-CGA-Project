@@ -247,6 +247,9 @@
     $run2 = $conn -> query($query2);
     $row2= $run2 ->fetch_array();
 
+    $count = mysqli_num_rows($run1);
+    if ($count != 0){
+
      ?>
   <table border="1" width="100%">
     <tbody>
@@ -257,6 +260,7 @@
               <th>Leader Email</th>
               <th>Number of Members/Capacity</th>
           </tr>
+
           <tr>
             <td><?php echo $row1['group_name'];?></td>
             <td><?php echo $row1['leader_id'];?></td>
@@ -264,8 +268,13 @@
             <td><?php echo $row1['email'];?></td>
             <td><?php echo $row2['COUNT(group_id)'];?>/5</td>
           </tr>
+          <?php
+        }
+
+           ?>
       </tbody>
   </table>
+
 
   <br>
   <hr>

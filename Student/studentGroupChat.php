@@ -258,6 +258,10 @@
 
     <!-- main part -->
     <div class="main_home">
+      <?php
+      if ($group_id != NULL){
+
+       ?>
     <form  name="myform" action="studentGroupChat.php" method="post">
       <section class="chat_area">
         <header>
@@ -338,7 +342,14 @@
                 </button>
           </div>
       </section>
+
       </form>
+
+<?php
+} else{
+  echo "You have not yet been assigned to a group. Please contact your instructor";
+}
+ ?>
     </div>
    </body>
 </html>

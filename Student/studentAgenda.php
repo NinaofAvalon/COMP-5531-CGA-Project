@@ -292,6 +292,11 @@
     <div class="main_home">
 
 
+          <?php
+          if ($group_id != NULL){
+
+           ?>
+
 
 <form class="" action="studentAgenda.php" method="get">
 
@@ -525,7 +530,9 @@ echo draw_calendar($numericalMonth,$year);
 
 <?php
 }
-
+} else{
+  echo "You have not yet been assigned to a group. Please contact your instructor";
+}
  ?>
 
 
