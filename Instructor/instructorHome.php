@@ -49,7 +49,7 @@ session_start();
         </div>
 
         <!-- menu -->
-        <div class="menu-welcome" height="100%" width="150px">
+        <div class="menu1" height="100%" width="150px">
             <hr>
             <b>
                 <font size="4">
