@@ -110,7 +110,7 @@
           <li>
             <a href="adminCourses.php">
               <b>
-                <font color="black">Courses and Courses Sections</font>
+                <font color="black">Terms and Courses</font>
               </b>
             </a>
           </li>
@@ -146,19 +146,6 @@
       </font>
     </b>
 
-    <b>
-      <font size="4">
-        <ul>
-          <li>
-            <a href="adminGroups.php">
-              <b>
-                <font color="black">Course Groups</font>
-              </b>
-            </a>
-          </li>
-        </ul>
-      </font>
-    </b>
 
     <b>
       <font size="4">
@@ -173,7 +160,19 @@
         </ul>
       </font>
     </b>
-
+<b>
+  <font size="4">
+    <ul>
+      <li>
+        <a href="adminGroups.php">
+          <b>
+            <font color="black">Course Groups</font>
+          </b>
+        </a>
+      </li>
+    </ul>
+  </font>
+</b>
     <b>
       <font size="4">
         <ul>

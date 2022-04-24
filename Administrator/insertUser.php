@@ -22,7 +22,7 @@
       {
            echo 'Please Fill in the blanks';
       }else{
-          $a = rand(3,1000);
+          $a = rand(3,20);
           $uname  = substr($fname,0,1).'_'.substr($lname,0,3).$a;
           $upass = $uname.'1234';
           $query = "select max(id) as mid from users";
@@ -31,12 +31,12 @@
               {
                 $nextuid = $row['mid']+1;
                 }
-           $query1 = "insert into users VALUES('$nextuid', '$uname','$upass','$email')";
+           $query1 = "insert into users(id, username, password, email) VALUES('$nextuid', '$uname','$upass','$email')";
            $result1 = mysqli_query($conn,$query1);
            
            if($role == 'instructor')
            {
-                   $query2 = "insert into instructor(id, user_id, first_name, last_name, birth_date ,phone, email) VALUES('$instrid','$nextuid','$fname','$lname','$bday','$phone','$email')";
+                   $query2 = "insert into instructor(id, user_id, first_name, last_name, birth_date ,phone) VALUES('$instrid','$nextuid','$fname','$lname','$bday','$phone')";
                    $result2 = mysqli_query($conn,$query2);  
                    if ($instrid)
                      {
@@ -52,6 +52,24 @@
             if ($instrid)
               {
                   header("location:adminStudents.php");
+              }
+          else
+              {
+                  echo 'Please check your query';
+              }
+           
+           
+           
+           
+           }elseif($role == 'TA'){
+                $cid = $_GET['cid'];
+                $query4 = "insert into TA(id, user_id, first_name, last_name, birth_date ,phone) VALUES('$instrid','$nextuid','$fname','$lname','$bday','$phone')";
+                $result4 = mysqli_query($conn,$query4);
+                $query5 = "insert into course_ta(course_id, ta_id) VALUES('$cid','$instrid')";
+                $result5 = mysqli_query($conn,$query5);
+            if ($instrid)
+              {
+                  header("location:adminCourses.php");
               }
           else
               {

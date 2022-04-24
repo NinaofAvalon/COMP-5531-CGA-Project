@@ -120,19 +120,7 @@
       </font>
     </b>
 
-    <b>
-      <font size="4">
-        <ul>
-          <li>
-            <a href="adminGroups.php">
-              <b>
-                <font color="black">Course Groups</font>
-              </b>
-            </a>
-          </li>
-        </ul>
-      </font>
-    </b>
+    
 
     <b>
       <font size="4">

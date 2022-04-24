@@ -96,6 +96,19 @@
         </font>
       </b>
       <b>
+       <font size="4">
+         <ul>
+           <li <?php echo (in_array("administrator", $userRoles))? "" : "style='display:none;'" ?>>
+             <a href="Administrator/adminHome.php">
+               <b>
+                 <font color="black">Administrator Section</font>
+               </b>
+             </a>
+           </li>
+         </ul>
+       </font>
+     </b>
+     <b>
         <font size="4">
           <ul>
             <li>
@@ -108,6 +121,7 @@
           </ul>
         </font>
       </b>
+
     </div>
 
     <!-- Main section -->

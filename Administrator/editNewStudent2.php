@@ -2,7 +2,7 @@
 include('../session.php');
 require_once "../php/config.php";
 /* 
-make a user as a instructor
+make a user as a student
 */
 
    $userid = $_GET['user_id'];
@@ -35,7 +35,7 @@ make a user as a instructor
       <tbody>
         <tr width="100%">
           <td width="5%" align="left"><h2>CGA</h2></td>
-          <td align="center"><font size="5"><b>Edit Instructor Information</b></font></td>
+          <td align="center"><font size="5"><b>Edit Student Information</b></font></td>
         </tr>
       </tbody>
     </table>
@@ -82,7 +82,7 @@ make a user as a instructor
           <li>
             <a href="adminCourses.php">
               <b>
-                <font color="black">Courses and Courses Sections</font>
+                <font color="black">Terms and Courses</font>
               </b>
             </a>
           </li>
@@ -118,19 +118,6 @@ make a user as a instructor
       </font>
     </b>
 
-    <b>
-      <font size="4">
-        <ul>
-          <li>
-            <a href="adminGroups.php">
-              <b>
-                <font color="black">Course Groups</font>
-              </b>
-            </a>
-          </li>
-        </ul>
-      </font>
-    </b>
 
     <b>
       <font size="4">
@@ -145,7 +132,19 @@ make a user as a instructor
         </ul>
       </font>
     </b>
-
+<b>
+  <font size="4">
+    <ul>
+      <li>
+        <a href="adminGroups.php">
+          <b>
+            <font color="black">Course Groups</font>
+          </b>
+        </a>
+      </li>
+    </ul>
+  </font>
+</b>
     <b>
       <font size="4">
         <ul>

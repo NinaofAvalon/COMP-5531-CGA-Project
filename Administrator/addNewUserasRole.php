@@ -2,13 +2,15 @@
     include('../session.php');
     require_once "../php/config.php";
 /* 
-make a new user as a new instructor
+make a new user as a new role
 */
     
     $intrid = $_GET['Id'];
-    echo $intrid;
     $role = $_GET['Role'];
     $email =  $_GET['email'];
+    if($role == "TA"){
+    $cid = $_GET['cid'];
+    }
     
     $qthisterm = "select termname from term where is_term_now = 'YES' ";
     $resthisterm = mysqli_query($conn,$qthisterm);
@@ -33,7 +35,7 @@ make a new user as a new instructor
       <tbody>
         <tr width="100%">
           <td width="5%" align="left"><h2>CGA</h2></td>
-          <td align="center"><font size="5"><b>Edit Instructor Information</b></font></td>
+          <td align="center"><font size="5"><b>Edit New User Information</b></font></td>
         </tr>
       </tbody>
     </table>
@@ -80,7 +82,7 @@ make a new user as a new instructor
           <li>
             <a href="adminCourses.php">
               <b>
-                <font color="black">Courses and Courses Sections</font>
+                <font color="black">Terms and Courses </font>
               </b>
             </a>
           </li>
@@ -120,20 +122,6 @@ make a new user as a new instructor
       <font size="4">
         <ul>
           <li>
-            <a href="adminGroups.php">
-              <b>
-                <font color="black">Course Groups</font>
-              </b>
-            </a>
-          </li>
-        </ul>
-      </font>
-    </b>
-
-    <b>
-      <font size="4">
-        <ul>
-          <li>
             <a href="adminNotices.php">
               <b>
                 <font color="black">Notices</font>
@@ -143,7 +131,19 @@ make a new user as a new instructor
         </ul>
       </font>
     </b>
-
+<b>
+  <font size="4">
+    <ul>
+      <li>
+        <a href="adminGroups.php">
+          <b>
+            <font color="black">Course Groups</font>
+          </b>
+        </a>
+      </li>
+    </ul>
+  </font>
+</b>
     <b>
       <font size="4">
         <ul>
@@ -181,7 +181,9 @@ make a new user as a new instructor
                             <h1 > Add a new User</h1>
                         </div>
                         <div class="form_container">
-                            <form action="insertUser.php?Id=<?php echo $intrid ?>&role=<?php echo $role?> " method="post">
+                        
+                        <form action="insertUser.php?Id=<?php echo $intrid ?>&role=<?php echo $role?>&cid=<?php echo $cid?> " method="post">
+               
                                 
                                 <Label>First Name</Label>
                                 <input type="text"  name="FirstName"  > 
