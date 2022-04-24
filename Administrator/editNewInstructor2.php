@@ -204,9 +204,7 @@ make a user as a instructor
                                 <Label>Enter Phone</Label>
                                 <input type="number" name="phone"  >
                                 <br><br>
-                                <Label>Enter Email</Label>
-                                <input type="email" name="email" value=<?php echo $email ?> >
-                                <br><br>
+                                
                                
                                <button name="insert">Insert</button>
                                <p><font color=gray> Other values will be automatically created according to dates provided above.</font> 
