@@ -96,16 +96,6 @@ if (!empty($_POST['sent'])
     <!--menu-->
     <div class="menu1" height="100%" width="150px">
       <hr>
-      <b >
-        <font size="4">
-          <i>
-            COMP 5531/Winter 2022
-            <br>
-            Email System
-          </i>
-        </font>
-      </b>
-      <hr>
       <b>
         <font size="4">
           <ul>

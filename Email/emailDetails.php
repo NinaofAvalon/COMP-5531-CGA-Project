@@ -102,16 +102,6 @@ if ($count == 1) {
     <hr>
     <b>
       <font size="4">
-        <i>
-          COMP 5531/Winter 2022
-          <br>
-          Email System
-        </i>
-      </font>
-    </b>
-    <hr>
-    <b>
-      <font size="4">
         <ul>
           <li>
             <a href="compose.php">
