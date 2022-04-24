@@ -85,7 +85,7 @@ include('../session.php');
         </div>
 
         <!-- menu -->
-        <div class="menu" height="100%" width="150px">
+        <div class="menu-welcome" height="100%" width="150px">
             <hr>
             <b>
                 <font size="4">
