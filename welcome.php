@@ -1,16 +1,10 @@
-<?php
+﻿<?php
+   require('php/utils.php');
    include('session.php');
-
-   $course_name = $_POST['course_name'];
-
-   $sql = "SELECT course_section, course_term from course where course_name='$course_name'";
-   $run = $conn->query($sql);
-   $row = $run->fetch_array();
-   $course_section = $row['course_section'];
-   $course_term = $row['course_term'];
-
-   GLOBAL $course_name;
-
+   if (!isset($_SESSION['id'])) {
+    header('Location: Index.php');
+   }
+   $userRoles = getRoleByUserId($conn, $_SESSION['id']);
 
 ?>
 <!DOCTYPE html>
@@ -46,7 +40,7 @@
               </i>
               <i>
                 <b>
-                  <a href="../logout.php">
+                  <a href="logout.php">
                     <font color="black">Logout</font>
                   </a>
                 </b>
@@ -60,25 +54,67 @@
 
 
     <!-- menu -->
-    <div class="menu" height="100%" width="150px">
-      <hr>
-      <b >
-        <font size="4">
-          <i>
-            <?php echo $_SESSION['course_name']; ?>/<?php echo $course_term; ?>
-            <br>
-            SECTION <?php echo $course_section; ?>
-          </i>
-        </font>
-      </b>
+    <div class="menu-welcome" height="100%" width="150px">
       <hr>
       <b>
         <font size="4">
           <ul>
-            <li>
-              <a href="Student/studentContact.php">
+            <li <?php echo (in_array("student", $userRoles))? "" : "style='display:none;'" ?>>
+              <a href="Student/studentCourses.php">
                 <b>
-                  <font color="black">Contact Information</font>
+                  <font color="black">Student Section</font>
+                </b>
+              </a>
+            </li>
+          </ul>
+        </font>
+      </b>
+      <b>
+        <font size="4">
+          <ul>
+            <li <?php echo (in_array("TA", $userRoles))? "" : "style='display:none;'" ?>>
+              <a href="TA/taCourses.php">
+                <b>
+                  <font color="black">TA Section</font>
+                </b>
+              </a>
+            </li>
+          </ul>
+        </font>
+      </b>
+      <b>
+        <font size="4">
+          <ul>
+            <li <?php echo (in_array("instructor", $userRoles))? "" : "style='display:none;'" ?>>
+              <a href="Instructor/instructorCourses.php">
+                <b>
+                  <font color="black">Instructor Section</font>
+                </b>
+              </a>
+            </li>
+          </ul>
+        </font>
+      </b>
+      <b>
+       <font size="4">
+         <ul>
+           <li <?php echo (in_array("administrator", $userRoles))? "" : "style='display:none;'" ?>>
+             <a href="Administrator/adminHome.php">
+               <b>
+                 <font color="black">Administrator Section</font>
+               </b>
+             </a>
+           </li>
+         </ul>
+       </font>
+     </b>
+     <b>
+        <font size="4">
+          <ul>
+            <li>
+              <a href="Email/inbox.php">
+                <b>
+                  <font color="black">Email System</font>
                 </b>
               </a>
             </li>
@@ -86,225 +122,80 @@
         </font>
       </b>
 
-      <b>
-        <font size="4">
-          <ul>
-            <li>
-              <a href="Student/studentGroup.php">
-                <b>
-                  <font color="black">Course Group</font>
-                </b>
-              </a>
-            </li>
-          </ul>
-        </font>
-      </b>
-
-      <b>
-        <font size="4">
-          <ul>
-            <li>
-              <a href="Student/studentGroupChat.php">
-                <b>
-                  <font color="black">Group Chat</font>
-                </b>
-              </a>
-            </li>
-          </ul>
-        </font>
-      </b>
-
-      <b>
-        <font size="4">
-          <ul>
-            <li>
-              <a href="Student/studentGroupDiscussion.php">
-                <b>
-                  <font color="black">Discussion Board</font>
-                </b>
-              </a>
-            </li>
-          </ul>
-        </font>
-      </b>
-
-      <b>
-        <font size="4">
-          <ul>
-            <li>
-              <a href="Student/studentAgenda.php">
-                <b>
-                  <font color="black">Agenda</font>
-                </b>
-              </a>
-            </li>
-          </ul>
-        </font>
-      </b>
-
-      <b>
-        <font size="4">
-          <ul>
-            <li>
-              <a href="Student/studentProjects.php">
-                <b>
-                  <font color="black">Upload Files</font>
-                </b>
-              </a>
-            </li>
-          </ul>
-        </font>
-      </b>
-
-      <b>
-        <font size="4">
-          <ul>
-            <li>
-              <a href="Student/studentFeed.php">
-                <b>
-                  <font color="black">Feed</font>
-                </b>
-              </a>
-            </li>
-          </ul>
-        </font>
-      </b>
-
-      <b>
-        <font size="4">
-          <ul>
-            <li>
-              <a href="Student/studentPassword.php">
-                <b>
-                  <font color="black">Change Password</font>
-                </b>
-              </a>
-            </li>
-          </ul>
-        </font>
-      </b>
-
-      <b>
-        <font size="4">
-          <ul>
-            <li>
-              <a href="Student/studentEmail.php">
-                <b>
-                  <font color="black">Change Email</font>
-                </b>
-              </a>
-            </li>
-          </ul>
-        </font>
-      </b>
     </div>
 
     <!-- Main section -->
     <div class="main_home">
 
       <p>
-       This webpage allows you to share information and ideas with your teammates via pages and shared files.
-       The features offered as menus are explained below.
+      This website is made with the intent to facilitate the academic lives of teachers, TAs and students alike.
 
-   </p>
+  </p>
 
-   <p>
-       <strong>Features</strong>
-   </p>
+  <p>
+      <strong>Features</strong>
+  </p>
 
-   <ul>
-       <li><strong>Contact Information</strong></li>
-   </ul>
+  <ul>
+      <li><strong>Contact Information</strong></li>
+  </ul>
 
-   <p>
-       List the contact information for the instructor and tutor for the course.
-   </p>
+  <p>
+      List the contact information for the instructor and tutor for the course.
+  </p>
 
-   <ul>
-       <li><strong>Course Group</strong></li>
-   </ul>
+  <ul>
+      <li><strong>Course Group</strong></li>
+  </ul>
 
-   <p>
-       List detail information of your current group.
-   </p>
+  <p>
+      List detail information of your current group.
+  </p>
 
-   <ul>
-       <li><strong>Group Discussion</strong></li>
-   </ul>
+  <ul>
+      <li><strong>Group Discussion</strong></li>
+  </ul>
 
-   <p>
-       Share and discuss ideas with your teammates on a message board.
-   </p>
+  <p>
+      Share and discuss ideas with your teammates on a message board.
+  </p>
 
-   <ul>
-       <li><strong>Assignment/Project Upload</strong></li>
-       <ul>
-           <li>Upload/Update your submission files before preset deadline</li>
-       </ul>
-       <ul>
-           <li>Upload your late submission files with preset penalty</li>
-       </ul>
-       <ul>
-           <li>View your current upload info for your individual/group works</li>
-       </ul>
-       <ul>
-           <li>View your current upload info for your individual/group works</li>
-       </ul>
-       <ul>
-           <li><strong>Note: For group work, only the group leader can upload files. Make sure the group members agree on the contents of the files being uploaded.</strong></li>
-       </ul>
-   </ul>
+  <ul>
+      <li><strong>Assignment/Project Upload</strong></li>
+      <ul>
+          <li>Upload/Update your submission files before preset deadline</li>
+      </ul>
+      <ul>
+          <li>Upload your late submission files with preset penalty</li>
+      </ul>
+      <ul>
+          <li>View your current upload info for your individual/group works</li>
+      </ul>
+      <ul>
+          <li>View your current upload info for your individual/group works</li>
+      </ul>
+      <ul>
+          <li><strong>Note: For group work, only the group leader can upload files. Make sure the group members agree on the contents of the files being uploaded.</strong></li>
+      </ul>
+  </ul>
 
-   <ul>
-       <li><strong>Change Password</strong></li>
-   </ul>
+  <ul>
+      <li><strong>Change Password</strong></li>
+  </ul>
 
-   <p>
-       Change your password for access to the system.
-   </p>
+  <p>
+      Change your password for access to the system.
+  </p>
 
-   <ul>
-       <li><strong>Change Username</strong></li>
-   </ul>
+  <ul>
+      <li><strong>Change Email</strong></li>
+  </ul>
 
-   <p>
-       Update your username which is recorded in the system. Make sure to change your username to the ones as required by the instructor.
-   </p>
+  <p>
+      Update your email which is recorded in the system. Make sure to change your username to the ones as required by the instructor.
+  </p>
 
-   <!-- Links -->
-   <br>
-   <hr>
 
-   <a href="studentContact.html">
-       <ul>
-           <li><strong>Contact Information</strong></li>
-       </ul>
-   </a>
-   <a href="studentGroup.html">
-       <ul>
-           <li><strong>Course Group</strong></li>
-       </ul>
-   </a>
-   <a href="studentGroupDiscussion.html">
-       <ul>
-           <li><strong>Group Discussion</strong></li>
-       </ul>
-   </a>
-   <a href="studentProjects.html">
-       <ul>
-           <li><strong>Assignment/Project Upload</strong></li>
-       </ul>
-   </a>
-   <a href="studentPassword.html">
-       <ul>
-           <li><strong>Change Password</strong></li>
-       </ul>
-   </a>
-   <a href="studentUsername.html">
-       <ul>
-           <li><strong>Change Username</strong></li>
-       </ul>
-   </a>
 
     </div>
 

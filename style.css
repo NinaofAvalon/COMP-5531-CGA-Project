@@ -16,6 +16,17 @@ body{
   padding-bottom:15px;
 }
 
+.header1{
+  background-color: #B7CADB;
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-left: 10px;
+  width: 100%;
+  padding-right: 10px;
+  padding-bottom:15px;
+}
 button.login {
   background-color: #B7CADB;
   border: none;
@@ -49,14 +60,40 @@ button.login {
   left: 0;
   padding-left: 10px;
   padding-right: 10px;
+  top:-1.9%;
+}
+
+
+.menu1{
+  background-color: #B7CADB;
+  width: 12%;
+  padding-top: 1%;
+  padding-bottom: 100%;
+  margin-top:5.7%;
+  position:fixed;
+  left: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+  top:-1px;
+}
+
+.menu-welcome{
+  background-color: #B7CADB;
+  width: 12%;
+  padding-top: 1%;
+  padding-bottom: 100%;
+  margin-top:5.7%;
+  position:fixed;
+  left: 0;
+  padding-left: 10px;
+  padding-right: 10px;
   top:3%;
-
-
 }
 
 .main_home{
-  margin-left:200px;
+  margin-left:300px;
   margin-top: 130px;
+  margin-right: 100px;
   position: static;
 
 
@@ -296,6 +333,10 @@ select {
   padding: 10px;
   width: 100%;
   border-radius: 3px;
+}
+
+.button-email{
+  border: none;
 }
 
 

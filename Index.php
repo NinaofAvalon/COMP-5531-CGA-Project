@@ -5,15 +5,16 @@ require_once "php/config.php";
 session_start();
 
 //processing form data when form is submitted
-// $_SERVER["REQUEST_METHOD"] == "POST"
+$_SERVER["REQUEST_METHOD"] == "POST";
 if(isset($_POST['submit'])){
 
   $username = mysqli_real_escape_string($conn,$_POST['username']);
   $password = mysqli_real_escape_string($conn,$_POST['password']);
-  echo $password;
+
 
   $sql = "SELECT id FROM users WHERE password = '$password' and username='$username'";
   $result = mysqli_query($conn,$sql);
+
   $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
 
@@ -22,8 +23,8 @@ if(isset($_POST['submit'])){
   if($count == 1) {
          session_start();
          $_SESSION["username"] = $username;
-
-         header("location: Student/studentCourses.php");
+         $_SESSION['id'] = $row['id'];
+         header("location: welcome.php");
       }else {
          $error = "Your Login Name or Password is invalid";
          echo $error;

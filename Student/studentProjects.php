@@ -1,6 +1,9 @@
 <?php
    include('../session.php');
 
+   $course_id =$_SESSION['course_id'];
+   $username = $_SESSION['username'];
+
    if(isset($_POST['submit'])){
       $fileName = $_FILES['file']['name'];
       $fileTmpName = $_FILES['file']['tmp_name'];
@@ -9,7 +12,10 @@
 
      //sql query
      $username = $_SESSION['username'];
-     $sql = "INSERT INTO uploads(username,file) values ('$username','$fileName')";
+     $course_name = $_SESSION['course_name'];
+     date_default_timezone_set('America/New_York');
+     $file_date = date('Y-m-d H:i:s');
+     $sql = "INSERT INTO uploads(username,file, course_id, file_date) select '$username','$fileName', id, '$file_date' from course c where c.course_name = '$course_name' limit 1";
 
        if(mysqli_query($conn, $sql)){
          move_uploaded_file($fileTmpName, $path);
@@ -45,7 +51,7 @@
           <td align="right">
             <i>
               <b>
-                <a href="../welcome.php">
+                <a href="StudentFeed.php">
                   <font class="home_link" color="black">Home</font>
                 </a>
               </b>
@@ -66,12 +72,12 @@
 
 
   <!-- menu -->
-  <div class="menu" height="100%" width="150px">
+  <div class="menu-welcome" height="100%" width="150px">
     <hr>
     <b >
       <font size="4">
         <i>
-          <?php echo htmlspecialchars($_SESSION["course_name"]); ?>/Winter 2022
+          <?php echo htmlspecialchars($_SESSION["course_name"]); ?>/<?php echo htmlspecialchars($_SESSION["course_term"]); ?>
           <br>
           SECTION <?php echo htmlspecialchars($_SESSION["course_section"]); ?>
         </i>
@@ -147,6 +153,19 @@
         </ul>
       </font>
     </b>
+    <b>
+                   <font size="4">
+                       <ul>
+                           <li>
+                               <a href="../Email/inbox.php">
+                                   <b>
+                                       <font color="black">Email</font>
+                                   </b>
+                               </a>
+                           </li>
+                       </ul>
+                   </font>
+               </b>
 
     <b>
       <font size="4">
@@ -155,20 +174,6 @@
             <a href="studentProjects.php">
               <b>
                 <font color="black">Upload Files</font>
-              </b>
-            </a>
-          </li>
-        </ul>
-      </font>
-    </b>
-
-    <b>
-      <font size="4">
-        <ul>
-          <li>
-            <a href="studentFeed.php">
-              <b>
-                <font color="black">Feed</font>
               </b>
             </a>
           </li>
@@ -216,6 +221,17 @@
         </ul>
       </font>
     </b>
+    <b>
+       <font size="4">
+         <ul>
+               <b>
+                 <form>
+<input type="button" class="button-email" value="Back" onclick="history.back()">
+</form>
+               </b>
+         </ul>
+       </font>
+     </b>
   </div>
   <div class="main_home">
     <table border="1" width="100%">
@@ -229,7 +245,7 @@
 
 
         <?php
-        $query = "SELECT * FROM uploads";
+        $query = "SELECT * FROM uploads where username='$username' and course_id='$course_id'";
         $run = $conn->query($query);
         while($row=$run->fetch_array()){
         ?>

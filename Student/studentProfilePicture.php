@@ -48,7 +48,7 @@ if(isset($_POST['submit'])){
              <td align="right">
                <i>
                  <b>
-                   <a href="../welcome.php">
+                   <a href="StudentFeed.php">
                      <font class="home_link" color="black">Home</font>
                    </a>
                  </b>
@@ -69,12 +69,12 @@ if(isset($_POST['submit'])){
 
 
      <!-- menu -->
-     <div class="menu" height="100%" width="150px">
+     <div class="menu-welcome" height="100%" width="150px">
        <hr>
        <b >
          <font size="4">
            <i>
-             <?php echo htmlspecialchars($_SESSION["course_name"]); ?>/Winter 2022
+             <?php echo htmlspecialchars($_SESSION["course_name"]); ?>/<?php echo htmlspecialchars($_SESSION["course_term"]); ?>
              <br>
              SECTION <?php echo htmlspecialchars($_SESSION["course_section"]); ?>
            </i>
@@ -150,6 +150,19 @@ if(isset($_POST['submit'])){
            </ul>
          </font>
        </b>
+       <b>
+                      <font size="4">
+                          <ul>
+                              <li>
+                                  <a href="../Email/inbox.php">
+                                      <b>
+                                          <font color="black">Email</font>
+                                      </b>
+                                  </a>
+                              </li>
+                          </ul>
+                      </font>
+                  </b>
 
        <b>
          <font size="4">
@@ -165,19 +178,6 @@ if(isset($_POST['submit'])){
          </font>
        </b>
 
-       <b>
-         <font size="4">
-           <ul>
-             <li>
-               <a href="studentFeed.php">
-                 <b>
-                   <font color="black">Feed</font>
-                 </b>
-               </a>
-             </li>
-           </ul>
-         </font>
-       </b>
 
        <b>
          <font size="4">
@@ -220,6 +220,17 @@ if(isset($_POST['submit'])){
            </ul>
          </font>
        </b>
+       <b>
+          <font size="4">
+            <ul>
+                  <b>
+                    <form>
+   <input type="button" class="button-email" value="Back" onclick="history.back()">
+   </form>
+                  </b>
+            </ul>
+          </font>
+        </b>
      </div>
 
      <div class="main_home">

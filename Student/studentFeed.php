@@ -1,7 +1,10 @@
 <?php
    include('../session.php');
-   $username = $_SESSION["username"];
-   $course_name = $_SESSION["course_name"];
+   //get student id
+   $student_id = $_SESSION['student_id'];
+   $username = $_SESSION['username'];
+   $id = $_SESSION['course_id'];
+
 
    if(isset($_POST['submit'])){
 
@@ -27,13 +30,10 @@
      $post_content = mysqli_real_escape_string(
         $conn, $_REQUEST['post-content']);
 
-        //likes
-        $likes = 0;
 
         // Attempt insert query execution
-
-        $sql = "INSERT INTO feed (fullName,username,feedContent,course_name)
-                    VALUES ('$full_name', '$username', '$feed_content','$course_name')";
+        $sql = "INSERT INTO feed (fullName,username,feedContent,course_id)
+                    VALUES ('$full_name', '$username', '$feed_content','$id')";
         if(mysqli_query($conn, $sql)){
           //prevent form to be resubmitted multiple times
           header("Location:studentFeed.php");
@@ -76,7 +76,7 @@
             <td align="right">
               <i>
                 <b>
-                  <a href="../welcome.php">
+                  <a href="StudentFeed.phpp">
                     <font class="home_link" color="black">Home</font>
                   </a>
                 </b>
@@ -97,12 +97,12 @@
 
 
     <!-- menu -->
-    <div class="menu" height="100%" width="150px">
+    <div class="menu-welcome" height="100%" width="150px">
       <hr>
       <b >
         <font size="4">
           <i>
-            <?php echo htmlspecialchars($_SESSION["course_name"]); ?>/Winter 2022
+            <?php echo htmlspecialchars($_SESSION["course_name"]); ?>/<?php echo htmlspecialchars($_SESSION["course_term"]); ?>
             <br>
             SECTION <?php echo htmlspecialchars($_SESSION["course_section"]); ?>
           </i>
@@ -178,6 +178,19 @@
           </ul>
         </font>
       </b>
+      <b>
+                     <font size="4">
+                         <ul>
+                             <li>
+                                 <a href="../Email/inbox.php">
+                                     <b>
+                                         <font color="black">Email</font>
+                                     </b>
+                                 </a>
+                             </li>
+                         </ul>
+                     </font>
+                 </b>
 
       <b>
         <font size="4">
@@ -192,21 +205,6 @@
           </ul>
         </font>
       </b>
-
-      <b>
-        <font size="4">
-          <ul>
-            <li>
-              <a href="studentFeed.php">
-                <b>
-                  <font color="black">Feed</font>
-                </b>
-              </a>
-            </li>
-          </ul>
-        </font>
-      </b>
-
       <b>
         <font size="4">
           <ul>
@@ -248,6 +246,17 @@
           </ul>
         </font>
       </b>
+      <b>
+         <font size="4">
+           <ul>
+                 <b>
+                   <form>
+  <input type="button" class="button-email" value="Back" onclick="history.back()">
+  </form>
+                 </b>
+           </ul>
+         </font>
+       </b>
     </div>
 
     <div class="main_home">
@@ -274,7 +283,7 @@
           </div>
           <!-- feed starts -->
           <?php
-          $query2 = "SELECT feed.fullName,feed.id, feed.feedContent, feed.username, users.profilePicture, users.username FROM feed LEFT JOIN users ON feed.username=users.username";
+          $query2 = "SELECT feed.fullName,feed.id, feed.feedContent, feed.username, users.profilePicture, users.username FROM feed LEFT JOIN users ON feed.username=users.username where course_id='$id'";
           $run2 = $conn->query($query2);
 
            while($row2 = $run2->fetch_array()) {
@@ -296,26 +305,14 @@
                 </div>
               </div>
 
-
-
-              <div class="post-feeder">
-
-                  <!-- implement like/unlike functionality -->
-                  <!-- user has liked the post -->
-                  <!-- <span><a href="" class="unlike" id="<?php echo $row2['id']; ?>"><img src="../heart.png"></a></span> -->
-
-                  <!-- user has not liked the post -->
-                  <!-- <span><a href="" class="like" id="<?php echo $row2['id']; ?>"><img src="../love.png"></a></span> -->
-
-              </div>
-
-              <?php
-            }
-
-               ?>
             </div>
 
           </div>
+
+                        <?php
+                      }
+
+                         ?>
 
         </div>
 

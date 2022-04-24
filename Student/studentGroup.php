@@ -1,7 +1,8 @@
 <?php
    include('../session.php');
    $username = $_SESSION['username'];
-   $group_id = $_SESSION['group_id'];
+   $group_id = $_SESSION["group_id"];
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,7 +30,7 @@
           <td align="right">
             <i>
               <b>
-                <a href="../welcome.php">
+                <a href="StudentFeed.php">
                   <font class="home_link" color="black">Home</font>
                 </a>
               </b>
@@ -50,12 +51,12 @@
 
 
   <!-- menu -->
-  <div class="menu" height="100%" width="150px">
+  <div class="menu-welcome" height="100%" width="150px">
     <hr>
     <b >
       <font size="4">
         <i>
-          <?php echo htmlspecialchars($_SESSION["course_name"]); ?>/Winter 2022
+          <?php echo htmlspecialchars($_SESSION["course_name"]); ?>/<?php echo htmlspecialchars($_SESSION["course_term"]); ?>
           <br>
           SECTION <?php echo htmlspecialchars($_SESSION["course_section"]); ?>
         </i>
@@ -131,6 +132,19 @@
         </ul>
       </font>
     </b>
+    <b>
+                   <font size="4">
+                       <ul>
+                           <li>
+                               <a href="../Email/inbox.php">
+                                   <b>
+                                       <font color="black">Email</font>
+                                   </b>
+                               </a>
+                           </li>
+                       </ul>
+                   </font>
+               </b>
 
     <b>
       <font size="4">
@@ -139,20 +153,6 @@
             <a href="studentProjects.php">
               <b>
                 <font color="black">Upload Files</font>
-              </b>
-            </a>
-          </li>
-        </ul>
-      </font>
-    </b>
-
-    <b>
-      <font size="4">
-        <ul>
-          <li>
-            <a href="studentFeed.php">
-              <b>
-                <font color="black">Feed</font>
               </b>
             </a>
           </li>
@@ -200,6 +200,17 @@
         </ul>
       </font>
     </b>
+    <b>
+       <font size="4">
+         <ul>
+               <b>
+                 <form>
+<input type="button" class="button-email" value="Back" onclick="history.back()">
+</form>
+               </b>
+         </ul>
+       </font>
+     </b>
   </div>
 
   <!-- Table -->
@@ -210,29 +221,34 @@
 
     <?php
     //all group members
-    $query ="SELECT student.student_id,student.first_name, student.last_name, student.group_id, class_group.group_name, class_group.leader_id, users.email
-            from ((student
-            inner join class_group on student.group_id = class_group.group_id
-            inner join users on student.user_id = users.id))
-            having group_id = (select group_id from student where user_id = ( select id from users where username='$username'))";
+    $query ="SELECT class_group.group_id,class_group.group_name,class_group.leader_id,class_group.course_id, stud_in_group.student_id,student.first_name, student.last_name, users.email
+            FROM class_group
+            inner join stud_in_group ON class_group.group_id=stud_in_group.group_id
+            inner join student on stud_in_group.student_id=student.student_id
+            inner join users on student.user_id = users.id
+            having group_id = '$group_id'";
 
     //leader information
-    $query1 ="SELECT student.student_id,student.first_name, student.last_name, student.group_id, class_group.group_name, class_group.leader_id, users.email
-              from ((student
-              inner join class_group on student.student_id = class_group.leader_id
-              inner join users on student.user_id = users.id))
-              having group_id = (select group_id from student where user_id = ( select id from users where username='$username'))";
+    $query1 ="SELECT class_group.group_id,class_group.group_name,class_group.leader_id,class_group.course_id, stud_in_group.student_id,student.first_name, student.last_name, users.email
+              FROM class_group
+              inner join stud_in_group ON class_group.group_id=stud_in_group.group_id
+              inner join student on stud_in_group.student_id=student.student_id
+              inner join users on student.user_id = users.id
+              having group_id = '$group_id' AND student_id=leader_id";
     $run1 = $conn -> query($query1);
     $row1= $run1 ->fetch_array();
 
     //group count Members
     $query2 = "SELECT COUNT(group_id)
-                FROM student
+                FROM stud_in_group
                 WHERE group_id='$group_id'";
 
 
     $run2 = $conn -> query($query2);
     $row2= $run2 ->fetch_array();
+
+    $count = mysqli_num_rows($run1);
+    if ($count != 0){
 
      ?>
   <table border="1" width="100%">
@@ -244,15 +260,21 @@
               <th>Leader Email</th>
               <th>Number of Members/Capacity</th>
           </tr>
+
           <tr>
             <td><?php echo $row1['group_name'];?></td>
             <td><?php echo $row1['leader_id'];?></td>
             <td><?php echo $row1['first_name'];?>  <?php echo $row1['last_name']?></td>
             <td><?php echo $row1['email'];?></td>
-            <td><?php echo $row2['COUNT(group_id)'];?>/4</td>
+            <td><?php echo $row2['COUNT(group_id)'];?>/5</td>
           </tr>
+          <?php
+        }
+
+           ?>
       </tbody>
   </table>
+
 
   <br>
   <hr>

@@ -1,6 +1,8 @@
 <?php
    include('../session.php');
 
+   $username = $_SESSION["username"];
+
    $post_id = $_GET["id"];
 
    if(isset($_POST['submit'])){
@@ -62,7 +64,7 @@
             <td align="right">
               <i>
                 <b>
-                  <a href="../welcome.php">
+                  <a href="StudentFeed.php">
                     <font class="home_link" color="black">Home</font>
                   </a>
                 </b>
@@ -83,12 +85,12 @@
 
 
     <!-- menu -->
-    <div class="menu" height="100%" width="150px">
+    <div class="menu-welcome" height="100%" width="150px">
       <hr>
       <b >
         <font size="4">
           <i>
-            <?php echo htmlspecialchars($_SESSION["course_name"]); ?>/Winter 2022
+            <?php echo htmlspecialchars($_SESSION["course_name"]); ?>/<?php echo htmlspecialchars($_SESSION["course_term"]); ?>
             <br>
             SECTION <?php echo htmlspecialchars($_SESSION["course_section"]); ?>
           </i>
@@ -164,6 +166,19 @@
           </ul>
         </font>
       </b>
+      <b>
+                     <font size="4">
+                         <ul>
+                             <li>
+                                 <a href="../Email/inbox.php">
+                                     <b>
+                                         <font color="black">Email</font>
+                                     </b>
+                                 </a>
+                             </li>
+                         </ul>
+                     </font>
+                 </b>
 
       <b>
         <font size="4">
@@ -172,20 +187,6 @@
               <a href="studentProjects.php">
                 <b>
                   <font color="black">Upload Files</font>
-                </b>
-              </a>
-            </li>
-          </ul>
-        </font>
-      </b>
-
-      <b>
-        <font size="4">
-          <ul>
-            <li>
-              <a href="studentFeed.php">
-                <b>
-                  <font color="black">Feed</font>
                 </b>
               </a>
             </li>
@@ -233,6 +234,17 @@
           </ul>
         </font>
       </b>
+      <b>
+         <font size="4">
+           <ul>
+                 <b>
+                   <form>
+  <input type="button" class="button-email" value="Back" onclick="history.back()">
+  </form>
+                 </b>
+           </ul>
+         </font>
+       </b>
     </div>
 
 
@@ -247,6 +259,7 @@
           $query = "SELECT * FROM discussion_board where id='$post_id'";
           $run = $conn->query($query);
           $row = $run->fetch_array();
+
            ?>
             <!--Original thread-->
             <div class="head">
@@ -257,7 +270,6 @@
             <div class="body">
                 <div class="authors">
                     <div class="username" name=author><?php echo $row['creator']; ?></div>
-                    <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt="">
 
                 </div>
                 <div class="content" name="orignal_post">
@@ -288,7 +300,6 @@
                <div class="body-replies">
                    <div class="authors">
                        <div class="username"><?php echo $row['creator']; ?></div>
-                       <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt="">
 
                    </div>
                    <div class="content">

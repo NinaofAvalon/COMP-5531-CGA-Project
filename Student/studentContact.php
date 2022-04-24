@@ -1,7 +1,24 @@
 <?php
    include('../session.php');
 
+  $course_section=  $_SESSION["course_section"];
+  $student_id =$_SESSION["student_id"];
+  $course_id = $_SESSION["course_id"];
+  $course_term = $_SESSION["course_term"];
 
+  //student group_id
+  $query4= "SELECT group_id from group_full_info where course_id='$course_id' and student_id='$student_id'";
+  $query4 = "SELECT class_group.course_id, stud_in_group.group_id, stud_in_group.student_id
+from stud_in_group
+inner join class_group on class_group.group_id = stud_in_group.group_id
+having student_id ='$student_id' and course_id='$course_id'";
+  $run4 = $conn->query($query4);
+  $row4= $run4->fetch_array();
+    $count = mysqli_num_rows($run4);
+  if($count== 1){
+    $_SESSION['group_id'] = $row4['group_id'];
+    $group_id = $_SESSION['group_id'];
+  }
 
 ?>
 ﻿<!DOCTYPE html>
@@ -29,7 +46,7 @@
           <td align="right">
             <i>
               <b>
-                <a href="../welcome.php">
+                <a href="StudentFeed.php">
                   <font class="home_link" color="black">Home</font>
                 </a>
               </b>
@@ -50,12 +67,12 @@
 
 
   <!-- menu -->
-  <div class="menu" height="100%" width="150px">
+  <div class="menu-welcome" height="100%" width="150px">
     <hr>
     <b >
       <font size="4">
         <i>
-          <?php echo htmlspecialchars($_SESSION["course_name"]); ?>/Winter 2022
+          <?php echo htmlspecialchars($_SESSION["course_name"]); ?>/<?php echo htmlspecialchars($_SESSION["course_term"]); ?>
           <br>
           SECTION <?php echo htmlspecialchars($_SESSION["course_section"]); ?>
         </i>
@@ -131,6 +148,19 @@
         </ul>
       </font>
     </b>
+    <b>
+                   <font size="4">
+                       <ul>
+                           <li>
+                               <a href="../Email/inbox.php">
+                                   <b>
+                                       <font color="black">Email</font>
+                                   </b>
+                               </a>
+                           </li>
+                       </ul>
+                   </font>
+               </b>
 
     <b>
       <font size="4">
@@ -146,19 +176,6 @@
       </font>
     </b>
 
-    <b>
-      <font size="4">
-        <ul>
-          <li>
-            <a href="studentFeed.php">
-              <b>
-                <font color="black">Feed</font>
-              </b>
-            </a>
-          </li>
-        </ul>
-      </font>
-    </b>
 
     <b>
       <font size="4">
@@ -201,6 +218,17 @@
         </ul>
       </font>
     </b>
+    <b>
+       <font size="4">
+         <ul>
+               <b>
+                 <form>
+<input type="button" class="button-email" value="Back" onclick="history.back()">
+</form>
+               </b>
+         </ul>
+       </font>
+     </b>
   </div>
 
 
@@ -213,7 +241,12 @@
 
     <?php
     $coursename = $_SESSION['course_name'];
-    $query = "SELECT * FROM instructor where instructor_course='$coursename'";
+    $course_id = $_SESSION['course_id'];
+    $query = "SELECT instructor.first_name, instructor.last_name, instructor.phone, users.email, users.username, course.id
+from instructor
+inner join users on instructor.user_id = users.id
+inner join course on course.instructor_id = instructor.id
+having id = '$course_id'";
     $run = $conn -> query($query);
     $row = $run -> fetch_array();
      ?>
@@ -242,8 +275,15 @@
     <br>
     <br>
     <?php
-    $query = "SELECT * FROM TA where id = (SELECT TA_id from course where course_name='$coursename')";
+    $query = "SELECT TA.first_name, TA.last_name, TA.phone, users.email, users.username, course_ta.course_id
+from TA
+inner join users on TA.user_id = users.id
+inner join course_ta on course_ta.ta_id = TA.id
+having course_id = '$course_id'";
     $run = $conn -> query($query);
+    $count = mysqli_num_rows($run);
+    if ($count != 0){
+
     $row = $run -> fetch_array();
      ?>
   <table border="1" width="100%">
@@ -262,8 +302,11 @@
           </tr>
       </tbody>
   </table>
+  <?php
 
-    <div class="main_home">
+  }
+   ?>
 
+</div>
 </body>
 </html>

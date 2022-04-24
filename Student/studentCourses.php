@@ -2,8 +2,28 @@
    include('../session.php');
    $username = $_SESSION["username"];
 
+   //get student_id
+   $query3 = "SELECT student_id from student where user_id=(select id from users where username='$username')";
+   $run3 = $conn->query($query3);
+   $row3= $run3->fetch_array();
+   $_SESSION['student_id'] = $row3['student_id'];
+   $student_id = $_SESSION['student_id'];
+
+   //get group_id
 
 
+   if (isset($_POST['course_name'])) {
+    echo "course_id" . $_REQUEST['course_id'];
+    $_SESSION['course_id'] = $_REQUEST['course_id'];
+    $course_id = $_SESSION['course_id'];
+    $_SESSION['course_name']= $_REQUEST['course_name'];
+    $_SESSION['course_section']= $_REQUEST['course_section'];
+    $_SESSION['group_id']= $_REQUEST['group_id'];
+    $_SESSION['course_term']=$_REQUEST['course_term'];
+
+
+    header("Location: studentContact.php");
+  }
 
 
 ?>
@@ -52,30 +72,39 @@
 
 <?php
 
-$query = "SELECT course_id from course_enrolled where student_id=(select student_id from student where user_id=(select id from users where username='$username'))";
-$run = $conn->query($query);
+$query = "SELECT course.course_name,course.course_term,course.id as course_id,course.course_section,student.student_id
+from student
+inner join course_enrolled ce on student.student_id = ce.student_id
+inner join course on ce.course_id = course.id
+having student_id = (select student_id from student where user_id = (select id from users where username='$username'))";
 ?>
 <button align=center class="dropdownbtn">Winter 2022</button>
 
 <?php
+$run = $conn->query($query);
+
 while($row= $run->fetch_array()) {
-  $course_id = $row['course_id'];
-  $query2 = "SELECT * from course where id='$course_id'";
-  $run2 = $conn->query($query2);
-  while($row2= $run2->fetch_array()){
+
+
  ?>
 
 <div class="dropdownlist-content">
-<form class="" action="../welcome.php" method="post">
 
-  <input type="submit" class="course-name" name="course_name" value="<?php echo $row2['course_name'];?>" ></input>
 
+
+<form class="" action="studentCourses.php" method="post">
+
+
+
+  <input  type="hidden" name="course_id" id="course_id" value="<?php echo $row['course_id']; ?>" ></input>
+  <input type="submit" class="course-name" name="course_name" id="course_name" value="<?php echo $row['course_name']; ?>" ></input>
+  <input  type="hidden" name="course_term" id="course_term" value="<?php echo $row['course_term']; ?>"></input>
+  <input  type="hidden" name="course_section" id="course_section" value="<?php echo $row['course_section']; ?>" ></input>
 
 </form>
 
 <?php
 }
-  }
 
  ?>
 
