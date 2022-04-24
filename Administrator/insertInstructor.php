@@ -11,7 +11,7 @@
       $bday = $_POST['bday'];
       $phone = $_POST['phone'];
       
-      if (empty($_POST['userid']) || empty($_POST['id']) || empty($_POST['email']) )
+      if (empty($_POST['userid']) || empty($_POST['id']) )
       {
            echo 'Please Fill in the blanks';
       }else{
