@@ -64,7 +64,7 @@ include('../session.php');
     <b>
       <font size="4">
         <i>
-          <?php echo substr($_SESSION["course_name"],0,-3); ?>/<?php echo htmlspecialchars($_SESSION["course_term"]); ?>
+          <?php echo htmlspecialchars($_SESSION["course_name"]); ?>/Winter 2022
           <br>
           SECTION <?php echo htmlspecialchars($_SESSION["course_section"]); ?>
         </i>
@@ -99,30 +99,6 @@ include('../session.php');
         </ul>
       </font>
     </b>
-    <b>
-                   <font size="4">
-                       <ul>
-                           <li>
-                               <a href="../Email/inbox.php">
-                                   <b>
-                                       <font color="black">Email</font>
-                                   </b>
-                               </a>
-                           </li>
-                       </ul>
-                   </font>
-               </b>
-               <b>
-                  <font size="4">
-                    <ul>
-                          <b>
-                            <form>
-           <input type="button" class="button-email" value="Back" onclick="history.back()">
-           </form>
-                          </b>
-                    </ul>
-                  </font>
-                </b>
   </div>
   <!-- main section -->
 
@@ -177,6 +153,7 @@ include('../session.php');
     </div>
 
 
+    <button class="post-button"><a href="taCreatePost.php">Submit New Post</a></button>
   </div>
 
 </body>

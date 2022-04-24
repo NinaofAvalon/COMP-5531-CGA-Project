@@ -100,7 +100,7 @@ if (isset($_POST['submit'])) {
     <b>
       <font size="4">
         <i>
-          <?php echo substr($_SESSION["course_name"],0,-3); ?>/<?php echo htmlspecialchars($_SESSION["course_term"]); ?>
+          <?php echo htmlspecialchars($_SESSION["course_name"]); ?>/Winter 2022
           <br>
           SECTION <?php echo htmlspecialchars($_SESSION["course_section"]); ?>
         </i>
@@ -121,43 +121,6 @@ if (isset($_POST['submit'])) {
         </ul>
       </font>
     </b>
-    <b>
-      <font size="4">
-        <ul>
-          <li>
-            <a href="taProjects.php">
-              <b>
-                <font color="black">Download Files</font>
-              </b>
-            </a>
-          </li>
-        </ul>
-      </font>
-    </b>
-    <b>
-                   <font size="4">
-                       <ul>
-                           <li>
-                               <a href="../Email/inbox.php">
-                                   <b>
-                                       <font color="black">Email</font>
-                                   </b>
-                               </a>
-                           </li>
-                       </ul>
-                   </font>
-               </b>
-               <b>
-                  <font size="4">
-                    <ul>
-                          <b>
-                            <form>
-           <input type="button" class="button-email" value="Back" onclick="history.back()">
-           </form>
-                          </b>
-                    </ul>
-                  </font>
-                </b>
 
   </div>
 
@@ -183,6 +146,7 @@ if (isset($_POST['submit'])) {
         <div class="body">
           <div class="authors">
             <div class="username" name=author><?php echo $row['creator']; ?></div>
+            <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt="">
 
           </div>
           <div class="content" name="orignal_post">
@@ -213,6 +177,7 @@ if (isset($_POST['submit'])) {
         <div class="body-replies">
           <div class="authors">
             <div class="username"><?php echo $row['creator']; ?></div>
+            <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt="">
 
           </div>
           <div class="content">

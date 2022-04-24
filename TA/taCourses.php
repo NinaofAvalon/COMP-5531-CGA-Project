@@ -6,7 +6,6 @@
     $_SESSION['course_id'] = $_REQUEST['course_id'];
     $_SESSION['course_name']= $_REQUEST['course_name'];
     $_SESSION['course_section']= $_REQUEST['course_section'];
-    $_SESSION['course_term']= $_REQUEST['course_term'];
     header("Location: taDiscussionBoard.php");
   }
 
@@ -57,22 +56,21 @@
         <button align=center class="dropdownbtn">Winter 2022</button>
 <?php
 $user_id = $_SESSION['id'];
-$query = "SELECT course.id as course_id, course.course_name,course.course_section,course.course_term from TA inner join course_ta ct on TA.id = ct.ta_id inner join course on course.id = ct.course_id where TA.user_id = '$user_id'";
+$query = "SELECT course.id as course_id, course.course_name,course.course_section from ta inner join course_ta ct on ta.id = ct.ta_id inner join course on course.id = ct.course_id where ta.user_id = '$user_id'";
 $run = $conn->query($query);
 $i=0;
 while($row= $run->fetch_array()) {
-
+  // if($i==0){
 ?>
 <div class="dropdownlist-content">
 <form class="" action="taCourses.php" method="post">
   <input  type="hidden" name="course_id" id="course_id" value="<?php echo $row['course_id']; ?>" ></input>
-  <input type="submit" class="course-name" name="course_name" id="course_name" value="<?php echo $row['course_name']; echo " " ; echo $row['course_section']; ?>" ></input>
-  <input type="hidden" class="course_term" name="course_term" id="course_term" value="<?php echo $row['course_term'];?>" ></input>
+  <input type="submit" class="course-name" name="course_name" id="course_name" value="<?php echo $row['course_name']; ?>" ></input>
   <input  type="hidden" name="course_section" id="course_section" value="<?php echo $row['course_section']; ?>" ></input>
 </form>
 
 <?php
-
+// }
 }
  ?>
 
