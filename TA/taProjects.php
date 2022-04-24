@@ -72,7 +72,7 @@
     <b>
       <font size="4">
         <i>
-          <?php echo htmlspecialchars($_SESSION["course_name"]); ?>/Winter 2022
+        <?php echo substr($_SESSION["course_name"],0,-3); ?>/<?php echo htmlspecialchars($_SESSION["course_term"]); ?>
           <br>
           SECTION <?php echo htmlspecialchars($_SESSION["course_section"]); ?>
         </i>

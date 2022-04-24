@@ -151,9 +151,6 @@ include('../session.php');
       </div>
 
     </div>
-
-
-    <button class="post-button"><a href="taCreatePost.php">Submit New Post</a></button>
   </div>
 
 </body>
