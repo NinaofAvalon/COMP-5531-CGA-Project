@@ -1,7 +1,7 @@
 <?php
    include('../session.php');
    $Iid = $_GET['GetId'];
-   $query = "select id, user_id,first_name,last_name,birth_date, phone, email from instructor where id = '".$Iid."'  ";
+   $query = "select id, user_id,first_name,last_name,birth_date, phone from instructor where id = '".$Iid."'  ";
    $result = mysqli_query($conn,$query);
    
    while($row = mysqli_fetch_assoc($result))
@@ -11,7 +11,7 @@
      $lname = $row['last_name']; 
      $bday = $row['birth_date'];  
      $phone = $row['phone'];
-     $email =  $row['email'];
+ 
   
      
 }
@@ -202,10 +202,7 @@ while($rowinprocess = mysqli_fetch_assoc($resthisterm))
                                 <Label>Enter Phone</Label>
                                 <input type="number" name="phone"  value=<?php echo $phone  ?> >
                                 <br><br>
-                                <Label>Enter Email</Label>
-                                <input type="email" name="email" value=<?php echo $email ?> >
-                                    
-                                <br><br>
+                                
                                <button name="update">Update</button>
                                <p><font color=gray> Other values will be automatically created according to dates provided above.</font> 
                                
