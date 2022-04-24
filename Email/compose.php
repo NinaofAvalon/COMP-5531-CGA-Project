@@ -137,6 +137,17 @@ if (!empty($_POST['sent'])
           </ul>
         </font>
       </b>
+       <b>
+         <font size="4">
+           <ul>
+                 <b>
+                   <form>
+  <input type="button" class="button-email" value="Back" onclick="history.back()">
+  </form>
+                 </b>
+           </ul>
+         </font>
+       </b>
 
     </div>
 
