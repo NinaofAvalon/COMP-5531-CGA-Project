@@ -31,7 +31,7 @@
       <tbody>
         <tr width="100%">
           <td width="5%" align="left"><h2>CGA</h2></td>
-          <td align="center"><font size="5"><b>Courses and Courses Sections</b></font></td>
+          <td align="center"><font size="5"><b>Terms and Courses </b></font></td>
         </tr>
       </tbody>
     </table>
@@ -78,7 +78,7 @@
           <li>
             <a href="adminCourses.php">
               <b>
-                <font color="black">Courses and Courses Sections</font>
+                <font color="black">Terms and Courses</font>
               </b>
             </a>
           </li>
@@ -114,19 +114,6 @@
       </font>
     </b>
 
-    <b>
-      <font size="4">
-        <ul>
-          <li>
-            <a href="adminGroups.php">
-              <b>
-                <font color="black">Course Groups</font>
-              </b>
-            </a>
-          </li>
-        </ul>
-      </font>
-    </b>
 
     <b>
       <font size="4">
@@ -141,7 +128,19 @@
         </ul>
       </font>
     </b>
-
+<b>
+  <font size="4">
+    <ul>
+      <li>
+        <a href="adminGroups.php">
+          <b>
+            <font color="black">Course Groups</font>
+          </b>
+        </a>
+      </li>
+    </ul>
+  </font>
+</b>
     <b>
       <font size="4">
         <ul>
@@ -160,9 +159,9 @@
       <font size="4">
         <ul>
           <li>
-            <a href="adminUsername.php">
+            <a href="adminEmail.php">
               <b>
-                <font color="black">Change Username</font>
+                <font color="black">Change Email</font>
               </b>
             </a>
           </li>
@@ -284,13 +283,17 @@
                  
                    $section = $row['course_section'];   
                    $cterm = $row['course_term'];
+                   if($insid){
                
-               
-                   $query4 = "select first_name, last_name from instructor where id = $insid ";
+                   $query4 = "select first_name, last_name from instructor where id = '".$insid."' ";
                    $result4= mysqli_query($conn,$query4);
                    while($row4 = mysqli_fetch_assoc($result4)){
                        
                        $insname = $row4['first_name']." ".$row4['last_name'];
+                   }
+                   
+                   }else{ $insname =  "TBA";
+                   
                    }
            ?>
            <tr>
@@ -300,8 +303,10 @@
              <td><?php echo $section ?></td>
              <td><?php echo $cterm ?></td>
              
-             <td colspan="2" align="center"><a href="editCourse.php?GetId=<?php echo $cid ?>&instructor=<?php echo $insname ?>"> <button class="administrator" type="reset" value="Clear">Edit</button> </a> 
+             <td colspan="2" align="center"><a href="courseTA.php?Id=<?php echo $cid ?>&cname=<?php echo $cname?>"><button class="administrator" type="reset" value="Clear">TA</button></a>
+             <a href="editCourse.php?GetId=<?php echo $cid ?>&instructor=<?php echo $insname ?>"> <button class="administrator" type="reset" value="Clear">Edit</button> </a> 
              <a href="deleteCourse.php?del=<?php echo $cid ?>"><button class="administrator" type="reset" value="Clear">Delete</button></a>
+             
              </td>
            </tr>
            

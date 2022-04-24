@@ -1,10 +1,8 @@
 <?php
 include('../session.php');
 require_once "../php/config.php";
-
-    $pid = $_GET['Id'];
-    $Role = $_GET['Role'];
-    $Name = $_GET['fullname'];
+$Role = $_GET['Role'];  
+$cid =  $_GET['Id'];  
     
     
 ?>
@@ -31,7 +29,7 @@ require_once "../php/config.php";
       <tbody>
         <tr width="100%">
           <td width="5%" align="left"><h2>CGA</h2></td>
-          <td align="center"><font size="5"><b>Edit Student Information</b></font></td>
+          <td align="center"><font size="5"><b>Edit <?php echo $Role?> Information</b></font></td>
         </tr>
       </tbody>
     </table>
@@ -78,7 +76,7 @@ require_once "../php/config.php";
           <li>
             <a href="adminCourses.php">
               <b>
-                <font color="black">Courses and Courses Sections</font>
+                <font color="black">Terms and Courses</font>
               </b>
             </a>
           </li>
@@ -114,19 +112,7 @@ require_once "../php/config.php";
       </font>
     </b>
 
-    <b>
-      <font size="4">
-        <ul>
-          <li>
-            <a href="adminGroups.php">
-              <b>
-                <font color="black">Course Groups</font>
-              </b>
-            </a>
-          </li>
-        </ul>
-      </font>
-    </b>
+
 
     <b>
       <font size="4">
@@ -141,7 +127,19 @@ require_once "../php/config.php";
         </ul>
       </font>
     </b>
-
+<b>
+  <font size="4">
+    <ul>
+      <li>
+        <a href="adminGroups.php">
+          <b>
+            <font color="black">Course Groups</font>
+          </b>
+        </a>
+      </li>
+    </ul>
+  </font>
+</b>
     <b>
       <font size="4">
         <ul>
@@ -160,9 +158,9 @@ require_once "../php/config.php";
       <font size="4">
         <ul>
           <li>
-            <a href="adminUsername.php">
+            <a href="adminEmail.php">
               <b>
-                <font color="black">Change Username</font>
+                <font color="black">Change Email</font>
               </b>
             </a>
           </li>
@@ -176,13 +174,16 @@ require_once "../php/config.php";
 
        <div >
                         <div class="title">
-                            <h1 > Add Course Information </h1>
+                            <h1 > Add <?php echo $Role?> Information </h1>
                         </div>
                         <div class="form_container">
                         
                         
                         <?php
                             if($Role == 'Student'){
+                                $pid = $_GET['Id'];
+                               
+                                $Name = $_GET['fullname'];
                               ?>   
                                 <form action="insertRoleCourse.php?Role=<?php echo $Role ?>" method="post">
                                     <Label>Student ID</Label>
@@ -234,6 +235,20 @@ require_once "../php/config.php";
                                 </form>
                         <?php
                                 
+                            }elseif($Role == 'TA'){
+                             ?> 
+                            <form action="verifyExisting.php?Id=<?php echo $Role ?>&cid=<?php echo $cid ?>" method="post">
+                                <Label>Course ID</Label>
+                                <input type="text"  name="CourseID" value="<?php echo $cid ?>" readonly> 
+                                <br><br>
+                                <Label>Enter Email</Label>
+                                <input type="email"  placeholder=" User Email " name="email">
+                                <br><br>                                                                   
+                               <button name="insert">Insert</button>  
+                            </p>
+                            </form>
+                            
+                           <?php 
                             } 
                               ?>  
                                
