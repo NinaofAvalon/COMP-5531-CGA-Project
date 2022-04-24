@@ -56,7 +56,7 @@ on leader_id = student_id where course_id ='".$course."'";
         </div>
 
         <!-- menu -->
-        <div class="menu" height="100%" width="150px">
+        <div class="menu-welcome" height="100%" width="150px">
             <hr>
             <b>
                 <font size="4">
