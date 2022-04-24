@@ -169,7 +169,7 @@ include('../session.php');
                 <font size="4">
                     <ul>
                         <li>
-                          <a href="../Email/inbox.php">
+                            <a href="../Email/inbox.php">
                                 <b>
                                     <font color="black">Email</font>
                                 </b>

@@ -63,11 +63,11 @@ require_once "../php/config.php";
 
 
 
-  <!-- menu -->
+  <!-- menu-welcome -->
   <div class="menu-welcome" height="100%" width="150px">
     <hr>
     <b >
-      <font size="4">
+      <menu-welcome size="4">
         <i><?php echo $termname?></i>
       </font>
     </b>

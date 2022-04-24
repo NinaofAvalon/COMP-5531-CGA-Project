@@ -3,26 +3,26 @@
    require_once "../php/config.php";
    $query = "select term_id, term_season,term_year,term_begin_date,term_end_date,is_term_now from term";
    $result = mysqli_query($conn,$query);
-   
+
    $query2 = "select termname,term_id,term_begin_date,term_end_date from term where is_term_now = 'YES' ";
    $result2 = mysqli_query($conn,$query2);
-   
+
    $query3 = "select id, course_name,instructor_id,course_section,course_term from course";
    $result3 = mysqli_query($conn,$query3);
-   
+
    while($rowinprocess = mysqli_fetch_assoc($result2))
    {
     $termname = $rowinprocess['termname'];
     }
-    
-    
+
+
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <title>Courses and Course Sections Information</title>
-    <style><?php include '../style.css'; ?></style>   
+    <style><?php include '../style.css'; ?></style>
 </head>
 <body>
      <!-- header -->
@@ -60,11 +60,11 @@
       </tbody>
     </table>
   </div>
-  
-  
-  
+
+
+
   <!-- menu -->
-  <div class="menu" height="100%" width="150px">
+  <div class="menu-welcome" height="100%" width="150px">
     <hr>
     <b >
       <font size="4">
@@ -168,23 +168,23 @@
         </ul>
       </font>
     </b>
- </div>  
- 
- 
+ </div>
+
+
     <!-- terms -->
-    
+
  <div class="main_home">
-     
+
 
     <b>Term Information <a href="editNewTerm.php"><button class="administrator"  style="position: absolute; right: 0.5%; margin: 2px;" type="reset" value="Insert">Insert</button></a>
     </b>
-    
+
     <br><br>
 
     <table border="1" width="100%">
-            
+
         <tbody>
-                
+
               <tr bgcolor="F6E5F5">
                   <th>Term Season</th>
                   <th>Term Year</th>
@@ -197,32 +197,32 @@
                   while($row = mysqli_fetch_assoc($result))
                   {
                   $termid  = $row['term_id'];
-                  $termseason = $row['term_season'];   
-                  $termyear = $row['term_year'];   
+                  $termseason = $row['term_season'];
+                  $termyear = $row['term_year'];
                   $begindate = $row['term_begin_date'];
                   $enddate = $row['term_end_date'];
                   $status =  $row['is_term_now'];
-                 
-                  
+
+
               ?>
-              
+
               <?php
               while($row2 = mysqli_fetch_assoc($result2))
               {
-               $thisid = $row2['term_id']; 
+               $thisid = $row2['term_id'];
                $thisbegin = $row2['term_begin_date'];
                $thisend = $row2['term_end_date'];
-               
+
               ?>
                <?php
                }
                ?>
-               
-               
-               
+
+
+
                 <?php
                     $today = date("Y-m-d");
-                    
+
                     if($status == 'YES')
                     {
                         $textstatus = "<p> <font color=green>In Process</font> </p>";
@@ -232,30 +232,30 @@
                         $textstatus = "Up Coming";
                     }
                 ?>
-              
+
               <tr>
                 <td><?php echo $termseason ?></td>
                 <td><?php echo $termyear ?></td>
                 <td><?php echo $begindate ?></td>
                 <td><?php echo $enddate ?></td>
                 <td><?php echo $textstatus ?></td>
-                <td colspan="2" align="center"><a href="editTerm.php?GetId=<?php echo $termid ?>"> <button class="administrator" type="reset" value="Clear">Edit</button> </a> 
+                <td colspan="2" align="center"><a href="editTerm.php?GetId=<?php echo $termid ?>"> <button class="administrator" type="reset" value="Clear">Edit</button> </a>
                 <a href="deleteTerm.php?del=<?php echo $termid ?>"><button class="administrator" type="reset" value="Clear">Delete</button></a>
                 </td>
               </tr>
-              
+
         <?php
         }
         ?>
           </tbody>
-        
-        
+
+
     </table>
 
     <br>
 
     <hr>
-    
+
      <br>
 
     <b>Course Information <a href="editNewCourse.php"><button class="administrator"  style="position: absolute; right: 0.5%; margin: 2px;" type="reset" value="Insert">Insert</button></a>
@@ -272,28 +272,28 @@
               <th>Course Term</th>
               <th>Action</th>
           </tr>
-          <tr> 
+          <tr>
           <?php
                while($row = mysqli_fetch_assoc($result3))
                {
                    $cid = $row['id'];
                    $cname  = $row['course_name'];
-                   $insid = $row['instructor_id']; 
-               
-                 
-                   $section = $row['course_section'];   
+                   $insid = $row['instructor_id'];
+
+
+                   $section = $row['course_section'];
                    $cterm = $row['course_term'];
                    if($insid){
-               
+
                    $query4 = "select first_name, last_name from instructor where id = '".$insid."' ";
                    $result4= mysqli_query($conn,$query4);
                    while($row4 = mysqli_fetch_assoc($result4)){
-                       
+
                        $insname = $row4['first_name']." ".$row4['last_name'];
                    }
-                   
+
                    }else{ $insname =  "TBA";
-                   
+
                    }
            ?>
            <tr>
@@ -302,29 +302,29 @@
              <td><?php echo $insname?></td>
              <td><?php echo $section ?></td>
              <td><?php echo $cterm ?></td>
-             
+
              <td colspan="2" align="center"><a href="courseTA.php?Id=<?php echo $cid ?>&cname=<?php echo $cname?>"><button class="administrator" type="reset" value="Clear">TA</button></a>
-             <a href="editCourse.php?GetId=<?php echo $cid ?>&instructor=<?php echo $insname ?>"> <button class="administrator" type="reset" value="Clear">Edit</button> </a> 
+             <a href="editCourse.php?GetId=<?php echo $cid ?>&instructor=<?php echo $insname ?>"> <button class="administrator" type="reset" value="Clear">Edit</button> </a>
              <a href="deleteCourse.php?del=<?php echo $cid ?>"><button class="administrator" type="reset" value="Clear">Delete</button></a>
-             
+
              </td>
            </tr>
-           
+
      <?php
      }
      ?>
           </tr>
       </tbody>
   </table>
-  
+
 
 <div class="main_home">
 
-    
+
 
     <!-- Links -->
-    
-    
-    
+
+
+
 </body>
 </html>

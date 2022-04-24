@@ -1,15 +1,15 @@
 <?php
 include('../session.php');
 require_once "../php/config.php";
-$Role = $_GET['Role'];  
-$cid =  $_GET['Id'];  
-    
-    
+$Role = $_GET['Role'];
+$cid =  $_GET['Id'];
+
+
 ?>
 <?php
     $query2 = "select termname,term_id,term_begin_date,term_end_date from term where is_term_now = 'YES' ";
     $result2 = mysqli_query($conn,$query2);
-    
+
     while($rowinprocess = mysqli_fetch_assoc($result2))
     {
      $termname = $rowinprocess['termname'];
@@ -20,7 +20,7 @@ $cid =  $_GET['Id'];
 <html>
 <head>
     <title>Student Section</title>
-    <style><?php include '../style.css'; ?></style>   
+    <style><?php include '../style.css'; ?></style>
 </head>
 <body>
      <!-- header -->
@@ -58,11 +58,11 @@ $cid =  $_GET['Id'];
       </tbody>
     </table>
   </div>
-  
-  
-  
+
+
+
   <!-- menu -->
-  <div class="menu" height="100%" width="150px">
+  <div class="menu-welcome" height="100%" width="150px">
     <hr>
     <b >
       <font size="4">
@@ -168,7 +168,7 @@ $cid =  $_GET['Id'];
       </font>
     </b>
   </div>
-    
+
     <!-- Main section -->
     <div class="main_home">
 
@@ -177,91 +177,91 @@ $cid =  $_GET['Id'];
                             <h1 > Add <?php echo $Role?> Information </h1>
                         </div>
                         <div class="form_container">
-                        
-                        
+
+
                         <?php
                             if($Role == 'Student'){
                                 $pid = $_GET['Id'];
-                               
+
                                 $Name = $_GET['fullname'];
-                              ?>   
+                              ?>
                                 <form action="insertRoleCourse.php?Role=<?php echo $Role ?>" method="post">
                                     <Label>Student ID</Label>
-                                    <input type="text"  name="StudentID" value="<?php echo $pid ?>" readonly> 
+                                    <input type="text"  name="StudentID" value="<?php echo $pid ?>" readonly>
                                     <br><br>
-                                    
+
                                     <Label>Student Name</Label>
-                                    <input type="text"  name="StudentName" value="<?php echo $Name ?>" readonly> 
+                                    <input type="text"  name="StudentName" value="<?php echo $Name ?>" readonly>
                                     <br><br>
-                                    
+
                                     <Label>Course Name</Label>
                                         <select name="courseName">"
                                    <?php
                                    $query1 = "select id,course_name,course_term from course where id  not in (select course_id from course_enrolled where student_id = '$pid')";
                                    $result1 = mysqli_query($conn,$query1);
-                                   
+
                                    while($row1 = mysqli_fetch_assoc($result1))
                                    {
                                        $cid = $row1['id'];
                                        $cname = $row1['course_name'];
-                                     
-                                ?>  
-                                    
+
+                                ?>
+
                                             <option value="<?php echo $cid.".".$cname  ?>" ><?php echo $cid.".".$cname  ?></option>
-                                       
-                                    
-                                    
-                                    
-                                    <?php    
+
+
+
+
+                                    <?php
                                     }
-                                      
-                                      
-                                         
-                                         
-                                    ?> 
+
+
+
+
+                                    ?>
                                     </select>
                                     <br><br>
-                                    
-                                    
-                                    
+
+
+
                                     <Label>Grade</Label>
-                                    <input type="number" placeholder=" Grade can be NULL " name="grade"  > 
+                                    <input type="number" placeholder=" Grade can be NULL " name="grade"  >
                                     <br><br>
 
                                    <button name="insert">Insert</button>
-                                   <p><font color=gray>When there is no course provided, all courses have already be assigned to other instructors. You can not assign that course to the instructor.</font> 
-                                   
+                                   <p><font color=gray>When there is no course provided, all courses have already be assigned to other instructors. You can not assign that course to the instructor.</font>
+
                                 </p>
                                 </form>
                         <?php
-                                
+
                             }elseif($Role == 'TA'){
-                             ?> 
+                             ?>
                             <form action="verifyExisting.php?Id=<?php echo $Role ?>&cid=<?php echo $cid ?>" method="post">
                                 <Label>Course ID</Label>
-                                <input type="text"  name="CourseID" value="<?php echo $cid ?>" readonly> 
+                                <input type="text"  name="CourseID" value="<?php echo $cid ?>" readonly>
                                 <br><br>
                                 <Label>Enter Email</Label>
                                 <input type="email"  placeholder=" User Email " name="email">
-                                <br><br>                                                                   
-                               <button name="insert">Insert</button>  
+                                <br><br>
+                               <button name="insert">Insert</button>
                             </p>
                             </form>
-                            
-                           <?php 
-                            } 
-                              ?>  
-                               
-                        
-                       
+
+                           <?php
+                            }
+                              ?>
+
+
+
                         </div>
                     </div>
                 </div>
 
 
    </p>
-    
-    
-    
+
+
+
 </body>
 </html>

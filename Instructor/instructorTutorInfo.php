@@ -140,7 +140,7 @@ $result = mysqli_query($conn,$query);
                 <font size="4">
                     <ul>
                         <li>
-                          <a href="../Email/inbox.php">
+                            <a href="../Email/inbox.php">
                                 <b>
                                     <font color="black">Email</font>
                                 </b>

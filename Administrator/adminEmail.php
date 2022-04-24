@@ -2,7 +2,7 @@
    include('../session.php');
    $query = "select term_season,term_year from term where is_term_now = 'YES'";
    $result = mysqli_query($conn,$query);
-   
+
 
    if(isset($_POST['submit'])){
 
@@ -83,20 +83,20 @@
 
 
   <!-- menu -->
-  <div class="menu" height="100%" width="150px">
+  <div class="menu-welcome" height="100%" width="150px">
     <hr>
     <b >
       <font size="4">
         <?php
         while($row = mysqli_fetch_assoc($result))
         {
-         $season = $row['term_season']; 
+         $season = $row['term_season'];
          $year = $row['term_year'];
          $termname = $season." ".$year;
         ?>
          <i>
            <?php echo $termname?>
-           
+
          </i>
          <?php
          }
@@ -203,7 +203,7 @@
  </div>
 
 
-    
+
     <!-- main page -->
     <div class="main_home">
 

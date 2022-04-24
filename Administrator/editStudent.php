@@ -70,7 +70,7 @@ while($rowinprocess = mysqli_fetch_assoc($resthisterm))
 
 
 
-  <!-- menu-welcome -->
+  <!-- menu -->
   <div class="menu-welcome" height="100%" width="150px">
     <hr>
     <b >

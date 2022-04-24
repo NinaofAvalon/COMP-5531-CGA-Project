@@ -84,7 +84,7 @@ include('../session.php');
         </div>
 
         <!-- menu -->
-        <div class="menu-welcome" height="100%" width="150px">
+        <div class="menu" height="100%" width="150px">
             <hr>
             <b>
                 <font size="4">
@@ -168,7 +168,7 @@ include('../session.php');
                 <font size="4">
                     <ul>
                         <li>
-                          <a href="../Email/inbox.php">
+                            <a href="../Email/inbox.php">
                                 <b>
                                     <font color="black">Email</font>
                                 </b>

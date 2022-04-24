@@ -138,7 +138,7 @@ inner join course_enrolled on student.student_id = course_enrolled.student_id in
                 <font size="4">
                     <ul>
                         <li>
-                          <a href="../Email/inbox.php">
+                            <a href="../Email/inbox.php">
                                 <b>
                                     <font color="black">Email</font>
                                 </b>
