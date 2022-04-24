@@ -14,8 +14,11 @@ inner join class_group on class_group.group_id = stud_in_group.group_id
 having student_id ='$student_id' and course_id='$course_id'";
   $run4 = $conn->query($query4);
   $row4= $run4->fetch_array();
-  $_SESSION['group_id'] = $row4['group_id'];
-  $group_id = $_SESSION['group_id'];
+    $count = mysqli_num_rows($run4);
+  if($count== 1){
+    $_SESSION['group_id'] = $row4['group_id'];
+    $group_id = $_SESSION['group_id'];
+  }
 
 ?>
 ﻿<!DOCTYPE html>
